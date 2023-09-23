@@ -1,5 +1,6 @@
 title = "kei5uke's Hacking Note"
-baseURL = 'https://kei5uke.github.io/'
+baseURL = ''
+canonifyurls = false
 publishDir = "docs"
 
 # This is what goes in <html lang="">

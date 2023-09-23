@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://kei5uke.github.io/pages/about/</loc>
+    <loc>/pages/about/</loc>
   </url><url>
-    <loc>https://kei5uke.github.io/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https://kei5uke.github.io/</loc>
+    <loc>/</loc>
   </url><url>
-    <loc>https://kei5uke.github.io/pages/</loc>
+    <loc>/pages/</loc>
   </url><url>
-    <loc>https://kei5uke.github.io/tags/</loc>
+    <loc>/tags/</loc>
   </url>
 </urlset>
