@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kei5uke&#39;s Hacking Note</title>
+    <title>Home on kei5uke&#39;s Hacking Note</title>
     <link>/</link>
-    <description>Recent content on kei5uke&#39;s Hacking Note</description>
+    <description>Recent content in Home on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Offsec PG Hutch (Writeup)</title>
+      <link>/posts/hutch/</link>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/hutch/</guid>
+      
+      <description>Hutch Enumeration with Nmap nmap -p- -sC -sV 192.168.175.122 -T4 -oN nmap.out
+┌──(root💀kali)-[~/hatch] └─# nmap -p- -sC -sV 192.168.175.122 -T4 -oN nmap.out Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-25 23:53 EEST Nmap scan report for 192.168.175.122 Host is up (0.046s latency). Not shown: 65514 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 | http-webdav-scan: | Public Options: OPTIONS, TRACE, GET, HEAD, POST, PROPFIND, PROPPATCH, MKCOL, PUT, DELETE, COPY, MOVE, LOCK, UNLOCK | WebDAV type: Unknown | Server Date: Mon, 25 Sep 2023 20:55:58 GMT | Server Type: Microsoft-IIS/10.</description>
+      
+    </item>
+    
     <item>
       <title></title>
       <link>/pages/about/</link>
@@ -13,8 +26,11 @@
       
       <guid>/pages/about/</guid>
       
-      <description>Hello, friend Greetings. I&amp;rsquo;m kei5uke, a student and a Software Engineer who works in both Backend and Frontend. I&amp;rsquo;m keen on cybersecurity and playing CTF. This blog is my personal repository for documenting my exploits in hacking machines.
-CV Skills Programming Languages Frequently Use: Javascript, Typescript, Python, C, Go Previous Experience: Java, PHP, C++, R Infrastructure as code: Ansible Basic Network Engineering: TCP/IP, LAN/WAN Algorithms and Data Structures Implementation of Machine Learning &amp;amp; Deep Learning Algorithms Experience Junior Software Engineer Hemlex OÜ, Estonia August 2022 - Present Working on educational software for teachers Frontend: Implemented UI with React (TypeScript) with Redux, CSS.</description>
+      <description>Hello, friend I&amp;rsquo;m kei5uke, a student and a Software Engineer who works in both Backend and Frontend.
+Also, I&amp;rsquo;m keen on cybersecurity and playing CTF. This blog is my personal repository for documenting my exploits in hacking machines.
+CV Contact Information Email: keiske.message AT gmail.com
+Github: kei5uke
+Skills Programming Languages Frequently Use: Javascript, Typescript, Python, C, Go Previous Experience: Java, PHP, C++, R Infrastructure as code: Ansible Basic Network Engineering: TCP/IP, LAN/WAN Algorithms and Data Structures Implementation of Machine Learning &amp;amp; Deep Learning Algorithms Experience Junior Software Engineer Hemlex OÜ, Estonia August 2022 - Present Working on educational software for teachers Frontend: Implemented UI with React (TypeScript) with Redux, CSS.</description>
       
     </item>
     

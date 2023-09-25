@@ -2,14 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/</loc>
+    <lastmod>2023-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/hutch/</loc>
+    <lastmod>2023-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2023-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2023-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/windows/</loc>
+    <lastmod>2023-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/writeup/</loc>
+    <lastmod>2023-09-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/pages/about/</loc>
   </url><url>
     <loc>/categories/</loc>
   </url><url>
-    <loc>/</loc>
-  </url><url>
     <loc>/pages/</loc>
-  </url><url>
-    <loc>/tags/</loc>
   </url>
 </urlset>
