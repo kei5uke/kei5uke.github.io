@@ -80,7 +80,7 @@ disqusShortname = ''
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "kei5uke"
   name = "kei5uke"
-  description = "Student, Software Engineer in BE & FE"
+  description = "Documenting my exploits in hacking machines."
 
 # Allow to override webmanifest options
 [params.webmanifest]

@@ -1,8 +1,12 @@
-# Hello, friend
-Greetings. I'm kei5uke, a student and a Software Engineer who works in both Backend and Frontend. 
-I'm keen on cybersecurity and playing CTF. <br/> This blog is my personal repository for documenting my exploits in hacking machines.
+# <ins>Hello, friend</ins>
+I'm kei5uke, a student and a Software Engineer who works in both Backend and Frontend.   
+Also, I'm keen on cybersecurity and playing CTF. <br/> This blog is my personal repository for documenting my exploits in hacking machines.
 
-# CV
+# <ins>CV</ins>
+## Contact Information
+Email: keiske.message AT gmail.com  
+Github: [kei5uke](https://github.com/kei5uke)
+
 ## Skills
 - Programming Languages
   - Frequently Use: Javascript, Typescript, Python, C, Go
