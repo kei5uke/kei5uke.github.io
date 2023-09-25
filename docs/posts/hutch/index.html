@@ -239,15 +239,15 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-time: 
 </span></span><span class="line"><span class="cl"><span class="p">|</span>   date: 2023-09-25T20:55:59
 </span></span><span class="line"><span class="cl"><span class="p">|</span>_  start_date: N/A
-</span></span></code></pre></div><p>Webdav is allowed in port 80
-LDAP is enabled
+</span></span></code></pre></div><p>Webdav is allowed in port 80<br>
+LDAP is enabled<br>
 Domain name is hutch.offsec</p>
 <h1 id="enumerating-ldap">Enumerating LDAP</h1>
 <p>Let’s search ldap with ldapsearch</p>
 <p><code>ldapsearch -x -b &quot;dc=hutch,dc=offsec&quot; -h 192.168.175.122 &gt; ldap.txt</code></p>
 <p><img src="Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_00.24.37.png" alt="Screenshot 2023-09-26 at 00.24.37.png"></p>
-<p>Command result contains a lot of information.
-I grepped the list of account by sAMAccountName</p>
+<p>Command result contains a lot of information.<br>
+I grepped the list of account by sAMAccountName.</p>
 <p><code>grep -oP &quot;(?&lt;=sAMAccountName:).*&quot; ldap.txt</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Guest
 </span></span><span class="line"><span class="cl"> Domain Computers

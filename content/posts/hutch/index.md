@@ -66,9 +66,9 @@ Host script results:
 |_  start_date: N/A
 ```
 
-Webdav is allowed in port 80
-LDAP is enabled
-Domain name is hutch.offsec
+Webdav is allowed in port 80  
+LDAP is enabled  
+Domain name is hutch.offsec  
 
 # Enumerating LDAP
 
@@ -78,8 +78,8 @@ Let’s search ldap with ldapsearch
 
 ![Screenshot 2023-09-26 at 00.24.37.png](Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_00.24.37.png)
 
-Command result contains a lot of information. 
-I grepped the list of account by sAMAccountName
+Command result contains a lot of information.   
+I grepped the list of account by sAMAccountName.  
 
 `grep -oP "(?<=sAMAccountName:).*" ldap.txt`
 
