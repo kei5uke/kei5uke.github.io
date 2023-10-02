@@ -3,11 +3,11 @@
 <meta http-equiv="content-type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title itemprop="name">Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note</title>
-<meta property="og:title" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
-<meta name="twitter:title" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
-<meta itemprop="name" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
-<meta name="application-name" content="Offsec PG Hutch (Writeup) | kei5uke&#39;s Hacking Note" />
+<title itemprop="name">Writeup - Offsec PG Hutch | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - Offsec PG Hutch | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - Offsec PG Hutch | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - Offsec PG Hutch | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - Offsec PG Hutch | kei5uke&#39;s Hacking Note" />
 <meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
 
 <meta name="description" content="Writeup for PG Hutch">
@@ -49,14 +49,14 @@
     {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": "Offsec PG Hutch (Writeup)",
+        "headline": "Writeup - Offsec PG Hutch",
         "author": {
         "@type": "Person",
         "name": ""
         },
         "datePublished": "2023-09-25",
         "description": "Writeup for PG Hutch",
-        "wordCount":  1019 ,
+        "wordCount":  1107 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-09-25",
         "image": {
@@ -165,7 +165,7 @@ stroke-linejoin="round" class="feather feather-home">
     <main class="page-content" aria-label="Content">
         <article>
             <header class="header">
-                <h1 class="header-title">Offsec PG Hutch (Writeup)</h1>
+                <h1 class="header-title">Writeup - Offsec PG Hutch</h1>
                 
                 
                 <div class="post-meta">
@@ -183,6 +183,7 @@ stroke-linejoin="round" class="feather feather-home">
     <li><a href="#enumerating-users">Enumerating Users</a></li>
     <li><a href="#finding-users-with-better-privilege">Finding users with better privilege</a></li>
     <li><a href="#getting-the-shell">Getting the shell</a></li>
+    <li><a href="#summary">Summary</a></li>
   </ul>
 </nav>
                 </details>
@@ -394,6 +395,9 @@ I grepped the list of account by sAMAccountName.</p>
 </span></span></code></pre></div><h1 id="getting-the-shell">Getting the shell</h1>
 <p><code>psexec.py Administrator@192.168.175.122 -hashes aad3b435b51404eeaad3b435b51404ee:333078b4951591731a68da1d3fb53cdb</code></p>
 <p><img src="Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_01.04.32.png" alt="Screenshot 2023-09-26 at 01.04.32.png"></p>
+<h1 id="summary">Summary</h1>
+<p>Cracking Windows machines has always posed a challenge for me. In this instance, the LDAP protocol emerged as the pivotal factor in gaining access to critical information. I delved into the world of Impacket scripts for robust Active Directory enumeration and mastered the intricacies of psexec.</p>
+<p>Having rooted nearly 30 machines on the proving ground, I&rsquo;m left with the sense that there are still protocols waiting to be unraveled. I&rsquo;m determined to keep honing my skills until I feel completely at ease with any protocol I encounter.</p>
 
             </div>
         </article></main>

