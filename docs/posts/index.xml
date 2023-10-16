@@ -6,7 +6,18 @@
     <description>Recent content in Posts on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writeup - Offsec PG Postfish</title>
+      <link>/posts/postfish/</link>
+      <pubDate>Mon, 16 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/postfish/</guid>
+      
+      <description>PostFish Enumeration with Nmap ┌──(root💀kali)-[~/postfish] └─# nmap -sC -sV -p- -T4 192.168.250.137 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-16 01:38 EEST Nmap scan report for 192.168.250.137 Host is up (0.047s latency). Not shown: 65528 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 c1:99:4b:95:22:25:ed:0f:85:20:d3:63:b4:48:bb:cf (RSA) | 256 0f:44:8b:ad:ad:95:b8:22:6a:f0:36:ac:19:d0:0e:f3 (ECDSA) |_ 256 32:e1:2a:6c:cc:7c:e6:3e:23:f4:80:8d:33:ce:9b:3a (ED25519) 25/tcp open smtp Postfix smtpd |_ssl-date: TLS randomness does not represent time | ssl-cert: Subject: commonName=ubuntu | Subject Alternative Name: DNS:ubuntu | Not valid before: 2021-01-26T10:26:37 |_Not valid after: 2031-01-24T10:26:37 |_smtp-commands: postfish.</description>
+      
+    </item>
+    
     <item>
       <title>Writeup - Offsec PG Nickel</title>
       <link>/posts/nickel/</link>
