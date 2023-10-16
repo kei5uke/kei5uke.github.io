@@ -187,7 +187,7 @@ IT
 .
 ```
 
-Sales team password is sales and it has a message from it team.
+Sales team password is sales and it has a message from it team.  
 From the looks of it, this can be used for phishing.
 
 # Phishing Brian Moore
@@ -380,11 +380,7 @@ User filter may run the following commands on postfish:
     (ALL) NOPASSWD: /usr/bin/mail *
 ```
 
-[mail
-            
-            |
-            
-            GTFOBins](https://gtfobins.github.io/gtfobins/mail/)
+[mail|GTFOBins](https://gtfobins.github.io/gtfobins/mail/)
 
 This user has some sudo privilege command. This can be exploit.
 
