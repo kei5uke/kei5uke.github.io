@@ -6,7 +6,18 @@
     <description>Recent content in writeup on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writeup - Offsec PG Peppo</title>
+      <link>/posts/peppo/</link>
+      <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/peppo/</guid>
+      
+      <description>Peppo Nmap Enumration # Nmap 7.94 scan initiated Tue Oct 17 10:21:56 2023 as: nmap -sC -sV -p- -T4 -oN nmap.txt 192.168.239.60 Nmap scan report for 192.168.239.60 Host is up (0.044s latency). Not shown: 65529 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u7 (protocol 2.0) |_auth-owners: root | ssh-hostkey: | 2048 75:4c:02:01:fa:1e:9f:cc:e4:7b:52:fe:ba:36:85:a9 (RSA) | 256 b7:6f:9c:2b:bf:fb:04:62:f4:18:c9:38:f4:3d:6b:2b (ECDSA) |_ 256 98:7f:b6:40:ce:bb:b5:57:d5:d1:3c:65:72:74:87:c3 (ED25519) 53/tcp closed domain 113/tcp open ident FreeBSD identd |_auth-owners: nobody 5432/tcp open postgresql PostgreSQL DB 12.</description>
+      
+    </item>
+    
     <item>
       <title>Writeup - Offsec PG Postfish</title>
       <link>/posts/postfish/</link>

