@@ -19,6 +19,17 @@
     </item>
     
     <item>
+      <title>Writeup - Offsec PG Snookums</title>
+      <link>/posts/snookums/</link>
+      <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/snookums/</guid>
+      
+      <description>snookums Enumeration Nmap ┌──(root💀kali)-[~/snook] └─# nmap -sC -sV -p- -T4 192.168.239.58 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-18 12:53 EEST Nmap scan report for 192.168.239.58 Host is up (0.046s latency). Not shown: 65527 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 3.0.2 | ftp-syst: | STAT: | FTP server status: | Connected to ::ffff:192.168.45.240 | Logged in as ftp | TYPE: ASCII | No session bandwidth limit | Session timeout in seconds is 300 | Control connection is plain text | Data connections will be plain text | At session startup, client count was 2 | vsFTPd 3.</description>
+      
+    </item>
+    
+    <item>
       <title>Writeup - Offsec PG Postfish</title>
       <link>/posts/postfish/</link>
       <pubDate>Mon, 16 Oct 2023 00:00:00 +0000</pubDate>

