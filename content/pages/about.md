@@ -4,7 +4,7 @@ Also, I'm keen on cybersecurity and playing CTF. <br/> This blog is my personal 
 
 # <ins>CV</ins>
 ## Contact Information
-Email: keiske.message AT gmail.com  
+Email: keisuke.konno.tech AT gmail.com  
 Github: [kei5uke](https://github.com/kei5uke)
 
 ## Skills
