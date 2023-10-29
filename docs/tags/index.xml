@@ -6,11 +6,11 @@
     <description>Recent content in Tags on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>linux</title>
       <link>/tags/linux/</link>
-      <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>/tags/linux/</guid>
       
@@ -19,9 +19,20 @@
     </item>
     
     <item>
+      <title>metasploit</title>
+      <link>/tags/metasploit/</link>
+      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/metasploit/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>writeup</title>
       <link>/tags/writeup/</link>
-      <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>/tags/writeup/</guid>
       
