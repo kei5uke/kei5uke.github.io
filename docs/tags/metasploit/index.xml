@@ -6,7 +6,18 @@
     <description>Recent content in metasploit on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/metasploit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/metasploit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writeup - HTB Legacy</title>
+      <link>/posts/legacy/</link>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/legacy/</guid>
+      
+      <description>Legacy Enumeration with Nmap ──(parallels㉿kali)-[~/legacy] └─$ nmap 10.129.227.181 -sC -sV -T4 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 01:37 EET Nmap scan report for 10.129.227.181 Host is up (0.054s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 445/tcp open ��z�� Windows XP microsoft-ds Service Info: OSs: Windows, Windows XP; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_xp Host script results: |_nbstat: NetBIOS name: LEGACY, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: 00:50:56:96:b3:75 (VMware) | smb-os-discovery: | OS: Windows XP (Windows 2000 LAN Manager) | OS CPE: cpe:/o:microsoft:windows_xp::- | Computer name: legacy | NetBIOS computer name: LEGACY\x00 | Workgroup: HTB\x00 |_ System time: 2023-11-04T03:35:28+02:00 |_smb2-time: Protocol negotiation failed (SMB2) | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) |_clock-skew: mean: 5d00h57m37s, deviation: 1h24m51s, median: 4d23h57m37s Service detection performed.</description>
+      
+    </item>
+    
     <item>
       <title>Writeup - HTB Lame</title>
       <link>/posts/lame/</link>

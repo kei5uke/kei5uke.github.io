@@ -6,22 +6,11 @@
     <description>Recent content in Tags on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>linux</title>
-      <link>/tags/linux/</link>
-      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/linux/</guid>
-      
-      <description></description>
-      
-    </item>
-    
+    <lastBuildDate>Mon, 30 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>metasploit</title>
       <link>/tags/metasploit/</link>
-      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>/tags/metasploit/</guid>
       
@@ -30,9 +19,20 @@
     </item>
     
     <item>
+      <title>windows</title>
+      <link>/tags/windows/</link>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/windows/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>writeup</title>
       <link>/tags/writeup/</link>
-      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>/tags/writeup/</guid>
       
@@ -41,11 +41,11 @@
     </item>
     
     <item>
-      <title>windows</title>
-      <link>/tags/windows/</link>
-      <pubDate>Sat, 07 Oct 2023 00:00:00 +0000</pubDate>
+      <title>linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>/tags/windows/</guid>
+      <guid>/tags/linux/</guid>
       
       <description></description>
       
