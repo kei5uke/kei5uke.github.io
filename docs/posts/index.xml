@@ -8,6 +8,17 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 30 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Writeup - HTB Blue</title>
+      <link>/posts/blue/</link>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/blue/</guid>
+      
+      <description>Blue Enumeration Nmap ┌──(parallels㉿kali)-[~/blue] └─$ nmap -sV -sC -p- 10.129.80.136 -T4 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 22:19 EET Nmap scan report for 10.129.80.136 Host is up (0.041s latency). Not shown: 65526 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 445/tcp open Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP) 49152/tcp open msrpc Microsoft Windows RPC 49153/tcp open msrpc Microsoft Windows RPC 49154/tcp open msrpc Microsoft Windows RPC 49155/tcp open msrpc Microsoft Windows RPC 49156/tcp open msrpc Microsoft Windows RPC 49157/tcp open msrpc Microsoft Windows RPC Service Info: Host: HARIS-PC; OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) | smb2-security-mode: | 2:1:0: |_ Message signing enabled but not required |_clock-skew: mean: 0s, deviation: 2s, median: -2s | smb2-time: | date: 2023-10-30T20:21:08 |_ start_date: 2023-10-30T20:16:04 | smb-os-discovery: | OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.</description>
+      
+    </item>
+    
+    <item>
       <title>Writeup - HTB Legacy</title>
       <link>/posts/legacy/</link>
       <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
