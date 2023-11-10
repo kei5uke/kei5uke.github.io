@@ -418,6 +418,6 @@ I got michael’s shell.
 
 I switched the user “sasuke” with password hello, and I got the shell.
 
-# Summary
+# Note
 
 After almost giving up trying to get the shell using the discovered script because it specified port 4444 for the attacker, I finally succeeded by changing it to port 21. When implementing reverse shell, it's important to reuse the port number that's open on the target machine from the attacker's machine, as it's less likely to be blocked.

@@ -328,6 +328,6 @@ I executed the curl command and got the shell.
 
 ![root.png](Nickel%20cff91a47fb794eae8107f3436b0f1748/root.png)
 
-# Summary
+# Note
 
 Relying solely on browser output can be unreliable. Utilizing tools like curl or wget in the terminal with various options (GET, POST, PUT) provides a more thorough enumeration. Additionally, the unexpected inclusion of steganography highlights the importance of keeping it in mind during assessments.

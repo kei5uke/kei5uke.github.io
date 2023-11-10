@@ -172,6 +172,6 @@ C:\Windows\system32>
 
 ![Screenshot 2023-10-30 at 23.20.49.png](Blue%203093795c1edc4ced88d2327361535a2c/Screenshot_2023-10-30_at_23.20.49.png)
 
-# Summary
+# Note
 
 Don’t forget to run vulnerability script on nmap. Could be useful.

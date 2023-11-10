@@ -166,7 +166,7 @@ I found interesting text. It could be the root password.
 
 `sudo su root -p`  and paste the password and got the root shell.
 
-# Summary
+# Note
 After a hiatus from Linux CTF challenges, diving into this one brought back the familiar rush. Unraveling the pathway to obtaining a shell was a bit of a work, yet the vulnerability turned out to be right under my nose, hidden in plain sight on the web page.
 
 In the initial stages, I overlooked some crucial information simply because the vulnerability version didn't match up. This served as a powerful reminder to always be vigilant and meticulous in scrutinizing every detail. It's a testament to the fact that sometimes, the most critical clues can be hiding in unexpected places.

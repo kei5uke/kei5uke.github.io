@@ -388,7 +388,7 @@ This user has some sudo privilege command. This can be exploit.
 
 ![Screenshot 2023-10-16 at 04.03.50.png](PostFish%2040044fed3fa9498fb14f157dadde44d1/Screenshot_2023-10-16_at_04.03.50.png)
 
-# Summary
+# Note
 
 Participating in this CTF was a formidable challenge, as it required the creativity to formulate a phishing strategy. I am not sure if its practical for OSCP prep but at least I learned how to enumerate email protocol, I guess.
 

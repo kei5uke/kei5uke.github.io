@@ -407,6 +407,6 @@ I checked the list of image and run with the command that I found in GTFO.
 
 Now you pwn.
 
-# Summary
+# Note
 
 It took me long time to figure out how to get shell, but the clue was in the nmap enumeration all the time in the first place. And shell restriction kinda freaked me out. This machine is indeed HARD level shit.

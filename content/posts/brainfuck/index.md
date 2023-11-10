@@ -541,7 +541,7 @@ root.txt
 6efc1a5dbb8904751ce6566a305bb8ef
 ```
 
-# Summary
+# Note
 
 Don’t forget to add DNS to /etc/hosts 😢
 I wasted hours because of this
