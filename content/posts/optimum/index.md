@@ -1,6 +1,6 @@
 ---
 title: Writeup - HTB Optimum
-date: 2023-11-11
+date: 2023-11-13
 author: kei5uke
 description: Writeup for HTB Optimum
 tags:
