@@ -30,6 +30,17 @@
     </item>
     
     <item>
+      <title>Writeup - HTB Optimum</title>
+      <link>/posts/optimum/</link>
+      <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/optimum/</guid>
+      
+      <description>Optimum Enumeration Nmap ┌──(root💀kali)-[~/optimum] └─# nmap -sV -sC -T4 -p- 10.129.148.144 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-13 21:25 EET Nmap scan report for 10.129.148.144 Host is up (0.039s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http HttpFileServer httpd 2.3 |_http-server-header: HFS 2.3 |_http-title: HFS / Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Service detection performed. Please report any incorrect results at https://nmap.</description>
+      
+    </item>
+    
+    <item>
       <title>Writeup - HTB Shocker</title>
       <link>/posts/shocker/</link>
       <pubDate>Fri, 10 Nov 2023 00:00:00 +0000</pubDate>
