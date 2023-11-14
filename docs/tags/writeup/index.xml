@@ -6,7 +6,18 @@
     <description>Recent content in writeup on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writeup - HTB Nibble</title>
+      <link>/posts/nibble/</link>
+      <pubDate>Tue, 14 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/nibble/</guid>
+      
+      <description>Nibble Enumeration Nmap ┌──(root💀kali)-[~/nibble] └─# nmap -sV -sC -T4 -p- 10.129.68.48 -oN nmap.txt Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-14 22:53 EET Nmap scan report for 10.129.68.48 Host is up (0.054s latency). Not shown: 65533 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77🇩🇪cf:15:0d:63:0a:18:7e:49 (RSA) | 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA) |_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
     <item>
       <title>Writeup - HTB Devel</title>
       <link>/posts/devel/</link>
