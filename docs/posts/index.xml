@@ -6,7 +6,18 @@
     <description>Recent content in Posts on kei5uke&#39;s Hacking Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writeup - PG Amaterasu</title>
+      <link>/posts/amaterasu/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/amaterasu/</guid>
+      
+      <description>Amaterasu Enumeration Nmap # Nmap 7.94 scan initiated Mon Jan 1 18:16:02 2024 as: nmap -sV -sC -T4 -p- -oN nmap.txt 192.168.162.249 Nmap scan report for 192.168.162.249 Host is up (0.046s latency). Not shown: 65524 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 3.0.3 | ftp-syst: | STAT: | FTP server status: | Connected to 192.168.45.169 | Logged in as ftp | TYPE: ASCII | No session bandwidth limit | Session timeout in seconds is 300 | Control connection is plain text | Data connections will be plain text | At session startup, client count was 3 | vsFTPd 3.</description>
+      
+    </item>
+    
     <item>
       <title>Writeup - HTB Nibble</title>
       <link>/posts/nibble/</link>

