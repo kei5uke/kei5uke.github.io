@@ -332,7 +332,7 @@ whoami
 apache
 ```
 
-I run the script and waited for the connection using netcat, and then I got the shell.
+I ran the script and waited for the connection using netcat, and then I got the shell.
 
 ## Privilege Escalation
 
@@ -420,4 +420,4 @@ I switched the user “sasuke” with password hello, and I got the shell.
 
 # Note
 
-After almost giving up trying to get the shell using the discovered script because it specified port 4444 for the attacker, I finally succeeded by changing it to port 21. When implementing reverse shell, it's important to reuse the port number that's open on the target machine from the attacker's machine, as it's less likely to be blocked.
+I almost gave up trying to get a shell using the discovered script, which was configured to use port 4444 for the attacker. I finally succeeded by changing the port to 21. When implementing a reverse shell, it's crucial to reuse an open port on the target machine from the attacker's machine. This minimizes the likelihood of the connection being blocked.

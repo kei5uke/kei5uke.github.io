@@ -160,7 +160,7 @@ MS-WBT-SERVER Enumeration
 <hr>
 ```
 
-The links in the page are not accessible. Let’s enumerate with Curl.
+The links in the page are not accessible. Let’s enumerate the links with curl.  
 
 ```bash
 ┌──(root💀kali)-[/opt/generic]
@@ -330,4 +330,5 @@ I executed the curl command and got the shell.
 
 # Note
 
-Relying solely on browser output can be unreliable. Utilizing tools like curl or wget in the terminal with various options (GET, POST, PUT) provides a more thorough enumeration. Additionally, the unexpected inclusion of steganography highlights the importance of keeping it in mind during assessments.
+Relying solely on browser output can be unreliable. Using tools like curl or wget in the terminal with options (GET, POST, PUT) provides detailed information.  
+Unexpected inclusion of steganography highlights the importance of keeping it in mind during assessments.

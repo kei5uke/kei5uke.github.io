@@ -58,9 +58,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 116.50 seconds
 ```
 
-This is likely to be SMB vulnerability.
+This is likely an SMB vulnerability.
 
- 
 
 ```bash
 ┌──(root💀kali)-[/home/parallels/blue]
@@ -114,7 +113,7 @@ Final size of exe file: 73802 bytes
 Saved as: reverse_shell.exe
 ```
 
-Made reverse shell.
+Created a reverse shell.
 
 ```bash
 ┌──(root💀kali)-[/home/parallels/blue]
@@ -155,7 +154,7 @@ Done
 
 [](https://github.com/helviojunior/MS17-010/blob/master/send_and_execute.py)
 
-I run the script above and got the shell
+I ran the script above and got the shell
 
 ```bash
 ┌──(root💀kali)-[/home/parallels/blue/AutoBlue-MS17-010]
@@ -174,4 +173,4 @@ C:\Windows\system32>
 
 # Note
 
-Don’t forget to run vulnerability script on nmap. Could be useful.
+Don’t forget to run vulnerability scripts with Nmap. They could be useful.

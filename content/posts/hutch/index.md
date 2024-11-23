@@ -265,7 +265,7 @@ HUTCHDC$:1000:aad3b435b51404eeaad3b435b51404ee:151657b4aa87d85cebc0543e9d1f095b:
 ![Screenshot 2023-09-26 at 01.04.32.png](Hutch%20aac63fefd54b41fd85acd5e7ed833711/Screenshot_2023-09-26_at_01.04.32.png)
 
 # Note 
-Cracking Windows machines has always posed a challenge for me. In this instance, the LDAP protocol emerged as the pivotal factor in gaining access to critical information. I delved into the world of Impacket scripts for robust Active Directory enumeration and mastered the intricacies of psexec.
+Cracking Windows machines has always been a challenge for me. In this particular case, the LDAP protocol proved to be the key to accessing critical information. I explored Impacket scripts for thorough Active Directory enumeration and gained a solid understanding of psexec.  
 
-Having rooted nearly 30 machines on the proving ground, I'm left with the sense that there are still protocols waiting to be unraveled. I'm determined to keep honing my skills until I feel completely at ease with any protocol I encounter.
+After successfully rooting nearly 30 machines on the Proving Ground, I can’t shake the feeling that there are still many protocols left to master. I’m committed to continuing my journey and refining my skills until I can confidently navigate any protocol I come across.
 

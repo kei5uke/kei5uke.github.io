@@ -68,7 +68,7 @@ Nmap done: 1 IP address (1 host up) scanned in 151.11 seconds
 
 ## FTP File Zilla
 
-Possible Access not writeable
+This is not writeable
 
 ## SMB
 
@@ -78,7 +78,7 @@ Possible Access not writeable
 protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
 ```
 
-Not use.
+Not accessible.
 
 ## Distccd
 
@@ -95,11 +95,11 @@ Found interestring exploit.
 
 ![Screenshot 2023-10-29 at 02.06.44.png](Lame%201eaea493130c47ba805ffed580c9de33/Screenshot_2023-10-29_at_02.06.44.png)
 
-I got shell
+I got first shell
 
 # Shell Privilege Escalation
 
-I tried a lot of things but I couldn’t find anything that makes me root with this user.
+I tried a lot of things but I couldn’t find anything that makes me gain root privilege with this user.
 
 [Samba "username map script" Command Execution](https://www.rapid7.com/db/modules/exploit/multi/samba/usermap_script/)
 

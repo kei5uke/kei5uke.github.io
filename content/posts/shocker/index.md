@@ -38,11 +38,9 @@ Nmap done: 1 IP address (1 host up) scanned in 21.61 seconds
 
 ## SSH manual bruteforce
 
-Tried to ssh as root with random password does not work
+Tried to ssh as root with random passwords did not work.  
 
 ## Gobuster
-
-No hit
 
 ```bash
 ┌──(parallels㉿kali)-[~/shock]
@@ -86,7 +84,7 @@ Progress: 17762 / 17771 (99.95%)
 
 ## Brute forcing cgi-bin
 
-Seriously, I can’t find anything useful 😟
+I couldn’t find anything useful.
 
 Hint suggest that there’s script in cgi-bin directory.
 
@@ -153,7 +151,7 @@ shelly@Shocker:/usr/lib/cgi-bin$
 
 ## Privilege Escalation
 
-This is too easy. Perl gets you the root shell.
+I got the root shell through Perl command.  
 
 [perl| GTFOBins](https://gtfobins.github.io/gtfobins/perl/)
 
@@ -174,4 +172,4 @@ User shelly may run the following commands on Shocker:
 ![Screenshot 2023-11-10 at 13.54.42.png](Shocker%20d782eb0bc7694e299cccc05d6353b6a4/Screenshot_2023-11-10_at_13.54.42.png)
 
 # Note
-Seems like Gobuster can’t detect cgi-bin folder without -f option.
+Gobuster can’t detect cgi-bin folder without -f option.

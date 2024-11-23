@@ -37,7 +37,7 @@ Found interesting exploit.
 
 [Rejetto HttpFileServer 2.3.x - Remote Command Execution (3)](https://www.exploit-db.com/exploits/49125)
 
-I run the command below and got first shell.
+I ran the command below and got first shell.
 
 ```bash
 ┌──(root💀kali)-[~/optimum]

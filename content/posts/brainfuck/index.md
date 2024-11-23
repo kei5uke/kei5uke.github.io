@@ -95,7 +95,7 @@ A1 NO [AUTHENTICATIONFAILED] Authentication failed.
 
 # DNS
 
-I added www.brainfuck.htb, sup3rs3cr3t.brainfuck.htb, brainfuck.htb to /etc/hots and I found wordpress page and some forum on broser.
+Added www.brainfuck.htb, sup3rs3cr3t.brainfuck.htb, and brainfuck.htb to /etc/hosts. Discovered a WordPress site and a forum.
 
 # Wordpress
 
@@ -206,11 +206,11 @@ Interesting Finding(s):
 [+] Elapsed time: 00:00:06
 ```
 
-I found interesting exploit after searching “wp-support-plus-responsive-ticket-system”
+Identified WordPress version 4.7.3 and a vulnerable plugin: wp-support-plus-responsive-ticket-system version 7.1.3.  
 
 [WordPress Plugin WP Support Plus Responsive Ticket System 7.1.3 - Privilege Escalation](https://www.exploit-db.com/exploits/41006)
 
-I made HTML file and made a request through it.
+Used a known exploit for the vulnerable plugin to escalate privileges and gain admin access.  
 
 ```bash
 <form method="post" action="https://brainfuck.htb/wp-admin/admin-ajax.php">
@@ -221,15 +221,11 @@ I made HTML file and made a request through it.
 </form>
 ```
 
-After redirecting, I got admin cookie.
-
 ![Screenshot 2023-11-02 at 16.32.59.png](Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.32.59.png)
-
-I found smtp credential in wp plugin setting.
 
 ![Screenshot 2023-11-02 at 16.33.54.png](Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.33.54.png)
 
-I accessed the pop3 port and logged in with the credential, and found some information.
+Obtained admin credentials and discovered SMTP credentials in the plugin settings.  
 
 ```bash
 ┌──(root💀kali)-[~]

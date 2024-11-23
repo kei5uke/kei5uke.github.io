@@ -109,7 +109,7 @@ I added the necessary part in the java.env script and committed the setting.
 
 ![Screenshot 2023-10-02 at 02.34.36.png](Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.34.36.png)
 
-I successfully obtained the shell.
+I successfully got the shell.
 
 # Privilege Escalation
 
@@ -160,14 +160,12 @@ I analyzed the strings.
 001 Password: root:
 ClogKingpinInning731
 ```
-I found interesting text. It could be the root password.
+I found interesting text. It could be root password.
 
 ![Screenshot 2023-10-02 at 02.45.22.png](Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.45.22.png)
 
 `sudo su root -p`  and paste the password and got the root shell.
 
 # Note
-After a hiatus from Linux CTF challenges, diving into this one brought back the familiar rush. Unraveling the pathway to obtaining a shell was a bit of a work, yet the vulnerability turned out to be right under my nose, hidden in plain sight on the web page.
-
-In the initial stages, I overlooked some crucial information simply because the vulnerability version didn't match up. This served as a powerful reminder to always be vigilant and meticulous in scrutinizing every detail. It's a testament to the fact that sometimes, the most critical clues can be hiding in unexpected places.
- 
+After taking a break from the Linux CTF challenges, diving into this one brought back the familiar excitement of the challenge. It took some effort to track down a shell. But it turned out that the vulnerability had been hiding in plain sight on the web page all along.  
+In the enumeration stage, I missed some important information because the version of the vulnerability didn't seem to match. This remined me to stay vigilant and pay attention to every detail.  

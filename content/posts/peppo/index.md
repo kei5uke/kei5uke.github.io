@@ -96,7 +96,7 @@ I can see some user names such as nobody, eleanor, root
 
 ![Screenshot 2023-10-18 at 10.25.20.png](Peppo%203686053f39664308a95784e6e3c84088/Screenshot_2023-10-18_at_10.25.20.png)
 
-The Redmine page allows you login as admin with a password “admin” however I couldn’t find anything useful here.
+I could login as admin with a password “admin” however I couldn’t find anything useful here.
 
 ```bash
 msf6 exploit(unix/webapp/redmine_scm_exec) > show options
@@ -409,4 +409,4 @@ Now you pwn.
 
 # Note
 
-It took me long time to figure out how to get shell, but the clue was in the nmap enumeration all the time in the first place. And shell restriction kinda freaked me out. This machine is indeed HARD level shit.
+It took me long time to figure out how to get shell, but the clue was in the nmap enumeration all the time in the first place. And shell restriction kinda freaked me out. This machine is indeed HARD level.

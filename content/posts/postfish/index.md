@@ -65,7 +65,7 @@ PORT    STATE SERVICE  VERSION
 |_ssl-date: TLS randomness does not represent time
 ```
 
-There are many protocols for emails, and HTTP
+There are many protocols for emails and HTTP.
 
 # HTTP Page
 
@@ -228,7 +228,7 @@ Content-Type: application/x-www-form-urlencoded
 first_name%3DBrian%26last_name%3DMoore%26email%3Dbrian.moore%postfish.off%26username%3Dbrian.moore%26password%3DEternaLSunshinE%26confifind /var/mail/ -type f ! -name sales -delete_password%3DEternaLSunshinE
 ```
 
-I sent email to Brian, while disguised as IT team with the malicious URL.
+I sent an email to Brian, while disguised as IT team with the malicious URL.
 And I got the response from him.
 
 # Decoded URL
@@ -382,7 +382,7 @@ User filter may run the following commands on postfish:
 
 [mail|GTFOBins](https://gtfobins.github.io/gtfobins/mail/)
 
-This user has some sudo privilege command. This can be exploit.
+This user has some sudo privilege command. This can be used for exploitation.  
 
 # Root shell
 
@@ -390,6 +390,6 @@ This user has some sudo privilege command. This can be exploit.
 
 # Note
 
-Participating in this CTF was a formidable challenge, as it required the creativity to formulate a phishing strategy. I am not sure if its practical for OSCP prep but at least I learned how to enumerate email protocol, I guess.
+Participating in this CTF was quite a challenge, as it required the creativity to formulate a phishing strategy. I am not sure if its practical for OSCP prep but at least I learned how to enumerate email protocol, I guess.
 
 Anyway, happy hacking!
