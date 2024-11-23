@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-10-07",
         "description": "Writeup for PG Hutch",
-        "wordCount":  1085 ,
+        "wordCount":  1082 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-10-07",
         "image": {
@@ -321,7 +321,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">&lt;input <span class="nv">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span> <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;List Active Nodes&#39;</span>&gt;
 </span></span><span class="line"><span class="cl">&lt;/form&gt;
 </span></span><span class="line"><span class="cl">&lt;hr&gt;
-</span></span></code></pre></div><p>The links in the page are not accessible. Let’s enumerate with Curl.</p>
+</span></span></code></pre></div><p>The links in the page are not accessible. Let’s enumerate the links with curl.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/opt/generic<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# curl -X GET http://192.168.249.99:33333/                         
 </span></span><span class="line"><span class="cl">Invalid Token
@@ -440,7 +440,8 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span></code></pre></div><p>I executed the curl command and got the shell.</p>
 <p><img src="Nickel%20cff91a47fb794eae8107f3436b0f1748/root.png" alt="root.png"></p>
 <h1 id="note">Note</h1>
-<p>Relying solely on browser output can be unreliable. Utilizing tools like curl or wget in the terminal with various options (GET, POST, PUT) provides a more thorough enumeration. Additionally, the unexpected inclusion of steganography highlights the importance of keeping it in mind during assessments.</p>
+<p>Relying solely on browser output can be unreliable. Using tools like curl or wget in the terminal with options (GET, POST, PUT) provides detailed information.<br>
+Unexpected inclusion of steganography highlights the importance of keeping it in mind during assessments.</p>
 
             </div>
         </article></main>

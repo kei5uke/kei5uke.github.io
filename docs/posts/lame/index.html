@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-10-29",
         "description": "Writeup for HTB Lame",
-        "wordCount":  455 ,
+        "wordCount":  458 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-10-29",
         "image": {
@@ -243,12 +243,12 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 151.11 seconds
 </span></span></code></pre></div><h2 id="ftp-file-zilla">FTP File Zilla</h2>
-<p>Possible Access not writeable</p>
+<p>This is not writeable</p>
 <h2 id="smb">SMB</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>~/lame<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# smbclient -L 10.129.79.102                                                                                           <span class="m">1</span> ⨯
 </span></span><span class="line"><span class="cl">protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
-</span></span></code></pre></div><p>Not use.</p>
+</span></span></code></pre></div><p>Not accessible.</p>
 <h2 id="distccd">Distccd</h2>
 <p><a href="https://gist.github.com/DarkCoderSc/4dbf6229a93e75c3bdf6b467e67a9855">(CVE-2004-2687) DistCC Daemon - Command Execution (Python)</a></p>
 <p>Found interestring exploit.</p>
@@ -257,9 +257,9 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Connected to remote service
 </span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Socket Timeout
 </span></span></code></pre></div><p><img src="Lame%201eaea493130c47ba805ffed580c9de33/Screenshot_2023-10-29_at_02.06.44.png" alt="Screenshot 2023-10-29 at 02.06.44.png"></p>
-<p>I got shell</p>
+<p>I got first shell</p>
 <h1 id="shell-privilege-escalation">Shell Privilege Escalation</h1>
-<p>I tried a lot of things but I couldn’t find anything that makes me root with this user.</p>
+<p>I tried a lot of things but I couldn’t find anything that makes me gain root privilege with this user.</p>
 <p><a href="https://www.rapid7.com/db/modules/exploit/multi/samba/usermap_script/">Samba &ldquo;username map script&rdquo; Command Execution</a></p>
 <p>I decided to go back to enumeration and found interesting smb vulnerability and tried it with msfconsole in the end.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msf6 &gt; use exploit/multi/samba/usermap_script

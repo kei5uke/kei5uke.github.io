@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-11-10",
         "description": "Writeup for HTB Shocker",
-        "wordCount":  453 ,
+        "wordCount":  445 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-11-10",
         "image": {
@@ -222,9 +222,8 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 21.61 seconds
 </span></span></code></pre></div><h2 id="ssh-manual-bruteforce">SSH manual bruteforce</h2>
-<p>Tried to ssh as root with random password does not work</p>
+<p>Tried to ssh as root with random passwords did not work.</p>
 <h2 id="gobuster">Gobuster</h2>
-<p>No hit</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>parallels㉿kali<span class="o">)</span>-<span class="o">[</span>~/shock<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─$ gobuster dir -u http://10.129.45.100/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-small-directories-lowercase.txt 
 </span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
@@ -259,7 +258,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">&lt;/body&gt;
 </span></span><span class="line"><span class="cl">&lt;/html&gt;
 </span></span></code></pre></div><h2 id="brute-forcing-cgi-bin">Brute forcing cgi-bin</h2>
-<p>Seriously, I can’t find anything useful 😟</p>
+<p>I couldn’t find anything useful.</p>
 <p>Hint suggest that there’s script in cgi-bin directory.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/home/parallels/shock<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# gobuster dir -u http://10.129.86.205/cgi-bin/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .sh   
@@ -306,7 +305,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">bash: no job control in this shell
 </span></span><span class="line"><span class="cl">shelly@Shocker:/usr/lib/cgi-bin$
 </span></span></code></pre></div><h2 id="privilege-escalation">Privilege Escalation</h2>
-<p>This is too easy. Perl gets you the root shell.</p>
+<p>I got the root shell through Perl command.</p>
 <p><a href="https://gtfobins.github.io/gtfobins/perl/">perl| GTFOBins</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">shelly@Shocker:/usr/lib/cgi-bin$ id
 </span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>shelly<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>shelly<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1000<span class="o">(</span>shelly<span class="o">)</span>,4<span class="o">(</span>adm<span class="o">)</span>,24<span class="o">(</span>cdrom<span class="o">)</span>,30<span class="o">(</span>dip<span class="o">)</span>,46<span class="o">(</span>plugdev<span class="o">)</span>,110<span class="o">(</span>lxd<span class="o">)</span>,115<span class="o">(</span>lpadmin<span class="o">)</span>,116<span class="o">(</span>sambashare<span class="o">)</span>
@@ -320,7 +319,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span></code></pre></div><h1 id="root-shell">Root shell</h1>
 <p><img src="Shocker%20d782eb0bc7694e299cccc05d6353b6a4/Screenshot_2023-11-10_at_13.54.42.png" alt="Screenshot 2023-11-10 at 13.54.42.png"></p>
 <h1 id="note">Note</h1>
-<p>Seems like Gobuster can’t detect cgi-bin folder without -f option.</p>
+<p>Gobuster can’t detect cgi-bin folder without -f option.</p>
 
             </div>
         </article></main>

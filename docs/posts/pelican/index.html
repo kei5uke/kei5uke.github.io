@@ -56,7 +56,7 @@
         },
         "datePublished": "2023-10-02",
         "description": "Writeup for PG Pelican",
-        "wordCount":  645 ,
+        "wordCount":  625 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-10-02",
         "image": {
@@ -269,7 +269,7 @@ stroke-linejoin="round" class="feather feather-home">
 <p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.19.21.png" alt="Screenshot 2023-10-02 at 02.19.21.png"></p>
 <h1 id="low-privilege-shell">Low Privilege Shell</h1>
 <p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.34.36.png" alt="Screenshot 2023-10-02 at 02.34.36.png"></p>
-<p>I successfully obtained the shell.</p>
+<p>I successfully got the shell.</p>
 <h1 id="privilege-escalation">Privilege Escalation</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">charles@pelican:/opt/zookeeper$ sudo -l
 </span></span><span class="line"><span class="cl">sudo -l
@@ -301,12 +301,12 @@ It can be a way to retrieve sensitive information if the process is run by root.
 </span></span></code></pre></div><p>I analyzed the strings.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">001</span> Password: root:
 </span></span><span class="line"><span class="cl">ClogKingpinInning731
-</span></span></code></pre></div><p>I found interesting text. It could be the root password.</p>
+</span></span></code></pre></div><p>I found interesting text. It could be root password.</p>
 <p><img src="Pelican%20cc5be9ecb14f4241b87f5ab19c417ad7/Screenshot_2023-10-02_at_02.45.22.png" alt="Screenshot 2023-10-02 at 02.45.22.png"></p>
 <p><code>sudo su root -p</code>  and paste the password and got the root shell.</p>
 <h1 id="note">Note</h1>
-<p>After a hiatus from Linux CTF challenges, diving into this one brought back the familiar rush. Unraveling the pathway to obtaining a shell was a bit of a work, yet the vulnerability turned out to be right under my nose, hidden in plain sight on the web page.</p>
-<p>In the initial stages, I overlooked some crucial information simply because the vulnerability version didn&rsquo;t match up. This served as a powerful reminder to always be vigilant and meticulous in scrutinizing every detail. It&rsquo;s a testament to the fact that sometimes, the most critical clues can be hiding in unexpected places.</p>
+<p>After taking a break from the Linux CTF challenges, diving into this one brought back the familiar excitement of the challenge. It took some effort to track down a shell. But it turned out that the vulnerability had been hiding in plain sight on the web page all along.<br>
+In the enumeration stage, I missed some important information because the version of the vulnerability didn&rsquo;t seem to match. This remined me to stay vigilant and pay attention to every detail.</p>
 
             </div>
         </article></main>
