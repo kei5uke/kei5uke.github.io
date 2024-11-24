@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Nibble
+title: CTF Writeup - HTB Nibble
 date: 2023-11-14
 author: kei5uke
 description: Writeup for HTB Nibble
