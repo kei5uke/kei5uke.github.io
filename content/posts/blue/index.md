@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Blue
+title: CTF Writeup - HTB Blue
 date: 2023-10-30
 author: kei5uke
 description: Writeup for HTB Blue

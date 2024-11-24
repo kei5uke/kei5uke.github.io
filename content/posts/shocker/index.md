@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Shocker
+title: CTF Writeup - HTB Shocker
 date: 2023-11-10 
 author: kei5uke
 description: Writeup for HTB Shocker

@@ -1,5 +1,5 @@
 ---
-title: Writeup - Offsec PG Postfish
+title: CTF Writeup - Offsec PG Postfish
 date: 2023-10-16  
 author: kei5uke
 description: Writeup for PG Postfish 

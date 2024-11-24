@@ -1,5 +1,5 @@
 ---
-title: Writeup - Offsec PG Snookums
+title: CTF Writeup - Offsec PG Snookums
 date: 2023-10-18 
 author: kei5uke
 description: Writeup for PG Snookums 

@@ -1,5 +1,5 @@
 ---
-title: Writeup - PG Amaterasu
+title: CTF Writeup - PG Amaterasu
 date: 2024-01-01
 author: kei5uke
 description: Writeup for PG Amaterasu

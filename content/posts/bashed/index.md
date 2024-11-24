@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Bashed
+title: CTF Writeup - HTB Bashed
 date: 2023-11-11
 author: kei5uke
 description: Writeup for HTB Bashed

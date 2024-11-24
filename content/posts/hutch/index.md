@@ -1,5 +1,5 @@
 ---
-title: Writeup - Offsec PG Hutch
+title: CTF Writeup - Offsec PG Hutch
 date: 2023-09-25  
 author: kei5uke
 description: Writeup for PG Hutch 

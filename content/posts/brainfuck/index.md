@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Brainfuck
+title: CTF Writeup - HTB Brainfuck
 date: 2023-11-03
 author: kei5uke
 description: Writeup for HTB Brainfuck

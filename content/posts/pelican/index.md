@@ -1,5 +1,5 @@
 ---
-title: Writeup - Offsec PG Pelican
+title: CTF Writeup - Offsec PG Pelican
 date: 2023-10-02  
 author: kei5uke
 description: Writeup for PG Pelican 

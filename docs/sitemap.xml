@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/posts/amaterasu/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
@@ -17,19 +20,16 @@
     <loc>/tags/writeup/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/amaterasu/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/posts/nibble/</loc>
     <lastmod>2023-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/windows/</loc>
-    <lastmod>2023-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/devel/</loc>
     <lastmod>2023-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/optimum/</loc>
+    <lastmod>2023-11-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/windows/</loc>
     <lastmod>2023-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/bashed/</loc>
@@ -41,13 +41,13 @@
     <loc>/posts/brainfuck/</loc>
     <lastmod>2023-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/metasploit/</loc>
-    <lastmod>2023-10-30T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/posts/blue/</loc>
     <lastmod>2023-10-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/legacy/</loc>
+    <lastmod>2023-10-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/metasploit/</loc>
     <lastmod>2023-10-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/lame/</loc>

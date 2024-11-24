@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Legacy
+title: CTF Writeup - HTB Legacy
 date: 2023-10-30
 author: kei5uke
 description: Writeup for HTB Legact

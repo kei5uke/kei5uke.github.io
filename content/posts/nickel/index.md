@@ -1,5 +1,5 @@
 ---
-title: Writeup - Offsec PG Nickel
+title: CTF Writeup - Offsec PG Nickel
 date: 2023-10-07  
 author: kei5uke
 description: Writeup for PG Hutch 

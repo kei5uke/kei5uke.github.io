@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Writeup - PG Amaterasu</title>
+      <title>CTF Writeup - PG Amaterasu</title>
       <link>/posts/amaterasu/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
       
@@ -30,7 +30,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Devel</title>
+      <title>CTF Writeup - HTB Devel</title>
       <link>/posts/devel/</link>
       <pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate>
       
@@ -41,7 +41,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Optimum</title>
+      <title>CTF Writeup - HTB Optimum</title>
       <link>/posts/optimum/</link>
       <pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate>
       
@@ -52,7 +52,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Bashed</title>
+      <title>CTF Writeup - HTB Bashed</title>
       <link>/posts/bashed/</link>
       <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
       
@@ -63,7 +63,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Shocker</title>
+      <title>CTF Writeup - HTB Shocker</title>
       <link>/posts/shocker/</link>
       <pubDate>Fri, 10 Nov 2023 00:00:00 +0000</pubDate>
       
@@ -74,7 +74,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Brainfuck</title>
+      <title>CTF Writeup - HTB Brainfuck</title>
       <link>/posts/brainfuck/</link>
       <pubDate>Fri, 03 Nov 2023 00:00:00 +0000</pubDate>
       
@@ -85,7 +85,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Blue</title>
+      <title>CTF Writeup - HTB Blue</title>
       <link>/posts/blue/</link>
       <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -96,7 +96,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Legacy</title>
+      <title>CTF Writeup - HTB Legacy</title>
       <link>/posts/legacy/</link>
       <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -107,7 +107,7 @@
     </item>
     
     <item>
-      <title>Writeup - HTB Lame</title>
+      <title>CTF Writeup - HTB Lame</title>
       <link>/posts/lame/</link>
       <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -118,7 +118,7 @@
     </item>
     
     <item>
-      <title>Writeup - Offsec PG Peppo</title>
+      <title>CTF Writeup - Offsec PG Peppo</title>
       <link>/posts/peppo/</link>
       <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -129,7 +129,7 @@
     </item>
     
     <item>
-      <title>Writeup - Offsec PG Snookums</title>
+      <title>CTF Writeup - Offsec PG Snookums</title>
       <link>/posts/snookums/</link>
       <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -140,7 +140,7 @@
     </item>
     
     <item>
-      <title>Writeup - Offsec PG Postfish</title>
+      <title>CTF Writeup - Offsec PG Postfish</title>
       <link>/posts/postfish/</link>
       <pubDate>Mon, 16 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -151,7 +151,7 @@
     </item>
     
     <item>
-      <title>Writeup - Offsec PG Nickel</title>
+      <title>CTF Writeup - Offsec PG Nickel</title>
       <link>/posts/nickel/</link>
       <pubDate>Sat, 07 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -162,7 +162,7 @@
     </item>
     
     <item>
-      <title>Writeup - Offsec PG Pelican</title>
+      <title>CTF Writeup - Offsec PG Pelican</title>
       <link>/posts/pelican/</link>
       <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -173,7 +173,7 @@
     </item>
     
     <item>
-      <title>Writeup - Offsec PG Hutch</title>
+      <title>CTF Writeup - Offsec PG Hutch</title>
       <link>/posts/hutch/</link>
       <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
       

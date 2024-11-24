@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Lame
+title: CTF Writeup - HTB Lame
 date: 2023-10-29
 author: kei5uke
 description: Writeup for HTB Lame

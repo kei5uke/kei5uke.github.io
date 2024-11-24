@@ -1,5 +1,5 @@
 ---
-title: Writeup - HTB Devel
+title: CTF Writeup - HTB Devel
 date: 2023-11-13
 author: kei5uke
 description: Writeup for HTB Devel

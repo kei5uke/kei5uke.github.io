@@ -1,5 +1,5 @@
 ---
-title: Writeup - Offsec PG Peppo
+title: CTF Writeup - Offsec PG Peppo
 date: 2023-10-18 
 author: kei5uke
 description: Writeup for PG Peppo 
