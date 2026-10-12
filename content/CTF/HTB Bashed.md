@@ -1,5 +1,5 @@
 ---
-title: HTB Bashed
+title: HTB Bashed (2023)
 date: 2023-11-11
 description: Writeup for HTB Bashed
 tags:

@@ -9,6 +9,7 @@ on:
       - "content/**"
       - "quartz/**"
       - ".github/workflows/deploy.yml"
+      - ".github/scripts/**"
       - "!**/.gitignore"
       - "!content/.obsidian/**"
   workflow_dispatch:
@@ -47,6 +48,11 @@ jobs:
 
       - name: Build site
         run: npx quartz build -d ../content
+
+      # Notes with `draft: true` are skipped by Quartz, but their images are
+      # still copied; drop any attachment no published page uses.
+      - name: Remove images only used by drafts
+        run: node ../.github/scripts/prune-attachments.mjs public
 
       - uses: actions/upload-pages-artifact@v3
         with:
