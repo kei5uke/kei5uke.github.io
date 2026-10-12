@@ -1,3 +1,16 @@
+# OS / editor
 .DS_Store
 .aider*
 .env
+
+# Obsidian
+content/.obsidian/workspace.json
+content/.obsidian/workspace-mobile.json
+content/.obsidian/cache
+content/.trash/
+
+# FE
+quartz/node_modules/
+quartz/.quartz/
+quartz/public/
+quartz/quartz/.quartz-cache/
