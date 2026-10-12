@@ -4,8 +4,13 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - "**/.gitignore"
+    # Deploy only when something that ends up on the site changes.
+    paths:
+      - "content/**"
+      - "quartz/**"
+      - ".github/workflows/deploy.yml"
+      - "!**/.gitignore"
+      - "!content/.obsidian/**"
   workflow_dispatch:
 
 permissions:
