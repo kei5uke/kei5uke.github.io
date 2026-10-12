@@ -1,3 +1,184 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// Tag chip shared by the post listing and the post header.
+@mixin tag-chip {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--lightgray);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--darkgray);
+  text-decoration: none;
+
+  &::before {
+    content: none;
+  }
+
+  &:hover {
+    background: var(--lightgray);
+    color: var(--secondary);
+  }
+}
+
+// Folder / tag listing: one ruled row per post — date, title, tags.
+.page-listing {
+  & > p {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+  }
+
+  ul.section-ul {
+    margin-top: 0;
+    border-top: 1px solid var(--lightgray);
+  }
+
+  li.section-li {
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--lightgray);
+
+    & > .section {
+      grid-template-columns: 7.5rem 1fr 12rem;
+      align-items: center;
+      column-gap: 1rem;
+      padding: 0.7rem 0.5rem;
+    }
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--lightgray) 40%, transparent);
+    }
+
+    .meta {
+      margin: 0;
+      opacity: 1;
+      color: var(--gray);
+      font-family: var(--codeFont);
+      font-size: 0.85rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .desc > h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: $semiBoldWeight;
+      line-height: 1.4;
+
+      & > a {
+        color: var(--dark);
+      }
+    }
+
+    &:hover .desc > h3 > a {
+      color: var(--secondary);
+    }
+
+    ul.tags {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      justify-content: flex-start;
+
+      li {
+        margin: 0;
+        list-style: none;
+        background: none;
+      }
+
+      a.tag-link {
+        @include tag-chip;
+      }
+    }
+  }
+}
+
+@media all and #{$mobile} {
+  .page-listing li.section-li > .section {
+    grid-template-columns: 1fr;
+    row-gap: 0.15rem;
+  }
+}
+
+// Note properties: drop the Obsidian-style box and show the description
+// as a subtitle and the tags as chips under the title.
+.note-properties {
+  margin: 0.25rem 0 0.75rem;
+  border: none;
+  border-radius: 0;
+  font-size: 1rem;
+
+  & > .note-properties-header {
+    display: none;
+  }
+
+  .note-properties-table,
+  .note-properties-table tbody,
+  .note-properties-row,
+  .note-properties-value {
+    display: block;
+    width: auto;
+  }
+
+  &,
+  & > .note-properties-header,
+  .note-properties-table,
+  .note-properties-table tbody,
+  .note-properties-row,
+  .note-properties-key,
+  .note-properties-value {
+    border: none !important;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .note-properties-row {
+    margin-bottom: 0.6rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .note-properties-key {
+    display: none;
+  }
+
+  .note-properties-value {
+    padding: 0;
+  }
+
+  .note-properties-text {
+    color: var(--darkgray);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .note-properties-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+
+    .tag-link {
+      @include tag-chip;
+    }
+  }
+
+  .note-properties-separator {
+    display: none;
+  }
+}
+
+// Home page: no date / reading time under the title.
+body[data-slug="index"] .content-meta {
+  display: none;
+}
