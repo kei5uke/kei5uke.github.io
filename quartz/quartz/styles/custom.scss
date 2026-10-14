@@ -109,6 +109,23 @@
   }
 }
 
+// Pentest notes are reference pages, not posts: list them without dates.
+body[data-slug^="pentest-note/"] .page-listing li.section-li {
+  & > .section {
+    grid-template-columns: 1fr 12rem;
+  }
+
+  .meta {
+    display: none;
+  }
+}
+
+@media all and #{$mobile} {
+  body[data-slug^="pentest-note/"] .page-listing li.section-li > .section {
+    grid-template-columns: 1fr;
+  }
+}
+
 // Note properties: drop the Obsidian-style box and show the description
 // as a subtitle and the tags as chips under the title.
 .note-properties {
@@ -175,6 +192,26 @@
 
   .note-properties-separator {
     display: none;
+  }
+}
+
+// Graph: the plugin draws nodes in --gray and links in --lightgray, which
+// nearly vanish against the page background. Give the box a bit more room
+// and a tinted backdrop, and push the canvas toward higher contrast.
+.graph > .graph-outer {
+  height: 300px;
+  background: color-mix(in srgb, var(--lightgray) 25%, transparent);
+}
+
+.graph-container canvas,
+.global-graph-container canvas {
+  filter: brightness(0.7) saturate(1.3);
+}
+
+:root[saved-theme="dark"] {
+  .graph-container canvas,
+  .global-graph-container canvas {
+    filter: brightness(1.35) saturate(1.2);
   }
 }
 
