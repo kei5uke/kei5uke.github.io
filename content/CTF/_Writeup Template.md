@@ -2,7 +2,7 @@
 title:
 author: kei5uke
 draft: true
-description: Writeup for HTB Arctic
+description: Writeup for MACHINE_NAME
 tags:
   - windows
   - writeup
