@@ -12,9 +12,12 @@ export default (() => {
     externalResources,
     ctx,
   }: QuartzComponentProps) => {
+    const titlePrefix = cfg.pageTitlePrefix ?? ""
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const title =
-      (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+      titlePrefix +
+      (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) +
+      titleSuffix
     const description =
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??

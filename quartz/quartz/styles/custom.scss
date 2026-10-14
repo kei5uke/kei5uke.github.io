@@ -215,7 +215,48 @@ body[data-slug^="pentest-note/"] .page-listing li.section-li {
   }
 }
 
-// Home page: no date / reading time under the title.
-body[data-slug="index"] .content-meta {
+// Right sidebar on desktop: graph pinned at the top, table of contents
+// filling the middle, backlinks at the bottom. The TOC list is a flex child
+// that scrolls on its own; the plugin's `max-height: calc(100% - 2rem)` left
+// the last entries hidden below the header and margins, out of scroll reach.
+@media all and #{$desktop} {
+  #quartz-body .sidebar.right {
+    & > .graph {
+      order: 1;
+      flex: 0 0 auto;
+    }
+
+    & > .toc {
+      order: 2;
+      flex: 1 1 auto;
+      min-height: 1.4rem;
+      overflow: hidden;
+
+      &:has(button.toc-header.collapsed) {
+        flex: 0 0 auto;
+      }
+
+      & > ul.toc-content.overflow {
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: none;
+        overflow-y: auto;
+        padding-bottom: 1rem;
+      }
+    }
+
+    & > .backlinks {
+      order: 3;
+      flex: 0 1 auto;
+      max-height: 25vh;
+      min-height: 0;
+    }
+  }
+}
+
+// Home page and Pentest Note index: no date / reading time under the title.
+body[data-slug="index"] .content-meta,
+body[data-slug="pentest-note/index"] .content-meta,
+body[data-slug="pentest-note/index"] .note-properties-row:has(.note-properties-tags) {
   display: none;
 }

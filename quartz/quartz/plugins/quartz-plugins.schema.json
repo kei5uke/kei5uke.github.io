@@ -19,6 +19,10 @@
           "type": "string",
           "description": "The title of the website"
         },
+        "pageTitlePrefix": {
+          "type": "string",
+          "description": "Prefix prepended to page titles"
+        },
         "pageTitleSuffix": {
           "type": "string",
           "description": "Suffix appended to page titles"

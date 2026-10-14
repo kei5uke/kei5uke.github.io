@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
   pageTitle: kei5uke
+  pageTitlePrefix: "kei5uke | "
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -265,7 +266,6 @@ plugins:
       includedProperties:
         - description
         - tags
-        - aliases
       excludedProperties: []
       hidePropertiesView: false
       delimiters: ---
