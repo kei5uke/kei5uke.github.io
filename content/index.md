@@ -2,10 +2,25 @@
 title: Hello
 ---
 
-I'm kei5uke, a full-stack software engineer who also does security testing from time to time.
-I'm passionate about cybersecurity and enjoy playing CTFs.
-This blog is my personal record of the CTF machines I've hacked and how I did it.
-See all writeups in [[CTF/|CTF]].
+<p align="center">
+  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80" alt="Matrix code rain" width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" />
+</p>
+
+```
+kei5uke@blog:~$ whoami
+> full-stack software engineer by day, CTF player by night
+> passion: breaking things (ethically), then building them better
+> status: hacking boxes and writing it all down
+```
+
+I'm **kei5uke**, a full-stack software engineer who also does security testing from time to time.
+
+I live at the intersection of **building software** and **breaking software** — writing production code with one hand while finding its weaknesses with the other. When I'm not shipping features, I'm grinding CTFs, solving machines, and turning every shell I pop into a lesson.
+
+> [!tip] Why this blog exists
+> Every machine I hack gets a writeup — the recon, the foothold, the privilege escalation, and the dead ends in between. If you want to learn offense, you have to *practice* offense, and the best way to sharpen it is to write about it.
+
+**Want to see what I've pwned so far?** → All writeups live in [[CTF/|CTF]] 🚩
 
 # CV
 ## Contact Information
